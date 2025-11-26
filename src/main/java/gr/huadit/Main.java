@@ -11,14 +11,7 @@ import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) {
-<<<<<<< Updated upstream
-        String filePath = args[0];
-        if (filePath == null) throw new  IllegalArgumentException("Please provide a valid file path");
-//        Logger log = new ConsoleLogger();
-//        XMLFileReader xmlFileReader = new XMLFileReader();
-//        xmlFileReader.readFile(filePath, log);
-}
-=======
+
         Logger log = new ConsoleLogger();
         XMLFileReader reader = new XMLFileReader();
         String fileName = args[0];
@@ -38,5 +31,4 @@ public class Main {
         }
 
     }
->>>>>>> Stashed changes
 }
