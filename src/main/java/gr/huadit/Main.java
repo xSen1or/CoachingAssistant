@@ -10,5 +10,5 @@ public class Main {
 //        Logger log = new ConsoleLogger();
 //        XMLFileReader xmlFileReader = new XMLFileReader();
 //        xmlFileReader.readFile(filePath, log);
-    }
+}
 }
