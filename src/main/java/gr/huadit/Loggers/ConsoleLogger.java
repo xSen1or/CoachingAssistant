@@ -1,6 +1,6 @@
 package gr.huadit.Loggers;
 
-import gr.huadit.Logger;
+import gr.huadit.Interfaces.Logger;
 import gr.huadit.LoggerLevel;
 
 import java.time.LocalDateTime;
@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
 public class ConsoleLogger implements Logger {
     @Override
     public void print(String message, LoggerLevel l) {
-        System.out.println(l.getColor() + "[" + l.name() + "] " + "\u001B[0m| " + LocalDateTime.now() + "|"+ message);
+        System.out.println(l.getColor() + "[" + l.name() + "] " + "\u001B[0m | \u001B[32m" + LocalDateTime.now() + " \u001B[0m| "+ message);
     }
 }

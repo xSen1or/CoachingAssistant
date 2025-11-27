@@ -1,4 +1,4 @@
-package gr.huadit;
+package gr.huadit.Interfaces;
 
 import org.w3c.dom.NodeList;
 

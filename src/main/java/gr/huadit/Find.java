@@ -28,7 +28,7 @@ public class Find {
             if (name != null && matcher.matches(name)) {
                 numMatches++;
                 foundPath = file.toAbsolutePath();
-                System.out.println(file);
+                System.out.println();
             }
         }
 

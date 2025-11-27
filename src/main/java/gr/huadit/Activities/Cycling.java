@@ -1,6 +1,9 @@
-package gr.huadit;
+package gr.huadit.Activities;
 
-public class Swimming implements Activity{
+import gr.huadit.Interfaces.Activity;
+
+public class Cycling  implements Activity {
+
 
     private double time;
     private double longitude;
@@ -8,12 +11,10 @@ public class Swimming implements Activity{
     private double altitude;
     private double heartrate;
 
-
     
 
 
-
-    public Swimming(double time, double longitude, double latitude, double altitude, double heartrate) {
+    public Cycling(double time, double longitude, double latitude, double altitude, double heartrate) {
         this.time = time;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -22,13 +23,24 @@ public class Swimming implements Activity{
     }
 
     @Override
+    public String getSportName() {
+        return "";
+    }
+
+    @Override
+    public String getId() {
+        return "";
+    }
+
+    @Override
     public double getTime() {
-          return this.time;  
+        return this.time;
     }
 
     @Override
     public double getLongitude() {
         return this.longitude;
+    
     }
 
     @Override

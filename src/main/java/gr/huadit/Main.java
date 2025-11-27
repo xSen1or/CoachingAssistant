@@ -1,10 +1,9 @@
 package gr.huadit;
 
 import gr.huadit.Helpers.XMLFileReader;
+import gr.huadit.Interfaces.Logger;
 import gr.huadit.Loggers.ConsoleLogger;
-import gr.huadit.LoggerLevel;
 
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,11 +13,16 @@ public class Main {
 
         Logger log = new ConsoleLogger();
         XMLFileReader reader = new XMLFileReader();
+        if (args.length < 1) {
+            log.print("Usage:  java -cp target/CoachingAssistant-1.0-SNAPSHOT.jar gr.huadit.Main <filename> ", LoggerLevel.FATAL);
+        }
+
         String fileName = args[0];
+
         try {
             log.print( "Reading file!", LoggerLevel.DEBUG);
             Path startingDir = Paths.get(System.getProperty("user.home"));
-            String pattern = args[0];
+            String pattern = "*.tcx";
             Find.Finder finder = new Find.Finder(pattern);
 
             Files.walkFileTree(startingDir, finder);
