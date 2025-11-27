@@ -64,14 +64,8 @@ public class Find {
         @Override
         public FileVisitResult visitFileFailed(Path file,
                                                IOException exc) {
-            System.err.println(exc);
+            System.err.println(exc.getMessage());
             return CONTINUE;
         }
-    }
-
-    static void usage() {
-        System.err.println("java Find <path>" +
-                " -name \"<glob_pattern>\"");
-        System.exit(-1);
     }
 }

@@ -9,6 +9,4 @@ public interface Activity {
     double getLatitude();
     double getAltitude();
     double getHeartRate();
-
-
 }
