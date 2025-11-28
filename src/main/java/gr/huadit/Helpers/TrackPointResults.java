@@ -7,7 +7,7 @@ import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static gr.huadit.Helpers.XMLFileReader.getNodeValue;
+import static gr.huadit.Helpers.XMLSingleFileReader.getNodeValue;
 import static gr.huadit.Interfaces.XMLReader.GARMIN_NS;
 
 public class TrackPointResults {

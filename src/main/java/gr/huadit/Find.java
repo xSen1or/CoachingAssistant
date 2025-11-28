@@ -3,23 +3,38 @@ package gr.huadit;
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
+import java.util.Arrays;
+
 import static java.nio.file.FileVisitResult.*;
 
 
 public class Find {
 
-    public static class Finder
-            extends SimpleFileVisitor<Path> {
+    /*
+    *   This class was found in the Oracle Documentation
+    *   https://docs.oracle.com/javase/tutorial/essential/io/find.html
+    * */
+
+
+
+    public static class Finder extends SimpleFileVisitor<Path> {
 
 
         private Path foundPath = null;
         private final PathMatcher matcher;
+//        private final PathMatcher[] pathMatcher;
         private int numMatches = 0;
 
-        Finder(String pattern) {
-            matcher = FileSystems.getDefault()
-                    .getPathMatcher("glob:" + pattern);
+        public Finder(String pattern) {
+            matcher = FileSystems.getDefault().getPathMatcher("glob:" + pattern);
         }
+
+//        public Finder(PathMatcher[] matcher,  String... Pattern) {
+//            this.matcher = null;
+//            this.pathMatcher = Arrays.stream(Pattern)
+//                    .map(p -> FileSystems.getDefault().getPathMatcher("glob:" + p))
+//                    .toArray(PathMatcher[]::new);
+//        }
 
         // Compares the glob pattern against
         // the file or directory name.
@@ -31,6 +46,8 @@ public class Find {
                 System.out.println();
             }
         }
+
+
 
         public String getPath() {
             return foundPath == null ? null : foundPath.toString();
