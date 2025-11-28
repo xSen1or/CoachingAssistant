@@ -1,5 +1,7 @@
 package gr.huadit;
 
+import gr.huadit.Helpers.ProgressCalculator;
+
 import java.time.Duration;
 
 public class AthleteCard {
@@ -10,6 +12,7 @@ public class AthleteCard {
     private double AveragePace;
     private double AverageHeartRate;
     private Duration duration;
+    private ProgressCalculator prgcl =  new ProgressCalculator();
 
     public AthleteCard(String activityName, String id, double totalDistance, double averagePace, double averageHeartRate, Duration duration) {
         ActivityName = activityName;
@@ -33,5 +36,13 @@ public class AthleteCard {
                         "Average BPM: " + this.AverageHeartRate + "\n" +
                         "Duration: " + formattedDuration
         );
+
+        /*
+            Waiting for tutors information.
+            System.out.println("Male |  Calories burned: " prgcl.caloriesMen());
+            System.out.println("Female |  Calories burned: " prgcl.caloriesWomen());
+         */
+
+
     }
 }
