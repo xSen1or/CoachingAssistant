@@ -31,7 +31,7 @@ public class Main {
         try {
             if (args.length > 1) { // we have more than one file.
                 log.print("Multiple Files", LoggerLevel.DEBUG);
-                Find.Finder finder = null; // we create the finder with first file tha arg[0]
+                Find.Finder finder; // we create the finder with first file tha arg[0]
                 String[] filePaths =  new String[args.length]; // creating this inside the if statement because it is useless if there is just one file
                 for (int i = 0; i < args.length; i++) { // we start the loop from i = 1 because the first
                     finder = new Find.Finder(args[i]);

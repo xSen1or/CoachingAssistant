@@ -3,7 +3,6 @@ package gr.huadit;
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
-import java.util.Arrays;
 
 import static java.nio.file.FileVisitResult.*;
 
@@ -29,13 +28,6 @@ public class Find {
             matcher = FileSystems.getDefault().getPathMatcher("glob:" + pattern);
         }
 
-//        public Finder(PathMatcher[] matcher,  String... Pattern) {
-//            this.matcher = null;
-//            this.pathMatcher = Arrays.stream(Pattern)
-//                    .map(p -> FileSystems.getDefault().getPathMatcher("glob:" + p))
-//                    .toArray(PathMatcher[]::new);
-//        }
-
         // Compares the glob pattern against
         // the file or directory name.
         void find(Path file) {
@@ -55,10 +47,10 @@ public class Find {
 
         // Prints the total number of
         // matches to standard out.
-        void done() {
-            System.out.println("Matched: "
-                    + numMatches);
-        }
+//        void done() {
+//            System.out.println("Matched: "
+//                    + numMatches);
+//        }
 
         // Invoke the pattern matching
         // method on each file.

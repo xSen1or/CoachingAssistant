@@ -3,6 +3,7 @@ package gr.huadit.Helpers;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import gr.huadit.AthleteCard;
 import gr.huadit.LoggerLevel;
 import gr.huadit.Interfaces.XMLReader;
 import org.w3c.dom.Document;
@@ -18,6 +19,8 @@ import gr.huadit.Interfaces.Logger;
 public class XMLSingleFileReader implements XMLReader {
     private static final String GARMIN_NS =  "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2";
     ProgressCalculator progressCalculator = new ProgressCalculator();
+
+    // Read Function
     public void read(String fileName, Logger logger) {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             dbFactory.setNamespaceAware(true);
@@ -36,12 +39,8 @@ public class XMLSingleFileReader implements XMLReader {
                     String[] timings = new String[trackPoints.getLength()];
                     TrackPointResults results = TrackPointResults.processTrackPoints(trackPoints, timings);
 
-                    logger.print("Activity: "+ sport,  LoggerLevel.INFO);
-                    logger.print("ID: " + Id,  LoggerLevel.INFO);
-                    logger.print("Total Distance: " + results.totalDistance, LoggerLevel.INFO);
-                    logger.print(progressCalculator.calculatePace(results.dur.toSeconds(), results.totalDistance), LoggerLevel.INFO);
-                    logger.print("Average BPM: " + results.averageBPM, LoggerLevel.INFO);
-                    logger.print("Duration: " + results.dur.toHours() + ":" + results.dur.toMinutes() + ":" + results.dur.toSeconds(), LoggerLevel.INFO);
+                    AthleteCard athleteCard = new AthleteCard(sport, Id, results.totalDistance(), progressCalculator.calculatePace(results.dur().toSeconds(), results.totalDistance()), results.averageBPM(), results.dur());
+                    athleteCard.printAthleteCard();
                 }
             }  catch (DateTimeParseException exc) {
                 logger.print("DateTimeParseException " + exc.getMessage(), LoggerLevel.ERROR);
@@ -49,6 +48,8 @@ public class XMLSingleFileReader implements XMLReader {
                 logger.print("Exc e: " + e.getMessage(), LoggerLevel.ERROR);
             }
         }
+
+    // getNodeValue Function
    public static String getNodeValue(NodeList n, Logger logger) {
         if (n == null || n.getLength() == 0) {
             logger.print("NodeList empty!", LoggerLevel.WARNING);

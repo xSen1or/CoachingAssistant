@@ -24,15 +24,8 @@ public class ProgressCalculator {
                 * (t / 4.184);
     }
 
-    public String calculatePace(long totalSeconds, double distanceMeters) {
-            if (distanceMeters <= 0) return "Pace: N/A";
-
+    public double calculatePace(long totalSeconds, double distanceMeters) {
             double distanceKm = distanceMeters / 1000.0;
-            double paceSecondsPerKm = totalSeconds / distanceKm;
-
-            long minutes = (long) (paceSecondsPerKm / 60);
-            long seconds = (long) (paceSecondsPerKm % 60);
-
-            return String.format("Pace: %d:%02d min/km", minutes, seconds);
+            return totalSeconds / distanceKm;
     }
 }
