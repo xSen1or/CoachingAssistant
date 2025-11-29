@@ -1,7 +1,7 @@
 package gr.huadit.Loggers;
 
 import gr.huadit.Interfaces.Logger;
-import gr.huadit.LoggerLevel;
+import gr.huadit.Enums.LoggerLevel;
 
 import java.time.LocalDateTime;
 

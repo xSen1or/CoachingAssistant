@@ -1,5 +1,6 @@
 package gr.huadit;
 
+import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Helpers.XMLMultipleFileReader;
 import gr.huadit.Helpers.XMLSingleFileReader;
 import gr.huadit.Interfaces.Logger;

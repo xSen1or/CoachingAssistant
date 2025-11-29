@@ -2,7 +2,7 @@ package gr.huadit.Helpers;
 
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Interfaces.XMLReader;
-import gr.huadit.LoggerLevel;
+import gr.huadit.Enums.LoggerLevel;
 import org.w3c.dom.NodeList;
 
 public class XMLMultipleFileReader implements XMLReader {

@@ -1,4 +1,4 @@
-package gr.huadit;
+package gr.huadit.Classes;
 
 import gr.huadit.Helpers.ProgressCalculator;
 

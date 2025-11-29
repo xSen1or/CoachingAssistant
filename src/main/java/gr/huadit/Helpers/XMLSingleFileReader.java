@@ -3,8 +3,8 @@ package gr.huadit.Helpers;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import gr.huadit.AthleteCard;
-import gr.huadit.LoggerLevel;
+import gr.huadit.Classes.AthleteCard;
+import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Interfaces.XMLReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -24,6 +24,7 @@ public class XMLSingleFileReader implements XMLReader {
     public void read(String fileName, Logger logger) {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             dbFactory.setNamespaceAware(true);
+
             try {
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                 Document doc = dBuilder.parse(new FileInputStream(fileName));

@@ -1,4 +1,4 @@
-package gr.huadit;
+package gr.huadit.Enums;
 
 public enum LoggerLevel {
     DEBUG("\u001B[34m"),
