@@ -17,8 +17,6 @@ public class Find {
 
 
     public static class Finder extends SimpleFileVisitor<Path> {
-
-
         private Path foundPath = null;
         private final PathMatcher matcher;
 //        private final PathMatcher[] pathMatcher;
@@ -39,18 +37,16 @@ public class Find {
             }
         }
 
-
-
         public String getPath() {
             return foundPath == null ? null : foundPath.toString();
         }
 
         // Prints the total number of
         // matches to standard out.
-//        void done() {
-//            System.out.println("Matched: "
-//                    + numMatches);
-//        }
+        void done() {
+            System.out.println("Matched: "
+                    + numMatches);
+        }
 
         // Invoke the pattern matching
         // method on each file.
@@ -73,7 +69,7 @@ public class Find {
         @Override
         public FileVisitResult visitFileFailed(Path file,
                                                IOException exc) {
-            System.err.println(exc.getMessage());
+//            System.err.println(exc.getMessage());
             return CONTINUE;
         }
     }

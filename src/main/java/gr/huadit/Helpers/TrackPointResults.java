@@ -60,6 +60,7 @@ public record TrackPointResults(double totalDistance, int countBPM, double avera
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
         OffsetDateTime firstDT = null, lastDT = null;
         try {
+            assert timings != null;
             for (String t : timings) {
                 if (t != null) {
                     if (firstDT == null) firstDT = OffsetDateTime.parse(t, inputFormatter);

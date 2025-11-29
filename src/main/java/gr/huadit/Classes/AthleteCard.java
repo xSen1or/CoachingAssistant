@@ -36,13 +36,5 @@ public class AthleteCard {
                         "Average BPM: " + this.AverageHeartRate + "\n" +
                         "Duration: " + formattedDuration
         );
-
-        /*
-            Waiting for tutors information.
-            System.out.println("Male |  Calories burned: " prgcl.caloriesMen());
-            System.out.println("Female |  Calories burned: " prgcl.caloriesWomen());
-         */
-
-
     }
 }

@@ -1,6 +1,7 @@
 package gr.huadit;
 
 import gr.huadit.Enums.LoggerLevel;
+import gr.huadit.Helpers.ArgumentHandler;
 import gr.huadit.Helpers.XMLMultipleFileReader;
 import gr.huadit.Helpers.XMLSingleFileReader;
 import gr.huadit.Interfaces.Logger;
@@ -14,32 +15,40 @@ public class Main {
     public static void main(String[] args) {
         /*
         * Creating object for handling the XML Files and logs.
-        *
-        * */
+        */
+
         Logger log = new ConsoleLogger();
         XMLSingleFileReader reader = new XMLSingleFileReader();
         XMLMultipleFileReader multiReader = new XMLMultipleFileReader();
+//        ArgumentHandler ArgHandler = new ArgumentHandler(args);
+//        Object Activities = new Object();
 
-
-        if (args.length < 1) { // if the usage of the command is incorrect return a usage message.
+        int index = 0;
+        if (args.length < 1) { // if the usage of the command is incorrect, return a usage message.
             log.print("Usage:  java -cp target/CoachingAssistant-1.0-SNAPSHOT.jar gr.huadit.Main <filename> ", LoggerLevel.FATAL);
             System.exit(1);
         }
 
-        log.print("Number of .tcx File Passed by User: " + args.length, LoggerLevel.DEBUG);
-        String pattern = args[0];
+        String pattern = args[index];
+        if (args[0].equals("-w")) {
+            double weight = Double.parseDouble(args[1]);
+            log.print("Weight: " + weight, LoggerLevel.DEBUG);
+            index += 2;
+        }
+
+        System.out.println(index);
         Path startingDir = Paths.get(System.getProperty("user.home"));
         try {
             if (args.length > 1) { // we have more than one file.
-                log.print("Multiple Files", LoggerLevel.DEBUG);
-                Find.Finder finder; // we create the finder with first file tha arg[0]
+                Find.Finder finder; // we create the finder with the first file -> arg[0]
                 String[] filePaths =  new String[args.length]; // creating this inside the if statement because it is useless if there is just one file
-                for (int i = 0; i < args.length; i++) { // we start the loop from i = 1 because the first
+
+                for (int i = index; i < args.length; i++) { // we start the loop from i = 1 because the first
                     finder = new Find.Finder(args[i]);
                     Files.walkFileTree(startingDir, finder);
                     filePaths[i] = finder.getPath();  // copy the filenames from the arguments to the files[] array.
                     log.print("File Name:: " + args[i], LoggerLevel.DEBUG);
-
+                    System.out.println(filePaths[i]);
                     multiReader.read(filePaths[i], log); // call the method of the XMLMultipleFileReader
                 }
             } else { // we just have one
@@ -49,6 +58,7 @@ public class Main {
                 Files.walkFileTree(startingDir, finder);
                 reader.read(finder.getPath(), log);
             }
+
         } catch (Exception e) {
             log.print( "File Not Found!\n" + e.getMessage(), LoggerLevel.ERROR);
             System.exit(1);

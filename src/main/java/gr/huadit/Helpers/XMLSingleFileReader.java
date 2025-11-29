@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.time.format.DateTimeParseException;
 
 import gr.huadit.Interfaces.Logger;
+import org.xml.sax.SAXException;
 
 public class XMLSingleFileReader implements XMLReader {
     private static final String GARMIN_NS =  "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2";
@@ -29,8 +30,8 @@ public class XMLSingleFileReader implements XMLReader {
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                 Document doc = dBuilder.parse(new FileInputStream(fileName));
                 NodeList activityList = doc.getElementsByTagNameNS(GARMIN_NS, "Activity");
+
                 for (int i = 0; i < activityList.getLength(); i++) {
-                    System.out.println(i);
                     Element activityElement = (Element) activityList.item(i);
 
                     String sport = activityElement.getAttribute("Sport");
@@ -40,11 +41,16 @@ public class XMLSingleFileReader implements XMLReader {
                     String[] timings = new String[trackPoints.getLength()];
                     TrackPointResults results = TrackPointResults.processTrackPoints(trackPoints, timings);
 
+
                     AthleteCard athleteCard = new AthleteCard(sport, Id, results.totalDistance(), progressCalculator.calculatePace(results.dur().toSeconds(), results.totalDistance()), results.averageBPM(), results.dur());
                     athleteCard.printAthleteCard();
                 }
-            }  catch (DateTimeParseException exc) {
-                logger.print("DateTimeParseException " + exc.getMessage(), LoggerLevel.ERROR);
+
+
+            }  catch (SAXException exc) {
+                logger.print("Invalid File Format: (Please ensure you entered a xml type file) " + exc.getMessage(), LoggerLevel.ERROR);
+            } catch (NullPointerException e) {
+                logger.print("Null Error: (Please check the file name and try again)\n"  + e.getMessage(), LoggerLevel.ERROR);
             } catch (Exception e) {
                 logger.print("Exc e: " + e.getMessage(), LoggerLevel.ERROR);
             }

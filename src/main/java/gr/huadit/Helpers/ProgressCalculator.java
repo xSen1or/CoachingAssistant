@@ -3,10 +3,10 @@ package gr.huadit.Helpers;
 public class ProgressCalculator {
 
     /*
-        double h = 120;   // heart rate
-        double w = 75;    // weight kg
-        double a = 30;    // age
-        double t = 30;    // time in minutes
+        double h = 120 heart rate
+        double w = 75 weight kg
+        double a = 30 age
+        double t = 30 time in minutes
     */
 
 
@@ -29,5 +29,19 @@ public class ProgressCalculator {
     public double calculatePace(long totalSeconds, double distanceMeters) {
             double distanceKm = distanceMeters / 1000.0;
             return totalSeconds / distanceKm;
+    }
+
+
+    public double calculateCFunction(double[] m, double[] ceff, double w) {
+        if (m.length != ceff.length) {
+            throw new IllegalArgumentException("Arrays m and ceff must have the same length.");
+        }
+
+        double C = 0.0;
+
+        for (int i = 0; i < m.length; i++) {
+            C += m[i] * ceff[i] * w;
+        }
+        return C;
     }
 }
