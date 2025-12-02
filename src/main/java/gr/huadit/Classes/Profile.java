@@ -1,38 +1,41 @@
 package gr.huadit.Classes;
 
 public class Profile {
-    private String Name;
-    private int age;
-    private double weight;
-    private double height;
-    private String gender;
+    private final String name;
+    private final int age;
+    private final double weight;
+    private final double height;
+    private final String gender;
 
     public Profile(String name, int age, double weight, double height, String gender) {
-        this.Name = name;
+        this.name = name;
         this.age = age;
         this.weight = weight;
         this.height = height;
         this.gender = gender;
     }
-
-
-    public void setName(String name) {
-        Name = name;
+    public String getName() {
+        return name;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public int getAge() {
+        return age;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
+    public double getHeight() {
+        return height;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public String getGender() {
+        return gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\nAge: " + age + "\nWeight: " + weight + "\nHeight: " + height + "\nGender: " + gender;
     }
 }

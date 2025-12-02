@@ -1,4 +1,4 @@
-package gr.huadit.Helpers;
+package gr.huadit.Classes;
 
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Enums.LoggerLevel;

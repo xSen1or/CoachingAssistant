@@ -24,7 +24,7 @@ public class Cycling  implements Activity {
 
     @Override
     public String getSportName() {
-        return "";
+        return "Cycling";
     }
 
     @Override

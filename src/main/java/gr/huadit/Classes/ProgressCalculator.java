@@ -1,4 +1,4 @@
-package gr.huadit.Helpers;
+package gr.huadit.Classes;
 
 public class ProgressCalculator {
 

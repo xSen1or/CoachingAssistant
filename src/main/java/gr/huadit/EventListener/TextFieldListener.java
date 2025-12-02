@@ -1,0 +1,28 @@
+package gr.huadit.EventListener;
+
+import gr.huadit.Classes.Profile;
+import gr.huadit.Enums.LoggerLevel;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import gr.huadit.Interfaces.Logger;
+import gr.huadit.Loggers.ConsoleLogger;
+
+
+public class TextFieldListener implements ActionListener {
+    private Profile profile;
+    Logger logger = new ConsoleLogger();
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton src = (JButton) e.getSource();
+        String CMD = src.getActionCommand();
+
+        if (CMD.equals("SAVE")) {
+            logger.print("Save Button Pressed", LoggerLevel.INFO);
+
+        } else if (CMD.equals("CANCEL")) {
+            logger.print("Cancel Button Pressed", LoggerLevel.INFO);
+        }
+    }
+}

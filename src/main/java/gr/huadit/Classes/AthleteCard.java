@@ -1,7 +1,5 @@
 package gr.huadit.Classes;
 
-import gr.huadit.Helpers.ProgressCalculator;
-
 import java.time.Duration;
 
 public class AthleteCard {

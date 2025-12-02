@@ -3,23 +3,23 @@ package gr.huadit;
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.nio.file.FileVisitResult.*;
 
 
 public class Find {
-
     /*
-    *   This class was found in the Oracle Documentation
-    *   https://docs.oracle.com/javase/tutorial/essential/io/find.html
-    * */
-
-
+     *   This class was found in the Oracle Documentation
+     *   https://docs.oracle.com/javase/tutorial/essential/io/find.html
+     *   Added some minor modifications so it will work with the XMLReader and GUI
+     * */
 
     public static class Finder extends SimpleFileVisitor<Path> {
+        private List<String> filenames = new ArrayList<>();
         private Path foundPath = null;
         private final PathMatcher matcher;
-//        private final PathMatcher[] pathMatcher;
         private int numMatches = 0;
 
         public Finder(String pattern) {
@@ -33,6 +33,7 @@ public class Find {
             if (name != null && matcher.matches(name)) {
                 numMatches++;
                 foundPath = file.toAbsolutePath();
+                filenames.add(foundPath.toString());
                 System.out.println();
             }
         }
@@ -69,8 +70,11 @@ public class Find {
         @Override
         public FileVisitResult visitFileFailed(Path file,
                                                IOException exc) {
-//            System.err.println(exc.getMessage());
             return CONTINUE;
+        }
+
+        public List<String> getFilenames() {
+            return filenames;
         }
     }
 }
