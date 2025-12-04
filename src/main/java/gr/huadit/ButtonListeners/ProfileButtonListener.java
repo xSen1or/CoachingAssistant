@@ -12,9 +12,6 @@ public class ProfileButtonListener implements ActionListener {
     private JButton button;
     private final ConsoleLogger logger = new ConsoleLogger();
 
-    public void setButton(JButton button) {
-        this.button = button;
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -58,6 +58,12 @@ public class Find {
             return CONTINUE;
         }
 
+
+        public int getNumMatches() {
+            return numMatches;
+        }
+
+
         // Invoke the pattern matching
         // method on each directory.
         @Override
@@ -75,6 +81,10 @@ public class Find {
 
         public List<String> getFilenames() {
             return filenames;
+        }
+
+        public void getFiles(String pattern) {
+
         }
     }
 }

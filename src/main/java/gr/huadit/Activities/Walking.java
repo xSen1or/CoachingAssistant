@@ -11,12 +11,6 @@ public class Walking implements Activity {
     private double altitude;
     private double heartrate;
 
-
-
-    
-
-
-
     public Walking(double time, double longitude, double latitude, double altitude, double heartrate) {
         this.time = time;
         this.longitude = longitude;

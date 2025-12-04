@@ -2,14 +2,6 @@ package gr.huadit.Classes;
 
 public class ProgressCalculator {
 
-    /*
-        double h = 120 heart rate
-        double w = 75 weight kg
-        double a = 30 age
-        double t = 30 time in minutes
-    */
-
-
     public double caloriesMen(double h, double w, double a, double t) {
         return -55.0969
                 + (0.6309 * h)

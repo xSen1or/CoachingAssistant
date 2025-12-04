@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HomePageGUI extends JFrame {
-
     public HomePageGUI() {
         displayPage();
     }

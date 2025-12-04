@@ -1,12 +1,7 @@
 package gr.huadit.Helpers;
-import gr.huadit.Find;
 import gr.huadit.GUI.HomePageGUI;
 import gr.huadit.Loggers.ConsoleLogger;
 import gr.huadit.Enums.LoggerLevel;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
 public class ArgumentHandler {
@@ -38,8 +33,8 @@ public class ArgumentHandler {
     }
 
     public boolean isEmpty() {
-        if (args.length == 0) {
-            log.print("No arguments provided", LoggerLevel.FATAL);
+        if (args.length == 1 && args[0].equals("-term") || args.length < 4  && args[0].equals("-term") && args[1].equals("-w" )){
+            log.print("No arguments (or not enough) provided for Terminal Mode.", LoggerLevel.FATAL);
             log.print("Usage:  java -cp target/CoachingAssistant-1.0-SNAPSHOT.jar gr.huadit.Main <run-type> [-w weight] <filename> ", LoggerLevel.INFO);
             return true;
         }
@@ -53,34 +48,9 @@ public class ArgumentHandler {
             return;
         }
         System.out.println(this.index);
-        XMLSingleFileReader reader = new XMLSingleFileReader();
-        XMLMultipleFileReader multiReader = new XMLMultipleFileReader();
-        String pattern = args[index];
-        Path startingDir = Paths.get(System.getProperty("user.home")); // entering the starting directory
-        try {
-            if (args.length - index > 1) { // More than one file AFTER the index
-                Find.Finder finder; // we create the finder with the first file -> arg[0]
-                String[] filePaths =  new String[args.length]; // creating this inside the if statement because it is useless if there is just one file
+        PathParser pParser = new PathParser(args, index, log);
+        pParser.handleXMLInput();
 
-                for (int i = index; i < args.length; i++) { // we start the loop from i = 1 because the first
-                    finder = new Find.Finder(args[i]);
-                    Files.walkFileTree(startingDir, finder);
-                    filePaths[i] = finder.getPath();  // copy the filenames from the arguments to the files[] array.
-                    log.print("File Name:: " + args[i], LoggerLevel.DEBUG);
-                    System.out.println(filePaths[i]);
-                    multiReader.read(filePaths[i], log); // call the method of the XMLMultipleFileReader
-                }
-            } else { // we just have one
-                // Pattern is the key file. Key file is the file we are looking for in the directory.
-                log.print("Single File", LoggerLevel.DEBUG);
-                Find.Finder finder = new Find.Finder(pattern);
-                Files.walkFileTree(startingDir, finder);
-                reader.read(finder.getPath(), log);
-            }
-        } catch (Exception e) {
-            log.print( "File Not Found!\n" + e.getMessage(), LoggerLevel.ERROR);
-            System.exit(1);
-        }
     }
     public void getWeight() {
         index = 1;

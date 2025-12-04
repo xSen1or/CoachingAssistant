@@ -23,8 +23,7 @@ import org.xml.sax.SAXException;
 public class XMLSingleFileReader implements XMLReader {
     private static final String GARMIN_NS =  "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2";
     ProgressCalculator progressCalculator = new ProgressCalculator();
-    private List<TrackPointResults> ListContent = new ArrayList<>();
-    private List<String> filenames = new ArrayList<>();
+    private final List<TrackPointResults> ListContent = new ArrayList<>();
     // Read Function
     public void read(String fileName, Logger logger) {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

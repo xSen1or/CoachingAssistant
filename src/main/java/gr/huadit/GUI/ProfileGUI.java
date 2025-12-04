@@ -1,6 +1,8 @@
 package gr.huadit.GUI;
 
 import gr.huadit.ButtonListeners.ProfileButtonListener;
+import gr.huadit.Classes.Profile;
+import gr.huadit.JSONHandler.JSONFileWriter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -122,6 +124,8 @@ public class ProfileGUI extends JFrame {
 
         add(mainPanel);
 
+        Profile prof = new Profile(nameField.getText(), Integer.parseInt(ageField.getText()), Double.parseDouble(weightField.getText()), Double.parseDouble(heightField.getText()), genderField.getText());
+        JSONFileWriter writer = new JSONFileWriter(prof);
         setSize(500, 450);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
