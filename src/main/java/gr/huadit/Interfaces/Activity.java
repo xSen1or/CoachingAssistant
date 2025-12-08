@@ -1,12 +1,13 @@
 package gr.huadit.Interfaces;
 
+import java.time.Duration;
+
 public interface Activity {
 
     String getSportName();
     String getId();
-    double getTime();
-    double getLongitude();
-    double getLatitude();
-    double getAltitude();
+    Duration getDuration();
+    String getPace();
+    double getCalories();
     double getHeartRate();
 }

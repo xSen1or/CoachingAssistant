@@ -1,18 +1,19 @@
 package gr.huadit.GUI;
 
 import gr.huadit.ButtonListeners.ProfileButtonListener;
-import gr.huadit.Classes.Profile;
-import gr.huadit.JSONHandler.JSONFileWriter;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileGUI extends JFrame {
-    private final List<String> filenames;
-    public ProfileGUI(List<String> filenames) {
-        this.filenames = filenames;
+
+    // Text fields stored as INSTANCE VARIABLES
+    private JTextField nameField;
+    private JTextField ageField;
+    private JTextField genderField;
+    private JTextField heightField;
+    private JTextField weightField;
+
+    public ProfileGUI() {
         displayGUIWindow();
     }
 
@@ -25,69 +26,31 @@ public class ProfileGUI extends JFrame {
 
         // ---- Labels + Text Fields ----
         JLabel nameLabel = new JLabel("Name:");
-        JTextField nameField = new JTextField();
+        nameField = new JTextField();
 
         JLabel ageLabel = new JLabel("Age:");
-        JTextField ageField = new JTextField();
+        ageField = new JTextField();
 
         JLabel genderLabel = new JLabel("Gender:");
-        JTextField genderField = new JTextField();
+        genderField = new JTextField();
 
-        JLabel heightLabel = new JLabel("Height:");
-        JTextField heightField = new JTextField();
+        JLabel heightLabel = new JLabel("Height: (cm)");
+        heightField = new JTextField();
 
-        JLabel weightLabel = new JLabel("Weight:");
-        JTextField weightField = new JTextField();
-
-        JLabel listLabel = new JLabel("File:");
-        List<String> filesGetName = new ArrayList<>();
-
-        for (String str : filenames) {
-            String trimmed = str.contains("/") ?
-                    str.substring(str.lastIndexOf("/") + 1) : str;
-            filesGetName.add(trimmed);
-        }
-
-        JList<String> list = new JList<>(filesGetName.toArray(new String[0]));
-        JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setPreferredSize(new Dimension(200, 80));
+        JLabel weightLabel = new JLabel("Weight: (kg)");
+        weightField = new JTextField();
 
         // ---- Buttons ----
         JButton saveButton = new JButton("Save");
         saveButton.setActionCommand("SAVE");
-        saveButton.addActionListener(new ProfileButtonListener());
+        saveButton.addActionListener(new ProfileButtonListener(this));
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setActionCommand("CANCEL");
-        cancelButton.addActionListener(new ProfileButtonListener());
+        cancelButton.addActionListener(new ProfileButtonListener(this));
 
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
-
-        // ---- Horizontal Layout ----
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(nameLabel)
-                                        .addComponent(ageLabel)
-                                        .addComponent(genderLabel)
-                                        .addComponent(heightLabel)
-                                        .addComponent(weightLabel)
-                                        .addComponent(listLabel))
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(nameField)
-                                        .addComponent(ageField)
-                                        .addComponent(genderField)
-                                        .addComponent(heightField)
-                                        .addComponent(weightField)
-                                        .addComponent(scrollPane)))
-
-                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(saveButton)
-                                .addComponent(cancelButton))
-        );
 
         // ---- Vertical Layout ----
         layout.setVerticalGroup(
@@ -113,22 +76,42 @@ public class ProfileGUI extends JFrame {
                                 .addComponent(weightLabel)
                                 .addComponent(weightField))
 
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(listLabel)
-                                .addComponent(scrollPane))
-
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(saveButton)
                                 .addComponent(cancelButton))
         );
 
+        // ---- Horizontal Layout ----
+        layout.setHorizontalGroup(
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(nameLabel)
+                                .addComponent(ageLabel)
+                                .addComponent(genderLabel)
+                                .addComponent(heightLabel)
+                                .addComponent(weightLabel)
+                                .addComponent(saveButton))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(nameField)
+                                .addComponent(ageField)
+                                .addComponent(genderField)
+                                .addComponent(heightField)
+                                .addComponent(weightField)
+                                .addComponent(cancelButton))
+        );
+
         add(mainPanel);
 
-        Profile prof = new Profile(nameField.getText(), Integer.parseInt(ageField.getText()), Double.parseDouble(weightField.getText()), Double.parseDouble(heightField.getText()), genderField.getText());
-        JSONFileWriter writer = new JSONFileWriter(prof);
         setSize(500, 450);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
+
+    // ---- Methods that the ButtonListener will call ----
+    public String getNameInput() { return nameField.getText(); }
+    public String getAgeInput() { return ageField.getText(); }
+    public String getGenderInput() { return genderField.getText(); }
+    public String getHeightInput() { return heightField.getText(); }
+    public String getWeightInput() { return weightField.getText(); }
 }

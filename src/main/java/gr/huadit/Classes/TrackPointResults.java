@@ -12,9 +12,18 @@ import gr.huadit.Loggers.ConsoleLogger;
 import static gr.huadit.Helpers.XMLSingleFileReader.getNodeValue;
 import static gr.huadit.Interfaces.XMLReader.GARMIN_NS;
 
+/*
+
+    DTO Class
+    Τρέχει μια λουπα για καθε τρακποιντ,
+    υπολογιζει τα απαραίτητα: BPM, DURATION, DISTANCE
+    Τα επιστρέφει σαν Object
+
+ */
+
+
+
 public record TrackPointResults(double totalDistance, int countBPM, double averageBPM, Duration dur) {
-
-
     public static TrackPointResults processTrackPoints(NodeList trackPoints, String[] timings) {
         Logger log = new ConsoleLogger();
         double totalDistance = 0.0;

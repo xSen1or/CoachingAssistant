@@ -2,60 +2,56 @@ package gr.huadit.Activities;
 
 import gr.huadit.Interfaces.Activity;
 
-public class Cycling  implements Activity {
+import java.time.Duration;
 
+public class Cycling implements Activity {
+    private final String name = "Cycling";
+    private final String id;
+    private final Duration duration;
+    private final String pace;
+    private final double calories;
+    private final double heartRate;
 
-    private double time;
-    private double longitude;
-    private double latitude;
-    private double altitude;
-    private double heartrate;
-
-    
-
-
-    public Cycling(double time, double longitude, double latitude, double altitude, double heartrate) {
-        this.time = time;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.altitude = altitude;
-        this.heartrate = heartrate;
+    public Cycling(String id, Duration duration, String pace, double calories, double heartRate) {
+        this.id = id;
+        this.duration = duration;
+        this.pace = pace;
+        this.calories = calories;
+        this.heartRate = heartRate;
     }
 
     @Override
     public String getSportName() {
-        return "Cycling";
+        return this.name;
     }
 
     @Override
     public String getId() {
-        return "";
+        return this.id;
     }
 
     @Override
-    public double getTime() {
-        return this.time;
+    public Duration getDuration() {
+        return this.duration;
     }
 
     @Override
-    public double getLongitude() {
-        return this.longitude;
-    
+    public String getPace() {
+        return this.pace;
     }
 
     @Override
-    public double getLatitude() {
-        return this.latitude;
-    }
-
-    @Override
-    public double getAltitude() {
-        return this.altitude;
+    public double getCalories() {
+        return this.calories;
     }
 
     @Override
     public double getHeartRate() {
-        return this.heartrate;
+        return this.heartRate;
     }
-    
+
+    @Override
+    public String toString() {
+        return this.name + " " + this.id + " " + this.duration + " " + this.pace + " " + this.calories + " " + this.heartRate;
+    }
 }

@@ -14,7 +14,8 @@ public class PathParser {
     private int index;
     private Logger log;
 
-    public PathParser( String[] args, int index, Logger log) {
+    public PathParser(
+        String[] args, int index, Logger log) {
         this.args = args;
         this.index = index;
         this.log = log;

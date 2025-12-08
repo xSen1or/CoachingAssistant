@@ -15,7 +15,7 @@ public class JSONFileReader {
 
     }
 
-    public Profile readJSON() {
+    public Profile readJSON(String key) {
         File outputFile = new File(STORAGE_DIRECTORY, "storage.json");
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -31,11 +31,4 @@ public class JSONFileReader {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        JSONFileReader reader = new JSONFileReader();
-        Profile prof = reader.readJSON();
-        System.out.println(prof.toString());
-    }
-
 }

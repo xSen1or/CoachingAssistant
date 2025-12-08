@@ -31,7 +31,6 @@ public class JSONFileWriter {
             File outputFile = new File(STORAGE_DIRECTORY, "storage.json");
             ArrayNode arrayNode;
 
-            // 1. Load existing file OR create new array
             if (outputFile.exists() && outputFile.length() > 0) {
                 JsonNode existing = objectMapper.readTree(outputFile);
 
@@ -61,6 +60,7 @@ public class JSONFileWriter {
 
         } catch (Exception e) {
             logger.print("Couldn't parse data in storage", LoggerLevel.FATAL);
+            logger.print(e.getMessage(), LoggerLevel.FATAL);
             System.exit(1);
         }
     }

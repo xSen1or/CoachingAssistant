@@ -1,6 +1,10 @@
 package gr.huadit.ButtonListeners;
 
-import gr.huadit.GUI.SelectFilesGUI;
+import gr.huadit.GUI.AddActivityGUI;
+import gr.huadit.GUI.CalorieGoalGUI;
+import gr.huadit.GUI.FileResultsGUI;
+import gr.huadit.GUI.ProfileGUI;
+import gr.huadit.Helpers.XMLSingleFileReader;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Loggers.ConsoleLogger;
 
@@ -8,11 +12,9 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import gr.huadit.Find;
+import java.io.File;
+
 public class HomePageButtonListener implements ActionListener {
-    private JButton button;
-    private Logger logger = new ConsoleLogger();
-//    Find.Finder finder = new Find.Finder(pattern);
 
 
     @Override
@@ -20,30 +22,33 @@ public class HomePageButtonListener implements ActionListener {
         JButton src = (JButton) e.getSource();
         JFrame srcFrame = (JFrame) SwingUtilities.getWindowAncestor(src);
         String CMD = src.getActionCommand();
-        if (CMD.equals("SELECT_FILES")) {
-            srcFrame.setTitle("Select TCX Files");
-            srcFrame.setSize(300, 200);
-            srcFrame.setLocationRelativeTo(null);
-            srcFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            srcFrame.setVisible(true);
+        Logger log = new ConsoleLogger();
 
-// File chooser
-            JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("TCX Files", "tcx");
-            chooser.setFileFilter(filter);
 
-            int returnVal = chooser.showOpenDialog(srcFrame);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                System.out.println("You chose to open this file: " + chooser.getSelectedFile().getPath());
-                    Find.Finder finder = new Find.Finder(chooser.getSelectedFile().getPath());
+        switch (CMD) {
+            case "SELECT_FILES" -> {
+                srcFrame.setTitle("Select TCX Files");
+                srcFrame.setSize(500, 400);
+                srcFrame.setLocationRelativeTo(null);
+//                srcFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                srcFrame.setVisible(true);
 
+                // File chooser
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("TCX Files", "tcx");
+                chooser.setFileFilter(filter);
+
+                FileResultsGUI fileResultsGUI = new FileResultsGUI();
+                int returnVal = chooser.showOpenDialog(fileResultsGUI);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    System.out.println("You chose to open this file: " + chooser.getSelectedFile().getPath());
+                    XMLSingleFileReader singleFileReader = new XMLSingleFileReader();
+                    singleFileReader.read(chooser.getSelectedFile().getPath(), log);
+                }
             }
-        } else if (CMD.equals("ADD_ACTIVITY")) {
-            // TODO
-        } else if (CMD.equals("USER_INFO")) {
-            // TODO
-        } else if (CMD.equals("CALORIE_GOAL")) {
-            // TODO
+            case "ADD_ACTIVITY" -> new AddActivityGUI();
+            case "USER_INFO" -> new ProfileGUI();
+            case "CALORIE_GOAL" -> new CalorieGoalGUI();
         }
     }
 }

@@ -1,24 +1,24 @@
 package gr.huadit.Helpers;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import gr.huadit.Classes.AthleteCard;
-import gr.huadit.Classes.ProgressCalculator;
-import gr.huadit.Classes.TrackPointResults;
-import gr.huadit.Enums.LoggerLevel;
-import gr.huadit.Interfaces.XMLReader;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import gr.huadit.Interfaces.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import gr.huadit.Classes.ActivityCard;
+import gr.huadit.Classes.ProgressCalculator;
+import gr.huadit.Classes.TrackPointResults;
+import gr.huadit.Enums.LoggerLevel;
+import gr.huadit.Interfaces.Logger;
+import gr.huadit.Interfaces.XMLReader;
 
 public class XMLSingleFileReader implements XMLReader {
     private static final String GARMIN_NS =  "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2";
@@ -45,11 +45,10 @@ public class XMLSingleFileReader implements XMLReader {
                 TrackPointResults results = TrackPointResults.processTrackPoints(trackPoints, timings);
                 ListContent.add(results);
 
-                AthleteCard athleteCard = new AthleteCard(sport, Id, results.totalDistance(), progressCalculator.calculatePace(results.dur().toSeconds(), results.totalDistance()), results.averageBPM(), results.dur());
-                athleteCard.printAthleteCard();
+                ActivityCard activityCard = new ActivityCard(sport, Id, results.totalDistance(), progressCalculator.calculatePace(results.dur().toSeconds(), results.totalDistance()), results.averageBPM(), results.dur());
+                activityCard.saveActivity();
+                activityCard.printAthleteCard();
             }
-
-
         }  catch (SAXException exc) {
             logger.print("Invalid File Format: (Please ensure you entered a xml type file) " + exc.getMessage(), LoggerLevel.ERROR);
         } catch (NullPointerException e) {

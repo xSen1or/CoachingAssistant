@@ -1,13 +1,22 @@
 package gr.huadit.GUI;
 
-import gr.huadit.ButtonListeners.HomePageButtonListener;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import gr.huadit.ButtonListeners.HomePageButtonListener;
 
 public class HomePageGUI extends JFrame {
     public HomePageGUI() {
-        displayPage();
     }
 
     public void displayPage() {
@@ -20,6 +29,14 @@ public class HomePageGUI extends JFrame {
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        String username = System.getProperty("user.name");
+        JLabel helloLabel = new JLabel("Hello, " + username);
+        helloLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        panel.add(helloLabel, BorderLayout.CENTER);
+        add(panel, BorderLayout.NORTH);
+
 
         // Title label
         JLabel title = new JLabel("Fitness Tracker Home");
@@ -49,7 +66,7 @@ public class HomePageGUI extends JFrame {
         btnAddActivity.setActionCommand("ADD_ACTIVITY");
         btnAddActivity.addActionListener(new HomePageButtonListener());
 
-        // Button 3: Enter user info & calorie calculation method
+        // Button 3: Enter user info and calorie calculation method
         JButton btnUserInfo = new JButton("Enter User Info & Calorie Method");
         btnUserInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(btnUserInfo);

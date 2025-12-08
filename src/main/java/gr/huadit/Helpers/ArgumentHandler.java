@@ -1,13 +1,14 @@
 package gr.huadit.Helpers;
+import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.HomePageGUI;
 import gr.huadit.Loggers.ConsoleLogger;
-import gr.huadit.Enums.LoggerLevel;
 
 
 public class ArgumentHandler {
     private final ConsoleLogger log = new ConsoleLogger();
     private final String[] args;
     private int index = 0;
+    public static int flag = -1;
 
     public ArgumentHandler(String[] args) {
         this.args = args;
@@ -21,16 +22,19 @@ public class ArgumentHandler {
 
     public void flag() {
         if (args[0].equals("-term")) {
+            flag = 1;
             this.getWeight();
             this.getFiles();
         } else if (args[0].equals("-gui")) {
+            flag = 0;
             System.out.println("GUI!");
-            new HomePageGUI();
+            HomePageGUI homePage = new HomePageGUI();
+            homePage.displayPage();
         } else {
             log.print("Usage:  java -cp target/CoachingAssistant-1.0-SNAPSHOT.jar gr.huadit.Main <run-type> [-w weight] <filename> ", LoggerLevel.INFO);
             System.exit(1);
         }
-    }
+    }   
 
     public boolean isEmpty() {
         if (args.length == 1 && args[0].equals("-term") || args.length < 4  && args[0].equals("-term") && args[1].equals("-w" )){
