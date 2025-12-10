@@ -15,7 +15,6 @@ public class ProfileGUI extends JFrame {
     private JTextField weightField;
 
     public ProfileGUI() {
-        displayGUIWindow();
     }
 
     public void displayGUIWindow() {
@@ -115,7 +114,6 @@ public class ProfileGUI extends JFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(450, 350);
         frame.setLocationRelativeTo(null);
-
         JPanel panel = new JPanel();
         panel.setBackground(new Color(40, 44, 52));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

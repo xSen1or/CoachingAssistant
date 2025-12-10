@@ -14,8 +14,7 @@ Tech stack
 - Static analysis (optional): JetBrains Qodana (qodana.yaml)
 
 Entry points
-- GUI launcher: `gr.huadit.Application`
-  - Starts the JavaFX-based Home Page GUI: `new HomePageGUI()`
+
 - CLI launcher: `gr.huadit.Main`
   - Delegates to `gr.huadit.Helpers.ArgumentHandler` which supports:
     - `-term` Terminal mode: requires input file arguments and optional `-w <weight>`

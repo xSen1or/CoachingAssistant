@@ -46,7 +46,7 @@ public class HomePageButtonListener implements ActionListener {
                 }
             }
             case "ADD_ACTIVITY" -> new AddActivity();
-            case "USER_INFO" -> new ProfileGUI();
+            case "USER_INFO" -> new ProfileGUI().displayGUIWindow();
             case "CALORIE_GOAL" -> new CalorieGoal();
         }
     }

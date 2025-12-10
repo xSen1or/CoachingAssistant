@@ -28,4 +28,22 @@
   "Gender" : "Male",
   "Weight" : 100.0,
   "Height" : 192.0
+}, {
+  "Name" : "Nikoloypolos",
+  "Age" : 19,
+  "Gender" : "Female",
+  "Weight" : 100.0,
+  "Height" : 192.0
+}, {
+  "Name" : "Nikos",
+  "Age" : 13,
+  "Gender" : "Female",
+  "Weight" : 100.0,
+  "Height" : 192.0
+}, {
+  "Name" : "nikos",
+  "Age" : 10,
+  "Gender" : "MAL",
+  "Weight" : 30.0,
+  "Height" : 100.0
 } ]

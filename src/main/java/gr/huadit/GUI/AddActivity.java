@@ -8,7 +8,6 @@ public class AddActivity {
         JLabel activityNameLabel = new JLabel("Activity Name:");
         JTextField activityNameField = new JTextField();
 
-
         JPanel mainPanel = new JPanel();
         GroupLayout layout = new GroupLayout(mainPanel);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
