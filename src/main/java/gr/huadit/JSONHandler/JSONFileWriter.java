@@ -44,7 +44,6 @@ public class JSONFileWriter {
                 arrayNode = objectMapper.createArrayNode();
             }
 
-            // Creating the new JSON object
             ObjectNode jsonNode = objectMapper.createObjectNode();
             jsonNode.put("Name", prof.name());
             jsonNode.put("Age", prof.age());
@@ -52,10 +51,8 @@ public class JSONFileWriter {
             jsonNode.put("Weight", prof.weight());
             jsonNode.put("Height", prof.height());
 
-            // Appending
             arrayNode.add(jsonNode);
 
-            // Saving
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputFile, arrayNode);
 
         } catch (Exception e) {

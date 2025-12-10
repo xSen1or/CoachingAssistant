@@ -10,7 +10,6 @@ import gr.huadit.Interfaces.Activity;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Loggers.ConsoleLogger;
 
-import java.io.File;
 import java.time.Duration;
 
 import static gr.huadit.Helpers.ArgumentHandler.flag;
@@ -50,7 +49,6 @@ public class ActivityCard {
         );
         this.pace = minutes + ":" + seconds + "min/km";
         if (flag == 0) {
-            log.print("GOT INSIDE FLAG=0:", LoggerLevel.DEBUG);
             FileResultsGUI fileResultsGUI = new FileResultsGUI();
             fileResultsGUI.displayGUIWindow(this);
         }
@@ -78,9 +76,7 @@ public class ActivityCard {
     }
 
 
-    public Logger getLog() {
-        return log;
-    }
+
 
     public String getActivityName() {
         return ActivityName;
@@ -106,7 +102,5 @@ public class ActivityCard {
         return duration;
     }
 
-    public String getPace() {
-        return pace;
-    }
+
 }

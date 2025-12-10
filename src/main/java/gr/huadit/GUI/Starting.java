@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 
 import gr.huadit.ButtonListeners.HomePageButtonListener;
 
-public class HomePageGUI extends JFrame {
-    public HomePageGUI() {
+public class Starting extends JFrame {
+    public Starting() {
     }
 
     public void displayPage() {

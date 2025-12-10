@@ -1,7 +1,7 @@
 package gr.huadit.ButtonListeners;
 
-import gr.huadit.GUI.AddActivityGUI;
-import gr.huadit.GUI.CalorieGoalGUI;
+import gr.huadit.GUI.AddActivity;
+import gr.huadit.GUI.CalorieGoal;
 import gr.huadit.GUI.FileResultsGUI;
 import gr.huadit.GUI.ProfileGUI;
 import gr.huadit.Helpers.XMLSingleFileReader;
@@ -12,10 +12,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class HomePageButtonListener implements ActionListener {
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -39,6 +37,7 @@ public class HomePageButtonListener implements ActionListener {
                 chooser.setFileFilter(filter);
 
                 FileResultsGUI fileResultsGUI = new FileResultsGUI();
+
                 int returnVal = chooser.showOpenDialog(fileResultsGUI);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     System.out.println("You chose to open this file: " + chooser.getSelectedFile().getPath());
@@ -46,9 +45,9 @@ public class HomePageButtonListener implements ActionListener {
                     singleFileReader.read(chooser.getSelectedFile().getPath(), log);
                 }
             }
-            case "ADD_ACTIVITY" -> new AddActivityGUI();
+            case "ADD_ACTIVITY" -> new AddActivity();
             case "USER_INFO" -> new ProfileGUI();
-            case "CALORIE_GOAL" -> new CalorieGoalGUI();
+            case "CALORIE_GOAL" -> new CalorieGoal();
         }
     }
 }

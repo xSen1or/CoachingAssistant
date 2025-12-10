@@ -1,6 +1,6 @@
 package gr.huadit.Helpers;
 import gr.huadit.Enums.LoggerLevel;
-import gr.huadit.GUI.HomePageGUI;
+import gr.huadit.GUI.Starting;
 import gr.huadit.Loggers.ConsoleLogger;
 
 
@@ -28,10 +28,10 @@ public class ArgumentHandler {
         } else if (args[0].equals("-gui")) {
             flag = 0;
             System.out.println("GUI!");
-            HomePageGUI homePage = new HomePageGUI();
+            Starting homePage = new Starting();
             homePage.displayPage();
         } else {
-            log.print("Usage:  java -cp target/CoachingAssistant-1.0-SNAPSHOT.jar gr.huadit.Main <run-type> [-w weight] <filename> ", LoggerLevel.INFO);
+            log.print("Usage:  java -jar CoachingAssistant-1.0-SNAPSHOT.jar -<run-type> [-w weight] <filename> ", LoggerLevel.INFO);
             System.exit(1);
         }
     }   
