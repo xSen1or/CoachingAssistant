@@ -5,7 +5,7 @@ import gr.huadit.Activities.Running;
 import gr.huadit.Activities.Swimming;
 import gr.huadit.Activities.Walking;
 import gr.huadit.Enums.LoggerLevel;
-import gr.huadit.GUI.FileResultsGUI;
+import gr.huadit.GUI.FileResults;
 import gr.huadit.Interfaces.Activity;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Loggers.ConsoleLogger;
@@ -13,6 +13,13 @@ import gr.huadit.Loggers.ConsoleLogger;
 import java.time.Duration;
 
 import static gr.huadit.Helpers.ArgumentHandler.flag;
+
+/*
+    Usage: print activity information 
+
+ */
+
+
 
 public class ActivityCard {
     private final Logger log = new ConsoleLogger();
@@ -49,7 +56,7 @@ public class ActivityCard {
         );
         this.pace = minutes + ":" + seconds + "min/km";
         if (flag == 0) {
-            FileResultsGUI fileResultsGUI = new FileResultsGUI();
+            FileResults fileResultsGUI = new FileResults();
             fileResultsGUI.displayGUIWindow(this);
         }
     }

@@ -5,7 +5,7 @@ import gr.huadit.ButtonListeners.ProfileButtonListener;
 import javax.swing.*;
 import java.awt.*;
 
-public class ProfileGUI extends JFrame {
+public class Client extends JFrame {
 
     // Text fields stored as INSTANCE VARIABLES
     private JTextField nameField;
@@ -14,10 +14,10 @@ public class ProfileGUI extends JFrame {
     private JTextField heightField;
     private JTextField weightField;
 
-    public ProfileGUI() {
+    public Client() {
     }
 
-    public void displayGUIWindow() {
+    public void displayGUIWindow(JFrame srcFrame) {
 
         JPanel mainPanel = new JPanel();
         GroupLayout layout = new GroupLayout(mainPanel);
@@ -107,7 +107,6 @@ public class ProfileGUI extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
-
 
     public void displayProfile(String name, int age, String gender, double height, double weight) {
         JFrame frame = new JFrame("User Profile Display");

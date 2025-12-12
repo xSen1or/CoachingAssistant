@@ -2,8 +2,8 @@ package gr.huadit.ButtonListeners;
 
 import gr.huadit.GUI.AddActivity;
 import gr.huadit.GUI.CalorieGoal;
-import gr.huadit.GUI.FileResultsGUI;
-import gr.huadit.GUI.ProfileGUI;
+import gr.huadit.GUI.FileResults;
+import gr.huadit.GUI.Client;
 import gr.huadit.Helpers.XMLSingleFileReader;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Loggers.ConsoleLogger;
@@ -36,7 +36,7 @@ public class HomePageButtonListener implements ActionListener {
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("TCX Files", "tcx");
                 chooser.setFileFilter(filter);
 
-                FileResultsGUI fileResultsGUI = new FileResultsGUI();
+                FileResults fileResultsGUI = new FileResults();
 
                 int returnVal = chooser.showOpenDialog(fileResultsGUI);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -46,7 +46,10 @@ public class HomePageButtonListener implements ActionListener {
                 }
             }
             case "ADD_ACTIVITY" -> new AddActivity();
-            case "USER_INFO" -> new ProfileGUI().displayGUIWindow();
+            case "USER_INFO" -> {
+                srcFrame.dispose();
+                new Client().displayGUIWindow(srcFrame);
+            }
             case "CALORIE_GOAL" -> new CalorieGoal();
         }
     }

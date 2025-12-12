@@ -24,7 +24,6 @@ public class AddActivity {
                         )
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         )
-
         );
     }
 }

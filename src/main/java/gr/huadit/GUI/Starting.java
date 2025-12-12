@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gr.huadit.ButtonListeners.HomePageButtonListener;
+import gr.huadit.ButtonListeners.ProfileButtonListener;
+import gr.huadit.Holders.CurrentUser;
 
 public class Starting extends JFrame {
     public Starting() {
@@ -29,8 +31,7 @@ public class Starting extends JFrame {
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        String username = System.getProperty("user.name");
+        String username = (CurrentUser.currentUser != null) ? CurrentUser.currentUser.getString("name") : System.getProperty("user.home");
         JLabel helloLabel = new JLabel("Hello, " + username);
         helloLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 
