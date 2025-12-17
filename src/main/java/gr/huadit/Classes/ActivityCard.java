@@ -15,7 +15,7 @@ import java.time.Duration;
 import static gr.huadit.Helpers.ArgumentHandler.flag;
 
 /*
-    Usage: print activity information 
+    Usage: print activity information
 
  */
 
@@ -54,8 +54,10 @@ public class ActivityCard {
                         "Average BPM: " + this.AverageHeartRate + "\n" +
                         "Duration: " + formattedDuration
         );
+
         this.pace = minutes + ":" + seconds + "min/km";
-        if (flag == 0) {
+
+        if (flag == 0) { // if a flag is for gui -> run gui
             FileResults fileResultsGUI = new FileResults();
             fileResultsGUI.displayGUIWindow(this);
         }

@@ -54,7 +54,7 @@ public class Starting extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // ActionListener
-        btnSelectFiles.setActionCommand("SELECT_FILES");
+        btnSelectFiles.setActionCommand("SELECT_FILES"); // CMD -> switch -> ....
         btnSelectFiles.addActionListener(new HomePageButtonListener());
 
         // Button 2: Add new activity
@@ -90,4 +90,5 @@ public class Starting extends JFrame {
         add(panel);
         setVisible(true);
     }
+
 }

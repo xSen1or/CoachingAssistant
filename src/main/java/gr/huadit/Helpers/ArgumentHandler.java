@@ -20,6 +20,12 @@ public class ArgumentHandler {
         }
     }
 
+
+    /*
+    if flag = 0 -> terminal mode
+    if flag = 1 -> gui mode
+     */
+
     public void flag() {
         if (args[0].equals("-term")) {
             flag = 1;
@@ -46,7 +52,6 @@ public class ArgumentHandler {
     }
 
     public void getFiles() {
-
         // Prevent crash when calling -gui (no arguments to read)
         if (args.length <= index) {
             return;

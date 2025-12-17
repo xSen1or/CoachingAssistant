@@ -22,8 +22,10 @@ public class PathParser {
     }
 
     public void handleXMLInput() {
+
         XMLSingleFileReader reader = new XMLSingleFileReader();
         XMLMultipleFileReader multiReader = new XMLMultipleFileReader();
+
         String pattern = args[index];
         Path startingDir = Paths.get(System.getProperty("user.home")); // entering the starting directory
         try {

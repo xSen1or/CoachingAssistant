@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import gr.huadit.Classes.Profile;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.Client;
+import gr.huadit.GUI.Starting;
 import gr.huadit.Holders.CurrentUser;
 import gr.huadit.Loggers.ConsoleLogger;
 import org.json.JSONObject;
@@ -54,7 +55,6 @@ public class ProfileButtonListener implements ActionListener {
             }
         } else if (CMD.equals("CANCEL")) {
             logger.print("Cancel Button Pressed", LoggerLevel.INFO);
-            srcFrame.dispose();
         }
     }
 
