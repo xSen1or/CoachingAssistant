@@ -30,16 +30,15 @@ public class ArgumentHandler {
         if (args[0].equals("-term")) {
             log.print("DISCLAIMER: Take notice that the applications response time depends on the storage of the current device.!", LoggerLevel.INFO);
             flag = 1;
-            this.getWeight();
-            this.getFiles();
+            this.getWeight(); //gets the weight argument
+            this.getFiles(); //gets the files
         } else if (args[0].equals("-gui")) {
-            flag = 0;
-            System.out.println("GUI!");
-            Starting homePage = new Starting();
+            flag = 0; // flag = 0 indicates that we are in GUI mode
+            Starting homePage = new Starting(); // open the starting page
             homePage.displayPage();
         } else {
             log.print("Usage:  java -jar CoachingAssistant-1.0-SNAPSHOT.jar -<run-type> [-w weight] <filename> ", LoggerLevel.INFO);
-            System.exit(1);
+            System.exit(1); // in case of missing arguments, throw a help message and terminate the program
         }
     }   
 
@@ -57,7 +56,7 @@ public class ArgumentHandler {
         if (args.length <= index) {
             return;
         }
-        System.out.println(this.index);
+        if (!args[index].trim().toLowerCase().endsWith(".tcx")) throw new IllegalArgumentException("Invalid file type!");
         PathParser pParser = new PathParser(args, index, log);
         pParser.handleXMLInput();
 
