@@ -13,8 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import gr.huadit.ButtonListeners.HomePageButtonListener;
-import gr.huadit.ButtonListeners.ProfileButtonListener;
+import gr.huadit.ButtonListeners.StartingPageListener;
 import gr.huadit.Holders.CurrentUser;
 
 public class Starting extends JFrame {
@@ -55,7 +54,7 @@ public class Starting extends JFrame {
 
         // ActionListener
         btnSelectFiles.setActionCommand("SELECT_FILES"); // CMD -> switch -> ....
-        btnSelectFiles.addActionListener(new HomePageButtonListener());
+        btnSelectFiles.addActionListener(new StartingPageListener());
 
         // Button 2: Add new activity
         JButton btnAddActivity = new JButton("Add New Activity");
@@ -65,7 +64,7 @@ public class Starting extends JFrame {
 
         // ActionListener
         btnAddActivity.setActionCommand("ADD_ACTIVITY");
-        btnAddActivity.addActionListener(new HomePageButtonListener());
+        btnAddActivity.addActionListener(new StartingPageListener());
 
         // Button 3: Enter user info and calorie calculation method
         JButton btnUserInfo = new JButton("Enter User Info & Calorie Method");
@@ -75,7 +74,7 @@ public class Starting extends JFrame {
 
         // ActionListener
         btnUserInfo.setActionCommand("USER_INFO");
-        btnUserInfo.addActionListener(new HomePageButtonListener());
+        btnUserInfo.addActionListener(new StartingPageListener());
 
         // Button 4: Enter daily calorie goal
         JButton btnCalorieGoal = new JButton("Set Daily Calorie Goal & Track Progress");
@@ -84,7 +83,7 @@ public class Starting extends JFrame {
 
         // ActionListener
         btnCalorieGoal.setActionCommand("CALORIE_GOAL");
-        btnCalorieGoal.addActionListener(new HomePageButtonListener());
+        btnCalorieGoal.addActionListener(new StartingPageListener());
 
 
         add(panel);

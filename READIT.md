@@ -65,8 +65,8 @@ ___
     1. Terminal Mode: `Java -jar target/CoachingAssistant-1.0-SNAPSHOT.jar -term [-w <weight>] <filename>`
     2. GUI Mode: `java -jar target/CoachingAssistant-1.0-SNAPSHOT.jar -gui`
 
-*[] indicates optional a[rgument*<br>
-*<> indicates required ar]()gument*
+*[] indicates optional agrgument*<br>
+*<> indicates required argument*
 ___
 ### XML File Structure:
 

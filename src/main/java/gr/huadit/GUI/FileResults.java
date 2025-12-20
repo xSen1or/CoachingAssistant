@@ -11,107 +11,118 @@ public class FileResults extends JFrame {
     private final ConsoleLogger log = new ConsoleLogger();
 
     public void displayGUIWindow(ActivityCard card) {
-        log.print("displayGUIWindow on FileResultsGUI triggered", LoggerLevel.INFO);
+        SwingUtilities.invokeLater(() -> {
+            log.print("displayGUIWindow on FileResultsGUI triggered", LoggerLevel.INFO);
 
-        String formattedDuration = getString(card);
+            if (card == null) {
+                log.print("ActivityCard is null; cannot display results window.", LoggerLevel.ERROR);
+                return;
+            }
 
-        JLabel durationLabel = new JLabel("Duration:");
-        JLabel durationValue = new JLabel(formattedDuration);
+            setTitle("Activity Results");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Labels
-        JLabel nameLabel = new JLabel("Name:");
-        JLabel idLabel = new JLabel("ID:");
-        JLabel distanceLabel = new JLabel("Distance:");
-        JLabel paceLabel = new JLabel("Average Pace:");
-        JLabel heartRateLabel = new JLabel("Heart Rate:");
+            getContentPane().removeAll();
 
-        // Values
-        JLabel name = new JLabel(card.getActivityName());
-        JLabel id = new JLabel(card.getId());
-        JLabel totalDistance = new JLabel(card.getTotalDistance() + " km");
-        JLabel averagePace = new JLabel(card.getAveragePace() + " min/km");
-        JLabel averageHeartRate = new JLabel(card.getAverageHeartRate() + " bpm");
-        JLabel duration = new JLabel(formattedDuration);
+            String formattedDuration = getString(card);
 
-        JPanel mainPanel = new JPanel();
-        GroupLayout layout = new GroupLayout(mainPanel);
-        mainPanel.setLayout(layout);
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+            JLabel durationLabel = new JLabel("Duration:");
 
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
+            // Labels
+            JLabel nameLabel = new JLabel("Name:");
+            JLabel idLabel = new JLabel("ID:");
+            JLabel distanceLabel = new JLabel("Distance:");
+            JLabel paceLabel = new JLabel("Average Pace:");
+            JLabel heartRateLabel = new JLabel("Heart Rate:");
 
-        // Horizontal group: 2 columns
-        layout.setHorizontalGroup(
-                layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(nameLabel)
-                                .addComponent(idLabel)
-                                .addComponent(distanceLabel)
-                                .addComponent(paceLabel)
-                                .addComponent(heartRateLabel)
-                                .addComponent(durationLabel)
-                        )
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(name)
-                                .addComponent(id)
-                                .addComponent(totalDistance)
-                                .addComponent(averagePace)
-                                .addComponent(averageHeartRate)
-                                .addComponent(duration)
-                        )
-        );
+            // Values
+            JLabel name = new JLabel(String.valueOf(card.getActivityName()));
+            JLabel id = new JLabel(String.valueOf(card.getId()));
+            JLabel totalDistance = new JLabel(card.getTotalDistance() + " km");
+            JLabel averagePace = new JLabel(card.getAveragePace() + " min/km");
+            JLabel averageHeartRate = new JLabel(card.getAverageHeartRate() + " bpm");
+            JLabel duration = new JLabel(formattedDuration);
 
-        // Vertical group: each row is a parallel group
-        layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(nameLabel)
-                                .addComponent(name)
-                        )
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(idLabel)
-                                .addComponent(id)
-                        )
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(distanceLabel)
-                                .addComponent(totalDistance)
-                        )
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(paceLabel)
-                                .addComponent(averagePace)
-                        )
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(heartRateLabel)
-                                .addComponent(averageHeartRate)
-                        )
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(durationLabel)
-                                .addComponent(duration)
-                        )
-        );
+            JPanel mainPanel = new JPanel();
+            GroupLayout layout = new GroupLayout(mainPanel);
+            mainPanel.setLayout(layout);
+            mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        add(mainPanel);
-        pack(); // Fit the window size
-        setLocationRelativeTo(null);
-        setVisible(true);
+            layout.setAutoCreateGaps(true);
+            layout.setAutoCreateContainerGaps(true);
+
+            layout.setHorizontalGroup(
+                    layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameLabel)
+                                    .addComponent(idLabel)
+                                    .addComponent(distanceLabel)
+                                    .addComponent(paceLabel)
+                                    .addComponent(heartRateLabel)
+                                    .addComponent(durationLabel)
+                            )
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addComponent(name)
+                                    .addComponent(id)
+                                    .addComponent(totalDistance)
+                                    .addComponent(averagePace)
+                                    .addComponent(averageHeartRate)
+                                    .addComponent(duration)
+                            )
+            );
+
+            layout.setVerticalGroup(
+                    layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(nameLabel)
+                                    .addComponent(name)
+                            )
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(idLabel)
+                                    .addComponent(id)
+                            )
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(distanceLabel)
+                                    .addComponent(totalDistance)
+                            )
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(paceLabel)
+                                    .addComponent(averagePace)
+                            )
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(heartRateLabel)
+                                    .addComponent(averageHeartRate)
+                            )
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(durationLabel)
+                                    .addComponent(duration)
+                            )
+            );
+
+            add(mainPanel);
+            pack();
+            setLocationRelativeTo(null);
+            setVisible(true);
+
+            revalidate();
+            repaint();
+        });
     }
 
     private static String getString(ActivityCard card) {
-        Duration duration = card.getDuration(); // your Duration object
+        Duration duration = card.getDuration();
+
+        if (duration == null) {
+            return "N/A";
+        }
 
         long hours = duration.toHours();
         long minutes = duration.toMinutes() % 60;
         long seconds = duration.getSeconds() % 60;
 
-// Format as HH:MM:SS or MM:SS if hours = 0
-        String formattedDuration;
         if (hours > 0) {
-            formattedDuration = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-        } else {
-            formattedDuration = String.format("%02d:%02d", minutes, seconds);
+            return String.format("%02d:%02d:%02d", hours, minutes, seconds);
         }
-        return formattedDuration;
+        return String.format("%02d:%02d", minutes, seconds);
     }
-
 }

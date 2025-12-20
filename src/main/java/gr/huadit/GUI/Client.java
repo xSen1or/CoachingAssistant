@@ -5,6 +5,14 @@ import gr.huadit.ButtonListeners.ProfileButtonListener;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+
+    This class indicates the Edit User Info & Calorie Method
+
+ */
+
+
+
 public class Client extends JFrame {
 
     // Text fields stored as INSTANCE VARIABLES
@@ -177,7 +185,6 @@ public class Client extends JFrame {
         field.setFont(font);
         return field;
     }
-    // ---- Methods that the ButtonListener will call ----
     public String getNameInput() { return nameField.getText(); }
     public String getAgeInput() { return ageField.getText(); }
     public String getGenderInput() { return genderField.getText(); }

@@ -28,6 +28,7 @@ public class ArgumentHandler {
 
     public void flag() {
         if (args[0].equals("-term")) {
+            log.print("DISCLAIMER: Take notice that the applications response time depends on the storage of the current device.!", LoggerLevel.INFO);
             flag = 1;
             this.getWeight();
             this.getFiles();

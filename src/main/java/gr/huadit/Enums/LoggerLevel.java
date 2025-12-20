@@ -2,6 +2,7 @@ package gr.huadit.Enums;
 
 public enum LoggerLevel {
     DEBUG("\u001B[34m"),
+    PERFORMANCE("\u001B[91m"),
     INFO("\u001B[36m"),
     WARNING("\u001B[33m"),
     ERROR("\u001B[31m"),

@@ -12,8 +12,9 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
-public class HomePageButtonListener implements ActionListener {
+public class StartingPageListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -25,26 +26,38 @@ public class HomePageButtonListener implements ActionListener {
 
         switch (CMD) {
             case "SELECT_FILES" -> {
+                srcFrame.dispose();
                 srcFrame.setTitle("Select TCX Files");
                 srcFrame.setSize(500, 400);
                 srcFrame.setLocationRelativeTo(null);
-//                srcFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 srcFrame.setVisible(true);
-
-                // File chooser
-                JFileChooser chooser = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("TCX Files", "tcx");
-                chooser.setFileFilter(filter);
-
                 FileResults fileResultsGUI = new FileResults();
 
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter =
+                new FileNameExtensionFilter("TCX Files", "tcx");
+
+                chooser.setMultiSelectionEnabled(true);
+                chooser.setFileFilter(filter);
+
                 int returnVal = chooser.showOpenDialog(fileResultsGUI);
+                File[] selectedFiles = new File[0];
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    System.out.println("You chose to open this file: " + chooser.getSelectedFile().getPath());
-                    XMLSingleFileReader singleFileReader = new XMLSingleFileReader();
-                    singleFileReader.read(chooser.getSelectedFile().getPath(), log);
+                    selectedFiles = chooser.getSelectedFiles();
+
+                    for (File file : selectedFiles) {
+                        System.out.println("You chose to open this file: " + file.getPath());
+                        XMLSingleFileReader singleFileReader = new XMLSingleFileReader();
+                        singleFileReader.read(file.getPath(), log);
+                    }
                 }
+
+                if (selectedFiles.length > 1) { // case where we have more than one file
+
+                }
+
             }
+
             case "ADD_ACTIVITY" -> new AddActivity();
             case "USER_INFO" -> {
                 srcFrame.dispose();

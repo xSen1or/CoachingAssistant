@@ -46,4 +46,10 @@
   "Gender" : "MAL",
   "Weight" : 30.0,
   "Height" : 100.0
+}, {
+  "Name" : "Nikos",
+  "Age" : 19,
+  "Gender" : "Male",
+  "Weight" : 100.0,
+  "Height" : 192.0
 } ]
