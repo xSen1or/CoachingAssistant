@@ -1,9 +1,7 @@
 package gr.huadit.ButtonListeners;
 
-import gr.huadit.GUI.AddActivity;
-import gr.huadit.GUI.CalorieGoal;
-import gr.huadit.GUI.FileResults;
-import gr.huadit.GUI.Client;
+import gr.huadit.Enums.LoggerLevel;
+import gr.huadit.GUI.*;
 import gr.huadit.Helpers.XMLSingleFileReader;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Loggers.ConsoleLogger;
@@ -46,14 +44,10 @@ public class StartingPageListener implements ActionListener {
                     selectedFiles = chooser.getSelectedFiles();
 
                     for (File file : selectedFiles) {
-                        System.out.println("You chose to open this file: " + file.getPath());
+                        log.print("You chose to open this file: " + file.getPath(), LoggerLevel.INFO);
                         XMLSingleFileReader singleFileReader = new XMLSingleFileReader();
                         singleFileReader.read(file.getPath(), log);
                     }
-                }
-
-                if (selectedFiles.length > 1) { // case where we have more than one file
-
                 }
 
             }
@@ -63,7 +57,10 @@ public class StartingPageListener implements ActionListener {
                 srcFrame.dispose();
                 new Client().displayGUIWindow(srcFrame);
             }
-            case "CALORIE_GOAL" -> new CalorieGoal();
+            case "CALORIE_GOAL" -> {
+                new CalorieGoal().show();
+                new CalorieInput().show();
+            }
         }
     }
 }

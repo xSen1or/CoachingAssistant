@@ -21,6 +21,6 @@ import gr.huadit.Loggers.ConsoleLogger;
 
         long end = System.nanoTime();
         double seconds = (end - start) / 1_000_000_000.0;
-        log.print("Execution time: " + seconds + " seconds", LoggerLevel.PERFORMANCE);
+//        log.print("Execution time: " + seconds + " seconds", LoggerLevel.PERFORMANCE);
     }
 }

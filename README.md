@@ -2,23 +2,24 @@ CoachingAssistant
 
 Overview
 - CoachingAssistant is a Java 21 application that helps analyze endurance activities (running, cycling, swimming, walking).
-- It provides two ways to use it:
-  - A desktop GUI built with Swing to select `.tcx` files, add activities, manage profile data, and track daily calorie goals.
-  - A CLI to parse input files and compute activity metrics.
-- The project uses Jackson for JSON handling and custom XML readers for importing activity data (e.g., TCX).
+- Two ways to use it:
+  - Desktop GUI built with Swing to select `.tcx` files, add activities, manage profile data, and track daily calorie goals.
+  - CLI to parse input files and compute activity metrics.
+- Uses Jackson for JSON and custom XML readers for importing TCX activity data.
 
 Tech stack
 - Language: Java 21
 - Build tool: Apache Maven (pom.xml)
-- GUI: Java Swing (via `javax.swing`)
-- JSON: Jackson Databind
-- Static analysis (optional): JetBrains Qodana (qodana.yaml)
+- GUI: Java Swing (`javax.swing`)
+- JSON: Jackson (databind/core/annotations)
+- Optional static analysis: JetBrains Qodana (`qodana.yaml`)
+- Note: The `pom.xml` includes JavaFX and Gluon dependencies, but the current GUI code uses Swing. TODO: decide whether to remove these deps or migrate GUI to JavaFX.
 
 Entry points
 - Main class: `gr.huadit.Main`
   - Delegates to `gr.huadit.Helpers.ArgumentHandler` which supports:
     - `-gui` Opens the Swing GUI (`gr.huadit.GUI.Starting`)
-    - `-term` Terminal mode: requires input file arguments and optional `-w <weight>`
+    - `-term` Terminal mode: requires at least one `.tcx` file argument; optional `-w <weight>`
 
 Requirements
 - Java Development Kit (JDK) 21
@@ -28,7 +29,7 @@ Requirements
 Getting started
 1) Clone the repository
 ```
-git clone https://github.com/<your-account>/CoachingAssistant.git
+git clone https://github.com/xS3nse/CoachingAssistant.git
 cd CoachingAssistant
 ```
 
@@ -45,10 +46,10 @@ java -jar target/CoachingAssistant-1.0-SNAPSHOT.jar -gui
 
 - Run the CLI in terminal mode
 ```
-# General usage (as printed by the app)
+# General usage
 java -jar target/CoachingAssistant-1.0-SNAPSHOT.jar -term [-w weight] <file1.tcx> [file2.tcx ...]
 
-# Alternative (equivalent) classpath form
+# Alternative classpath form
 java -cp target/CoachingAssistant-1.0-SNAPSHOT.jar gr.huadit.Main -term [-w weight] <file1.tcx> [file2.tcx ...]
 
 # Examples
@@ -57,10 +58,20 @@ java -jar target/CoachingAssistant-1.0-SNAPSHOT.jar -term -w 72 run1.tcx ride1.t
 ```
 
 Notes on the packaged JAR
-- The project is configured with Maven Shade Plugin to produce a runnable JAR with `Main-Class` set to `gr.huadit.Main`.
+- Built with Maven Shade Plugin to produce a runnable JAR with `Main-Class` set to `gr.huadit.Main`.
 - If you encounter classpath issues, try the classpath form shown above.
 
-Project structure (selected)
+CLI usage details
+- Flags handled in `ArgumentHandler`:
+  - `-gui`: Opens the GUI
+  - `-term`: Terminal mode (requires one or more input files; optional `-w <weight>`)
+  - `-w <weight>`: Weight argument used in calculations; only valid in `-term` mode
+- Input files:
+  - Only `.tcx` files are accepted; otherwise the app will error with "Invalid file type!"
+  - XML parsing is implemented via `XMLSingleFileReader` and `XMLMultipleFileReader` routed through `PathParser`.
+- When required arguments are missing in `-term` mode, the app prints usage and exits with code 1.
+
+Project structure (from `src/main/java`)
 ```
 CoachingAssistant/
 ├── pom.xml
@@ -71,11 +82,10 @@ CoachingAssistant/
 │   │   ├── Starting.java                # Swing home window
 │   │   ├── AddActivity.java
 │   │   ├── CalorieGoal.java
-│   │   ├── FileResultsGUI.java
-│   │   └── ProfileGUI.java
+│   │   ├── Client.java
+│   │   └── FileResults.java
 │   ├── ButtonListeners/
-│   │   ├── HomePageButtonListener.java
-│   │   └── ProfileButtonListener.java
+│   │   └── StartingPageListener.java
 │   ├── Activities/
 │   │   ├── Cycling.java
 │   │   ├── Running.java
@@ -102,53 +112,34 @@ CoachingAssistant/
 │   │   └── ConsoleLogger.java
 │   ├── Enums/
 │   │   └── LoggerLevel.java
+│   ├── Holders/
+│   │   └── CurrentUser.java
 │   ├── Find.java
 │   └── Storage/storage.json
 └── target/
 ```
 
-CLI usage details
-- Flags handled in `ArgumentHandler`:
-  - `-gui`: Opens the GUI
-  - `-term`: Terminal mode (requires one or more input files; optional `-w <weight>`)
-  - `-w <weight>`: Weight argument used in calculations; only valid in `-term` mode
-- Input files:
-  - XML parsing is implemented via `XMLSingleFileReader` and `XMLMultipleFileReader` through `PathParser`. Filenames follow the arguments after the mode and optional weight.
-- When required arguments are missing in `-term` mode, the app prints usage and exits with code 1.
-
 Features (high level)
 - Import and analyze activities from TCX files.
 - View per-activity stats and aggregated results in the GUI.
-- Manage athlete profile and choose calorie calculation method.
+- Manage athlete profile and choose a calorie calculation method.
 - Set a daily calorie goal and track progress.
 
 Configuration and data
 - `src/main/java/gr/huadit/Storage/storage.json` provides local persistence for user/profile data.
 - JSON serialization/deserialization uses Jackson Databind.
 
-Maven commands
-- Build: `mvn clean package`
-- Run tests: `mvn test` (no tests present yet)
-- Run via exec plugin (alternative to java -jar):
-```
-mvn -Dexec.args="-gui" exec:java
-mvn -Dexec.args="-term -w 72 file1.tcx file2.tcx" exec:java
-```
+Environment variables
+- None required at the moment.
 
 Testing
 - JUnit 3.8.1 is declared, but no test sources are included yet.
-- Recommendation: migrate to JUnit 5 and add tests for helpers (e.g., `ArgumentHandler`, `PathParser`) and file readers.
 
 Development notes
 - The code targets Java 21 (`maven.compiler.source/target`). Ensure your JDK matches.
 - Qodana config (`qodana.yaml`) is included for optional static analysis in CI.
 
-License
-- TODO: Add a LICENSE file (e.g., MIT, Apache-2.0) or state the project is proprietary.
-
-Contributing
-- TODO: Provide contribution guidelines (branching, code style, CI checks). Consider enabling Qodana in CI.
 
 Troubleshooting
-- If the app exits immediately with a usage message in `-term` mode, verify flags and provide at least one input file (and `-w` only when using `-term`).
+- If the app exits immediately with a usage message in `-term` mode, verify flags and provide at least one `.tcx` input file (and use `-w` only with `-term`).
 - If the GUI does not open, ensure you passed `-gui` and that your JDK is Java 21.

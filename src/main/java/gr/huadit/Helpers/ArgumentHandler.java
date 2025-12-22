@@ -45,7 +45,7 @@ public class ArgumentHandler {
     public boolean isEmpty() {
         if (args.length == 1 && args[0].equals("-term") || args.length < 4  && args[0].equals("-term") && args[1].equals("-w" )){
             log.print("No arguments (or not enough) provided for Terminal Mode.", LoggerLevel.FATAL);
-            log.print("Usage:  java -cp target/CoachingAssistant-1.0-SNAPSHOT.jar gr.huadit.Main <run-type> [-w weight] <filename> ", LoggerLevel.INFO);
+            log.print("Usage:  java -jar target/CoachingAssistant-1.0-SNAPSHOT.jar <run-type> [-w weight] <filename> ", LoggerLevel.INFO);
             return true;
         }
         return false;
