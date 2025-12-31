@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import gr.huadit.Classes.Profile;
+import gr.huadit.DTO.Profile;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.Client;
-import gr.huadit.GUI.Starting;
-import gr.huadit.Holders.CurrentUser;
+import gr.huadit.DTO.CurrentUser;
 import gr.huadit.Loggers.ConsoleLogger;
 import org.json.JSONObject;
 
@@ -30,8 +29,8 @@ public class ProfileButtonListener implements ActionListener {
 
         if (CMD.equals("SAVE")) {
             logger.print("Save Button Pressed", LoggerLevel.INFO);
+            srcFrame.dispose();
             try {
-
                 String name = client.getNameInput();
                 int age = Integer.parseInt(client.getAgeInput());
                 double weight = Double.parseDouble(client.getWeightInput());

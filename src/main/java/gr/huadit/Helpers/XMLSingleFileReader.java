@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 
 import gr.huadit.Classes.ActivityCard;
 import gr.huadit.Classes.ProgressCalculator;
-import gr.huadit.Classes.TrackPointResults;
+import gr.huadit.DTO.TrackPointResults;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Interfaces.XMLReader;

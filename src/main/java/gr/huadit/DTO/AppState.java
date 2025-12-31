@@ -1,4 +1,4 @@
-package gr.huadit.Holders;
+package gr.huadit.DTO;
 
 public class AppState {
     public static int dailyGoal = 0;

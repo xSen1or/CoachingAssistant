@@ -53,10 +53,7 @@ public class StartingPageListener implements ActionListener {
             }
 
             case "ADD_ACTIVITY" -> new AddActivity();
-            case "USER_INFO" -> {
-                srcFrame.dispose();
-                new Client().displayGUIWindow(srcFrame);
-            }
+            case "USER_INFO" -> new Client().displayGUIWindow(srcFrame);
             case "CALORIE_GOAL" -> {
                 new CalorieGoal().show();
                 new CalorieInput().show();

@@ -1,6 +1,6 @@
 package gr.huadit.GUI;
 
-import gr.huadit.Holders.AppState;
+import gr.huadit.DTO.AppState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,19 +18,19 @@ public class CalorieGoal {
         JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        JLabel goalLabel = new JLabel("Ημερήσιος στόχος:");
+        JLabel goalLabel = new JLabel("Daily Target:");
         JTextField goalField = new JTextField();
 
-        JLabel consumedLabel = new JLabel("Καταναλωθείσες:");
+        JLabel consumedLabel = new JLabel("Consumed:");
         JLabel consumedValue = new JLabel("0");
 
-        JLabel remainingLabel = new JLabel("Απομένουν:");
+        JLabel remainingLabel = new JLabel("Remaining:");
         JLabel remainingValue = new JLabel("-");
 
-        JLabel statusLabel = new JLabel("Κατάσταση:");
+        JLabel statusLabel = new JLabel("Status:");
         JLabel statusValue = new JLabel("-");
 
-        JButton calculateButton = new JButton("Υπολογισμός");
+        JButton calculateButton = new JButton("Counter");
 
         calculateButton.addActionListener(e -> {
             AppState.dailyGoal = Integer.parseInt(goalField.getText());
@@ -39,7 +39,7 @@ public class CalorieGoal {
             consumedValue.setText(String.valueOf(AppState.todayConsumed));
             remainingValue.setText(String.valueOf(Math.max(0, remaining)));
 
-            statusValue.setText(remaining <= 0 ? "Επιτεύχθηκε ✅" : "Δεν επιτεύχθηκε ❌");
+            statusValue.setText(remaining <= 0 ? "Succeeded ✅" : "Unsuccessful ❌");
         });
 
         panel.add(goalLabel);

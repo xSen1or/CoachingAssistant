@@ -1,4 +1,4 @@
-package gr.huadit.Classes;
+package gr.huadit.DTO;
 
 /*
 

@@ -2,7 +2,7 @@ package gr.huadit.JSONHandler;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import gr.huadit.Classes.Profile;
+import gr.huadit.DTO.Profile;
 
 import java.io.File;
 import java.io.IOException;

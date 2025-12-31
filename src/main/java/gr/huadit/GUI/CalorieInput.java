@@ -1,5 +1,5 @@
 package gr.huadit.GUI;
-import gr.huadit.Holders.AppState;
+import gr.huadit.DTO.AppState;
 
 import javax.swing.*;
 import java.awt.*;

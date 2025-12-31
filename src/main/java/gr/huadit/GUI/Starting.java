@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gr.huadit.ButtonListeners.StartingPageListener;
-import gr.huadit.Holders.CurrentUser;
+import gr.huadit.DTO.CurrentUser;
 
 public class Starting extends JFrame {
     public Starting() {
