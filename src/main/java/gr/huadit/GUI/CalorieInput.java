@@ -5,11 +5,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CalorieInput {
-
-    public void show() {
+    public void show(JFrame parent) {
         JFrame frame = new JFrame("Καταχώρηση Θερμίδων");
         frame.setSize(300, 200);
-        frame.setLocationRelativeTo(null);
+
+        int x = parent.getX() + parent.getWidth() + 10; // 10px κενό
+        int y = parent.getY();
+        frame.setLocation(x, y);
 
         JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));

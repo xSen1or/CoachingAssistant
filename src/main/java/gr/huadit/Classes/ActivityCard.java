@@ -32,7 +32,7 @@ public class ActivityCard {
     private final Duration duration;
     private String pace;
 
-    public ActivityCard(String activityName, String id, double totalDistance, double averagePace, double averageHeartRate, Duration duration) {
+    public ActivityCard (String activityName, String id, double totalDistance, double averagePace, double averageHeartRate, Duration duration) {
         ActivityName = activityName;
         Id = id;
         TotalDistance = totalDistance;

@@ -10,7 +10,7 @@ public class CalorieGoal {
     public CalorieGoal() {
     }
 
-    public void show() {
+    public JFrame show() {
         JFrame frame = new JFrame("Στόχος Θερμίδων");
         frame.setSize(350, 250);
         frame.setLocationRelativeTo(null);
@@ -55,5 +55,6 @@ public class CalorieGoal {
 
         frame.add(panel);
         frame.setVisible(true);
+        return frame;
     }
 }

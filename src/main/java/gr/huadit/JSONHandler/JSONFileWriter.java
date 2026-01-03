@@ -16,11 +16,7 @@ public class JSONFileWriter {
     private Profile prof = null;
     private final Logger logger = new ConsoleLogger();
 
-    public JSONFileWriter() {
-
-    }
-
-    public JSONFileWriter(Profile obj) {
+     public JSONFileWriter(Profile obj) {
         this.prof = obj;
     }
 

@@ -24,6 +24,7 @@ public class StartingPageListener implements ActionListener {
 
         switch (CMD) {
             case "SELECT_FILES" -> {
+                log.print("Select Files Button Pressed", LoggerLevel.INFO);
                 srcFrame.dispose();
                 srcFrame.setTitle("Select TCX Files");
                 srcFrame.setSize(500, 400);
@@ -49,14 +50,12 @@ public class StartingPageListener implements ActionListener {
                         singleFileReader.read(file.getPath(), log);
                     }
                 }
-
             }
-
             case "ADD_ACTIVITY" -> new AddActivity();
             case "USER_INFO" -> new Client().displayGUIWindow(srcFrame);
             case "CALORIE_GOAL" -> {
-                new CalorieGoal().show();
-                new CalorieInput().show();
+                JFrame parent = new CalorieGoal().show();
+                new CalorieInput().show(parent);
             }
         }
     }
