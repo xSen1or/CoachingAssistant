@@ -13,8 +13,7 @@ import java.awt.*;
 
 
 
-public class Client extends JFrame {
-
+public class Client extends JDialog {
     // Text fields stored as INSTANCE VARIABLES
     private JTextField nameField;
     private JTextField ageField;
@@ -22,10 +21,10 @@ public class Client extends JFrame {
     private JTextField heightField;
     private JTextField weightField;
 
-    public Client() {
+    public Client(JFrame parent) {
+        super(parent, "Client", true); //modal = true
     }
-
-    public void displayGUIWindow(JFrame srcFrame) {
+    public void displayGUIWindow() {
 
         JPanel mainPanel = new JPanel();
         GroupLayout layout = new GroupLayout(mainPanel);

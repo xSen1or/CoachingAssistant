@@ -16,8 +16,12 @@ import javax.swing.JPanel;
 import gr.huadit.ButtonListeners.StartingPageListener;
 import gr.huadit.DTO.CurrentUser;
 
+// super class
+
+
 public class Starting extends JFrame {
     public Starting() {
+        super("Starting");
     }
 
     public void displayPage() {

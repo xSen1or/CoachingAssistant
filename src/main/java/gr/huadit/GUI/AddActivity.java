@@ -1,18 +1,18 @@
 package gr.huadit.GUI;
 
+import gr.huadit.ButtonListeners.AddActivityListener;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-public class AddActivity extends JFrame{
+public class AddActivity extends JDialog {
 
-  
+   public AddActivity(JFrame parent) {
+        super(parent, "Add Activity", true);
+    }
 
     public void displayWindowGUI() {
         setTitle("Activity Details");
@@ -25,7 +25,6 @@ public class AddActivity extends JFrame{
         gbc.insets = new Insets(5, 5, 5, 5); // spacing
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Row 0
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(new JLabel("Activity Name:"), gbc);
@@ -33,7 +32,6 @@ public class AddActivity extends JFrame{
         JTextField activityNameField = new JTextField(15);
         panel.add(activityNameField, gbc);
 
-        // Row 1
         gbc.gridx = 0;
         gbc.gridy = 1;
         panel.add(new JLabel("ID:"), gbc);
@@ -41,7 +39,6 @@ public class AddActivity extends JFrame{
         JTextField idField = new JTextField(15);
         panel.add(idField, gbc);
 
-        // Row 2
         gbc.gridx = 0;
         gbc.gridy = 2;
         panel.add(new JLabel("Total Distance:(km)"), gbc);
@@ -49,7 +46,6 @@ public class AddActivity extends JFrame{
         gbc.gridx = 1;
         panel.add(totalDistanceField, gbc);
 
-        // Row 3
         gbc.gridx = 0;
         gbc.gridy = 3;
         panel.add(new JLabel("Average Pace:(km/h)"), gbc);
@@ -57,7 +53,6 @@ public class AddActivity extends JFrame{
         JTextField averagePaceField = new JTextField(15);
         panel.add(averagePaceField, gbc);
 
-        // Row 4
         gbc.gridx = 0;
         gbc.gridy = 4;
         panel.add(new JLabel("Average Heart Rate:(bp/s)"), gbc);
@@ -65,7 +60,6 @@ public class AddActivity extends JFrame{
         JTextField averageHeartRateField = new JTextField(15);
         panel.add(averageHeartRateField, gbc);
 
-        // Row 5
         gbc.gridx = 0;
         gbc.gridy = 5;
         panel.add(new JLabel("Duration:(minutes)"), gbc);
@@ -73,12 +67,12 @@ public class AddActivity extends JFrame{
         JTextField durationField = new JTextField(15);
         panel.add(durationField, gbc);
 
-        // Row 6 - Save button spanning 2 columns
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(new AddActivityListener(activityNameField, idField, totalDistanceField, averagePaceField, averageHeartRateField, durationField));
         panel.add(saveButton, gbc);
 
         add(panel);

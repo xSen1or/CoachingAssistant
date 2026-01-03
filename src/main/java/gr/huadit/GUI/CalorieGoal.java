@@ -5,15 +5,18 @@ import gr.huadit.DTO.AppState;
 import javax.swing.*;
 import java.awt.*;
 
-public class CalorieGoal {
+public class CalorieGoal extends JDialog {
+    JFrame parent;
 
-    public CalorieGoal() {
+    public CalorieGoal(JFrame parent) {
+        super(parent, "CalorieGoal", true);
+        displayWindowGUI();
     }
 
-    public JFrame show() {
-        JFrame frame = new JFrame("Στόχος Θερμίδων");
-        frame.setSize(350, 250);
-        frame.setLocationRelativeTo(null);
+    public void displayWindowGUI() {
+        parent = new JFrame("Στόχος Θερμίδων");
+        parent.setSize(350, 250);
+        parent.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -53,8 +56,12 @@ public class CalorieGoal {
         panel.add(new JLabel());
         panel.add(calculateButton);
 
-        frame.add(panel);
-        frame.setVisible(true);
-        return frame;
+        parent.add(panel);
+        parent.setVisible(true);
     }
+
+    public JFrame getParent() {
+        return parent;
+    }
+
 }

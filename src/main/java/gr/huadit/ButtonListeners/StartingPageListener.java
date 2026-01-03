@@ -59,11 +59,11 @@ public class StartingPageListener implements ActionListener {
                     }
                 }
             }
-            case "ADD_ACTIVITY" -> new AddActivity().displayWindowGUI();
-            case "USER_INFO" -> new Client().displayGUIWindow(srcFrame);
+            case "ADD_ACTIVITY" -> new AddActivity(srcFrame).displayWindowGUI();
+            case "USER_INFO" -> new Client(srcFrame).displayGUIWindow();
             case "CALORIE_GOAL" -> {
-                JFrame parent = new CalorieGoal().show();
-                new CalorieInput().show(parent);
+                CalorieGoal cgoal = new CalorieGoal(srcFrame);
+                new CalorieInput().show(cgoal.getParent());
             }
         }
     }
