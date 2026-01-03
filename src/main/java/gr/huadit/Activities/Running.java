@@ -1,8 +1,8 @@
 package gr.huadit.Activities;
 
-import gr.huadit.Interfaces.Activity;
-
 import java.time.Duration;
+
+import gr.huadit.Interfaces.Activity;
 
 public class Running implements Activity {
 
@@ -30,8 +30,6 @@ public class Running implements Activity {
     public String getId() {
         return this.id;
     }
-
-
 
     @Override
     public Duration getDuration() {

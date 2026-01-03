@@ -1,13 +1,18 @@
 package gr.huadit.GUI;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class AddActivity extends JFrame{
 
-    public AddActivity() {
-        displayWindowGUI();
-    }
+  
 
     public void displayWindowGUI() {
         setTitle("Activity Details");
@@ -15,38 +20,68 @@ public class AddActivity extends JFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        setLayout(new GridLayout(6, 2, 10, 10));
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // spacing
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Labels & TextFields
-        add(new JLabel("Activity Name:"));
-        JTextField activityNameField = new JTextField();
-        add(activityNameField);
+        // Row 0
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(new JLabel("Activity Name:"), gbc);
+        gbc.gridx = 1;
+        JTextField activityNameField = new JTextField(15);
+        panel.add(activityNameField, gbc);
 
-        add(new JLabel("ID:"));
-        JTextField idField = new JTextField();
-        add(idField);
+        // Row 1
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(new JLabel("ID:"), gbc);
+        gbc.gridx = 1;
+        JTextField idField = new JTextField(15);
+        panel.add(idField, gbc);
 
-        add(new JLabel("Total Distance:"));
-        JTextField totalDistanceField = new JTextField();
-        add(totalDistanceField);
+        // Row 2
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(new JLabel("Total Distance:(km)"), gbc);
+        JTextField totalDistanceField = new JTextField(15);
+        gbc.gridx = 1;
+        panel.add(totalDistanceField, gbc);
 
-        add(new JLabel("Average Pace:"));
-        JTextField averagePaceField = new JTextField();
-        add(averagePaceField);
+        // Row 3
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(new JLabel("Average Pace:(km/h)"), gbc);
+        gbc.gridx = 1;
+        JTextField averagePaceField = new JTextField(15);
+        panel.add(averagePaceField, gbc);
 
-        add(new JLabel("Average Heart Rate:"));
-        JTextField averageHeartRateField = new JTextField();
-        add(averageHeartRateField);
+        // Row 4
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel.add(new JLabel("Average Heart Rate:(bp/s)"), gbc);
+        gbc.gridx = 1;
+        JTextField averageHeartRateField = new JTextField(15);
+        panel.add(averageHeartRateField, gbc);
 
-        add(new JLabel("Duration:"));
-        JTextField durationField = new JTextField();
-        add(durationField);
+        // Row 5
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        panel.add(new JLabel("Duration:(minutes)"), gbc);
+        gbc.gridx = 1;
+        JTextField durationField = new JTextField(15);
+        panel.add(durationField, gbc);
+
+        // Row 6 - Save button spanning 2 columns
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
         JButton saveButton = new JButton("Save");
-        add(saveButton);
-        add(new JLabel());
+        panel.add(saveButton, gbc);
 
+        add(panel);
         setVisible(true);
-
-
     }
 }

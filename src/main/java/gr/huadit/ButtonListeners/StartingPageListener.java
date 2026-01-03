@@ -1,16 +1,24 @@
 package gr.huadit.ButtonListeners;
 
-import gr.huadit.Enums.LoggerLevel;
-import gr.huadit.GUI.*;
-import gr.huadit.Helpers.XMLSingleFileReader;
-import gr.huadit.Interfaces.Logger;
-import gr.huadit.Loggers.ConsoleLogger;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import gr.huadit.Enums.LoggerLevel;
+import gr.huadit.GUI.AddActivity;
+import gr.huadit.GUI.CalorieGoal;
+import gr.huadit.GUI.CalorieInput;
+import gr.huadit.GUI.Client;
+import gr.huadit.GUI.FileResults;
+import gr.huadit.Helpers.XMLSingleFileReader;
+import gr.huadit.Interfaces.Logger;
+import gr.huadit.Loggers.ConsoleLogger;
 
 public class StartingPageListener implements ActionListener {
 
@@ -51,7 +59,7 @@ public class StartingPageListener implements ActionListener {
                     }
                 }
             }
-            case "ADD_ACTIVITY" -> new AddActivity();
+            case "ADD_ACTIVITY" -> new AddActivity().displayWindowGUI();
             case "USER_INFO" -> new Client().displayGUIWindow(srcFrame);
             case "CALORIE_GOAL" -> {
                 JFrame parent = new CalorieGoal().show();
