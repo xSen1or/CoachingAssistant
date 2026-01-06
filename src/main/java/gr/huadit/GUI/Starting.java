@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import gr.huadit.ButtonListeners.StartingPageListener;
+import gr.huadit.Controllers.StartingPageListener;
 import gr.huadit.DTO.CurrentUser;
 
 // super class
@@ -89,6 +89,15 @@ public class Starting extends JFrame {
         btnCalorieGoal.setActionCommand("CALORIE_GOAL");
         btnCalorieGoal.addActionListener(new StartingPageListener());
 
+
+        // Button 5: Show Selected Files
+        JButton showSelectedFiles = new JButton("Show Selected Files");
+        showSelectedFiles.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(showSelectedFiles);
+
+        // ActionListener
+        showSelectedFiles.setActionCommand("DISPLAY_SELECTED_FILES");
+        showSelectedFiles.addActionListener(new StartingPageListener());
 
         add(panel);
         setVisible(true);

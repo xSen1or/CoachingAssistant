@@ -50,6 +50,7 @@ public class XMLSingleFileReader implements XMLReader {
                 activityCard.saveActivity();
                 activityCard.printAthleteCard();
             }
+            
         }  catch (SAXException exc) {
             logger.print("Invalid File Format: (Please ensure you entered a xml type file) " + exc.getMessage(), LoggerLevel.ERROR);
         } catch (NullPointerException e) {

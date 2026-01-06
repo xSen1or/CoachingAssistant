@@ -10,8 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import gr.huadit.ButtonListeners.AddActivityListener;
+import gr.huadit.Controllers.AddActivityListener;
 
 public class AddActivity extends JDialog {
 
@@ -79,8 +78,9 @@ public class AddActivity extends JDialog {
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(new AddActivityListener(activityNameField, idField, totalDistanceField, averagePaceField, averageHeartRateField, durationField));
         panel.add(saveButton, gbc);
-
         add(panel);
         setVisible(true);
-    }
+
+
+   }
 }

@@ -1,8 +1,10 @@
-package gr.huadit.ButtonListeners;
+package gr.huadit.Controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -16,6 +18,7 @@ import gr.huadit.GUI.CalorieGoal;
 import gr.huadit.GUI.CalorieInput;
 import gr.huadit.GUI.Client;
 import gr.huadit.GUI.FileResults;
+import gr.huadit.GUI.SelectedFiles;
 import gr.huadit.Helpers.XMLSingleFileReader;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Loggers.ConsoleLogger;
@@ -28,7 +31,8 @@ public class StartingPageListener implements ActionListener {
         JFrame srcFrame = (JFrame) SwingUtilities.getWindowAncestor(src);
         String CMD = src.getActionCommand();
         Logger log = new ConsoleLogger();
-
+        List<String> fileNames = new ArrayList<>();
+        SelectedFiles sFiles = new SelectedFiles(srcFrame, fileNames);
 
         switch (CMD) {
             case "SELECT_FILES" -> {
@@ -50,6 +54,7 @@ public class StartingPageListener implements ActionListener {
                 int returnVal = chooser.showOpenDialog(fileResultsGUI);
                 File[] selectedFiles = new File[0];
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
+
                     selectedFiles = chooser.getSelectedFiles();
 
                     for (File file : selectedFiles) {
@@ -64,6 +69,9 @@ public class StartingPageListener implements ActionListener {
             case "CALORIE_GOAL" -> {
                 CalorieGoal cgoal = new CalorieGoal(srcFrame);
                 new CalorieInput().show(cgoal.getParent());
+            }
+            case "DISPLAY_SELECTED_FILES" -> {
+                sFiles.displayGUIWindow(fileNames);
             }
         }
     }

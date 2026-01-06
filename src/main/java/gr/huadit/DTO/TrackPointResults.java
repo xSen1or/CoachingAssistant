@@ -1,24 +1,23 @@
 package gr.huadit.DTO;
 
-import gr.huadit.Interfaces.Logger;
-import gr.huadit.Enums.LoggerLevel;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import gr.huadit.Loggers.ConsoleLogger;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import gr.huadit.Enums.LoggerLevel;
 import static gr.huadit.Helpers.XMLSingleFileReader.getNodeValue;
+import gr.huadit.Interfaces.Logger;
 import static gr.huadit.Interfaces.XMLReader.GARMIN_NS;
+import gr.huadit.Loggers.ConsoleLogger;
 
 /*
-
     DTO Class
     Τρέχει μια λουπα για καθε τρακποιντ,
     υπολογιζει τα απαραίτητα: BPM, DURATION, DISTANCE
     Τα επιστρέφει σαν Object
-
  */
 
 

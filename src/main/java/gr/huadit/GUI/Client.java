@@ -1,8 +1,9 @@
 package gr.huadit.GUI;
 
-import gr.huadit.ButtonListeners.ProfileButtonListener;
-
 import javax.swing.*;
+
+import gr.huadit.Controllers.ProfileButtonListener;
+
 import java.awt.*;
 
 /*
