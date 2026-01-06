@@ -1,12 +1,12 @@
 package gr.huadit.Helpers;
 
-import gr.huadit.Enums.LoggerLevel;
-import gr.huadit.Find;
-import gr.huadit.Interfaces.Logger;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import gr.huadit.Enums.LoggerLevel;
+import gr.huadit.Find;
+import gr.huadit.Interfaces.Logger;
 
 public class PathParser {
     private  Find.Finder finder;
@@ -28,6 +28,7 @@ public class PathParser {
 
         String pattern = args[index];
         Path startingDir = Paths.get(System.getProperty("user.home")); // entering the starting directory
+        
         try {
             if (args.length - index > 1) { // More than one file AFTER the index
                 Find.Finder finder; // we create the finder with the first file -> arg[0]

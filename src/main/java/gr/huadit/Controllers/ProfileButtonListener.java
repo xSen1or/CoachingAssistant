@@ -1,4 +1,4 @@
-package gr.huadit.ButtonListeners;
+package gr.huadit.Controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

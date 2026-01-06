@@ -1,10 +1,13 @@
-package gr.huadit.ButtonListeners;
+package gr.huadit.Controllers;
 
-import gr.huadit.DTO.Activity;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class AddActivityListener implements ActionListener {
     private final JTextField activityNameField;
@@ -32,12 +35,15 @@ public class AddActivityListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        JButton src = (JButton) e.getSource();
+        JFrame srcFrame = (JFrame) SwingUtilities.getWindowAncestor(src);
+
         for (JTextField field : new JTextField[]{activityNameField, idField, totalDistanceField, averagePaceField, averageHeartRateField, durationField}) {
             if (field.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter all fields");
-                return;
+                JOptionPane.showMessageDialog(srcFrame, "Please enter all fields");
+            } else {
+                srcFrame.dispose();
             }
         }
     }
-
 }
