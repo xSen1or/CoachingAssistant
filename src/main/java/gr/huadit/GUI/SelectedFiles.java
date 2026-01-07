@@ -1,5 +1,7 @@
 package gr.huadit.GUI;
 
+import gr.huadit.DTO.TotalFiles;
+
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -11,20 +13,20 @@ import javax.swing.JScrollPane;
 
 public class SelectedFiles extends JDialog { 
 
-    public SelectedFiles(JFrame parentFrame, List<String> fileNames) {
-        super(parentFrame, "Select File", true); 
-        displayGUIWindow(fileNames);
-        setVisible(true);
+    public SelectedFiles(JFrame parentFrame) {
+        super(parentFrame, "Select File", true);
     }
 
-    public void displayGUIWindow(List<String> fileNames) {
+    public void displayGUIWindow() {
+
         setSize(300, 200);
         setLocationRelativeTo(getParent());
 
+        
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        for (String fileName : fileNames) {
+        for (String fileName : TotalFiles.results) {
             JButton button = new JButton(fileName);
             button.addActionListener(e -> {
                 System.out.println("Selected: " + fileName);
@@ -34,5 +36,6 @@ public class SelectedFiles extends JDialog {
 
         JScrollPane scrollPane = new JScrollPane(panel); // scroll if many files
         add(scrollPane);
+        setVisible(true);
     }
 }

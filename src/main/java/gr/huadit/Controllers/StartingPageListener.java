@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import gr.huadit.DTO.TotalFiles;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.AddActivity;
 import gr.huadit.GUI.CalorieGoal;
@@ -32,10 +33,11 @@ public class StartingPageListener implements ActionListener {
         String CMD = src.getActionCommand();
         Logger log = new ConsoleLogger();
         List<String> fileNames = new ArrayList<>();
-        SelectedFiles sFiles = new SelectedFiles(srcFrame, fileNames);
+        SelectedFiles sFiles = new SelectedFiles(srcFrame);
 
         switch (CMD) {
             case "SELECT_FILES" -> {
+                // This is where the files are selected so their names will be displayed
                 log.print("Select Files Button Pressed", LoggerLevel.INFO);
                 srcFrame.dispose();
                 srcFrame.setTitle("Select TCX Files");
@@ -52,12 +54,12 @@ public class StartingPageListener implements ActionListener {
                 chooser.setFileFilter(filter);
 
                 int returnVal = chooser.showOpenDialog(fileResultsGUI);
-                File[] selectedFiles = new File[0];
+                File[] selectedFiles;
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
-
                     selectedFiles = chooser.getSelectedFiles();
 
                     for (File file : selectedFiles) {
+                        TotalFiles.results.add(file.getName());
                         log.print("You chose to open this file: " + file.getPath(), LoggerLevel.INFO);
                         XMLSingleFileReader singleFileReader = new XMLSingleFileReader();
                         singleFileReader.read(file.getPath(), log);
@@ -71,7 +73,7 @@ public class StartingPageListener implements ActionListener {
                 new CalorieInput().show(cgoal.getParent());
             }
             case "DISPLAY_SELECTED_FILES" -> {
-                sFiles.displayGUIWindow(fileNames);
+                sFiles.displayGUIWindow();
             }
         }
     }
