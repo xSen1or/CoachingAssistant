@@ -3,8 +3,6 @@ package gr.huadit.Controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -28,15 +26,16 @@ public class StartingPageListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton src = (JButton) e.getSource();
-        JFrame srcFrame = (JFrame) SwingUtilities.getWindowAncestor(src);
-        String CMD = src.getActionCommand();
-        Logger log = new ConsoleLogger();
-        List<String> fileNames = new ArrayList<>();
-        SelectedFiles sFiles = new SelectedFiles(srcFrame);
+        
+        JButton src = (JButton) e.getSource(); // pressed button.
+        JFrame srcFrame = (JFrame) SwingUtilities.getWindowAncestor(src); // parent window. 
+        String CMD = src.getActionCommand(); // button command id. 
+        Logger log = new ConsoleLogger(); // loggger
+        SelectedFiles sFiles = new SelectedFiles(srcFrame); // 
 
-        switch (CMD) {
-            case "SELECT_FILES" -> {
+        switch (CMD) { 
+            case "SELECT_FILES" -> { 
+
                 // This is where the files are selected so their names will be displayed
                 log.print("Select Files Button Pressed", LoggerLevel.INFO);
                 srcFrame.dispose();
@@ -46,32 +45,48 @@ public class StartingPageListener implements ActionListener {
                 srcFrame.setVisible(true);
                 FileResults fileResultsGUI = new FileResults();
 
+                // selecting the files using java Build Id JFileChooser. https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html
                 JFileChooser chooser = new JFileChooser();
-                FileNameExtensionFilter filter =
-                new FileNameExtensionFilter("TCX Files", "tcx");
+                
+                // pass a filter to accept only .tcx files .
+                FileNameExtensionFilter filter =new FileNameExtensionFilter("TCX Files", "tcx");
 
+                // enable multiselection. 
                 chooser.setMultiSelectionEnabled(true);
+                
+                // apply the filter.
                 chooser.setFileFilter(filter);
 
+                // open the dialog 
                 int returnVal = chooser.showOpenDialog(fileResultsGUI);
                 File[] selectedFiles;
+
+                // if the option(s) is approved
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     selectedFiles = chooser.getSelectedFiles();
-
+                    // loop through the selected files.
                     for (File file : selectedFiles) {
+                        // add the filenames to the holder.
                         TotalFiles.results.add(file.getName());
+                        // logging.
                         log.print("You chose to open this file: " + file.getPath(), LoggerLevel.INFO);
+                        
+                        // read the files data.
                         XMLSingleFileReader singleFileReader = new XMLSingleFileReader();
                         singleFileReader.read(file.getPath(), log);
                     }
                 }
             }
+            // opens the AddActivity Window.
             case "ADD_ACTIVITY" -> new AddActivity(srcFrame).displayWindowGUI();
+            // opens the profile Window. 
             case "USER_INFO" -> new Client(srcFrame).displayGUIWindow();
+            // opens the calorie goal Window.
             case "CALORIE_GOAL" -> {
                 CalorieGoal cgoal = new CalorieGoal(srcFrame);
                 new CalorieInput().show(cgoal.getParent());
             }
+            // you guessed it, open the selected files Window.
             case "DISPLAY_SELECTED_FILES" -> {
                 sFiles.displayGUIWindow();
             }

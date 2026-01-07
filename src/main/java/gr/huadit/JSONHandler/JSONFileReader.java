@@ -1,11 +1,12 @@
 package gr.huadit.JSONHandler;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import gr.huadit.DTO.Profile;
-
 import java.io.File;
 import java.io.IOException;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import gr.huadit.DTO.Profile;
 
 public class JSONFileReader {
     private final String STORAGE_DIRECTORY = System.getProperty("user.dir") + "/src/main/java/gr/huadit/Storage";

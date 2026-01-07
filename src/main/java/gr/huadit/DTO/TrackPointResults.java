@@ -15,29 +15,34 @@ import gr.huadit.Loggers.ConsoleLogger;
 
 /*
     DTO Class
-    Τρέχει μια λουπα για καθε τρακποιντ,
-    υπολογιζει τα απαραίτητα: BPM, DURATION, DISTANCE
-    Τα επιστρέφει σαν Object
+    Runs a loop for each trackpoint.        
+    Calculates the: BPM, DURATION, DISTANCE
+    And returns it as an object.
  */
 
 
 
 public record TrackPointResults(double totalDistance, int countBPM, double averageBPM, Duration dur) {
     public static TrackPointResults processTrackPoints(NodeList trackPoints, String[] timings) {
-        Logger log = new ConsoleLogger();
+        Logger log = new ConsoleLogger(); // logger
+        
+        // initialize variables 
         double totalDistance = 0.0;
         int countBPM = 0;
         double sumBPM = 0.0;
 
-        for (int j = 0; j < trackPoints.getLength(); j++) {
-            Element tp = (Element) trackPoints.item(j);
 
+        // loop for length of the trackpoints 
+        for (int j = 0; j < trackPoints.getLength(); j++) {
+            Element tp = (Element) trackPoints.item(j); // get the item.
+
+            // get the specific node values 
             String distanceStr = getNodeValue(tp.getElementsByTagNameNS(GARMIN_NS, "DistanceMeters"), null);
             String timeStr = getNodeValue(tp.getElementsByTagNameNS(GARMIN_NS, "Time"), null);
-
             Element hrElement = (Element) tp.getElementsByTagNameNS(GARMIN_NS, "HeartRateBpm").item(0);
             String bpmStr = hrElement != null ? getNodeValue(hrElement.getElementsByTagName("Value"), null) : null;
 
+            // do some checks 
             if (timeStr != null && !timeStr.isEmpty()) {
                 if (timings != null && timings.length > j) {
                     timings[j] = timeStr;
@@ -65,6 +70,8 @@ public record TrackPointResults(double totalDistance, int countBPM, double avera
                 }
             }
         }
+
+        // create a time formater.
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
         OffsetDateTime firstDT = null, lastDT = null;
         try {
@@ -80,6 +87,7 @@ public record TrackPointResults(double totalDistance, int countBPM, double avera
         }
         double averageBPM = countBPM > 0 ? sumBPM / countBPM : 0.0;
         assert firstDT != null;
+        // return the data.
         return new TrackPointResults(totalDistance, countBPM, averageBPM, Duration.between(firstDT, lastDT));
     }
 

@@ -20,6 +20,11 @@ import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Interfaces.XMLReader;
 
+/*
+    This code was supplied to us from the Projects Instructions. Out team made some changes so it complies with our program.
+*/
+
+
 public class XMLSingleFileReader implements XMLReader {
     private static final String GARMIN_NS =  "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2";
     ProgressCalculator progressCalculator = new ProgressCalculator();

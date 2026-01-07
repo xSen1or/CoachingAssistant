@@ -1,9 +1,7 @@
 package gr.huadit.DTO;
 
 /*
-
-    Record classes: Με λίγα λόγια απλα ειναι DTO's (Data Transfer Objects)
-
+    DTO Class.
  */
 
 public record Profile(String name, int age, double weight, double height, String gender) {

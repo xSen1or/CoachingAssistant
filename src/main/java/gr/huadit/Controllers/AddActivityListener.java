@@ -2,7 +2,6 @@ package gr.huadit.Controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.Duration;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -10,7 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import gr.huadit.DTO.Activity;
+import gr.huadit.DTO.TotalFiles;
+import gr.huadit.Helpers.XMLCreator;
 
 public class AddActivityListener implements ActionListener {
     private final JTextField activityNameField;
@@ -33,31 +33,26 @@ public class AddActivityListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton src = (JButton) e.getSource();
-        JDialog srcFrame = (JDialog) SwingUtilities.getWindowAncestor(src);
+        JButton src = (JButton) e.getSource(); // pressed button 
+        JDialog srcFrame = (JDialog) SwingUtilities.getWindowAncestor(src); // source window.
 
         for (JTextField field : new JTextField[] { activityNameField, idField, totalDistanceField, averagePaceField,
-                averageHeartRateField, durationField }) {
+   averageHeartRateField, durationField }) { // loop through the fields and check if any of them are blank. Not checking this could result to a Fatal Error.
             if (field.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(srcFrame, "Please enter all fields");
+                JOptionPane.showMessageDialog(srcFrame, "Please enter all fields"); // error pop up message.
                 return;
             }
-            
-
-
-            srcFrame.dispose();
+            srcFrame.dispose(); // dispose the window. 
         }
 
         try {
-            Activity activity = new Activity(
-                    activityNameField.getText().trim(),
-                    idField.getText().trim(),
-                    Double.parseDouble(totalDistanceField.getText().trim()),
-                    Double.parseDouble(averageHeartRateField.getText().trim()),
-                    Duration.ofMinutes(Long.parseLong(durationField.getText().trim())));
-                    JOptionPane.showMessageDialog(srcFrame, "Activity Added!");
+            // Create a new XML File so it can be read using the already existed reader.
+            XMLCreator builder = new XMLCreator(); 
+            builder.createXML(activityNameField.getText(), idField.getText(), totalDistanceField.getText(), averagePaceField.getText(), averageHeartRateField.getText(), durationField.getText(), srcFrame);
+            JOptionPane.showMessageDialog(srcFrame, "Activity added to the Selected Files page!");
+            TotalFiles.results.add(activityNameField.getText() + ".tcx");
         } catch (Exception exc) {
-            JOptionPane.showMessageDialog(srcFrame, exc);
+            JOptionPane.showMessageDialog(srcFrame, exc); // error pop up message
         }
     }
 }

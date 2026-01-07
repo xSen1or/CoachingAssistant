@@ -10,10 +10,12 @@ public class ArgumentHandler {
     private int index = 0;
     public static int flag = -1;
 
+    // constructor
     public ArgumentHandler(String[] args) {
         this.args = args;
     }
 
+    // for debugging 
     public void debugIndexOfArguments() {
         for (int i = 0; i < args.length; i++) {
             log.print("Argument " + i + " is: " + args[i], LoggerLevel.DEBUG);
@@ -28,8 +30,11 @@ public class ArgumentHandler {
 
     public void flag() {
         if (args[0].equals("-term")) {
+            // logging 
             log.print("DISCLAIMER: Take notice that the applications response time depends on the storage of the current device.!", LoggerLevel.INFO);
+            // passes the correct flag value 
             flag = 1;
+            // calls the two functions that retrieve the neccessery data.
             this.getWeight(); //gets the weight argument
             this.getFiles(); //gets the files
         } else if (args[0].equals("-gui")) {
@@ -42,6 +47,7 @@ public class ArgumentHandler {
         }
     }   
 
+    // a function that returns a message in case the user gave invalid or empty info 
     public boolean isEmpty() {
         if (args.length == 1 && args[0].equals("-term") || args.length < 4  && args[0].equals("-term") && args[1].equals("-w" )){
             log.print("No arguments (or not enough) provided for Terminal Mode.", LoggerLevel.FATAL);
@@ -61,6 +67,8 @@ public class ArgumentHandler {
         pParser.handleXMLInput();
 
     }
+    
+    // get the weight argument.
     public void getWeight() {
         index = 1;
         if (args.length > 2 && args[index].equals("-w")) {

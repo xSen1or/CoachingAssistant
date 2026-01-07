@@ -2,7 +2,9 @@ package gr.huadit.DTO;
 
 import java.time.Duration;
 
-
+/*
+    DTO Class.
+*/
 
 
 public record Activity(String name, String id, double totalDistance, double averageHeartRate, Duration duration) {
