@@ -1,6 +1,8 @@
 package gr.huadit.GUI;
 
+
 import gr.huadit.DTO.TotalFiles;
+import gr.huadit.Controllers.*;
 
 import java.util.List;
 
@@ -22,20 +24,20 @@ public class SelectedFiles extends JDialog {
         setSize(300, 200);
         setLocationRelativeTo(getParent());
 
-        
+        List<String> filenames = TotalFiles.results;
+
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        for (String fileName : TotalFiles.results) {
+        for (String fileName : filenames) {
             JButton button = new JButton(fileName);
-            button.addActionListener(e -> {
-                System.out.println("Selected: " + fileName);
-            });
+            button.addActionListener(new SelectFilesListener(fileName));
             panel.add(button);
         }
 
-        JScrollPane scrollPane = new JScrollPane(panel); // scroll if many files
-        add(scrollPane);
+        JScrollPane scrollPane = new JScrollPane(panel);
+        setContentPane(scrollPane); // replaces old content
         setVisible(true);
     }
+
 }

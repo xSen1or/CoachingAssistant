@@ -58,7 +58,7 @@ public class ActivityCard {
         this.pace = minutes + ":" + seconds + "min/km";
 
         if (flag == 0) { // if a flag is for gui -> run gui
-            FileResults fileResultsGUI = new FileResults();
+            FileResults fileResultsGUI = new FileResults(null);
             fileResultsGUI.displayGUIWindow(this);
         }
     }

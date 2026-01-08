@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Activity Sport="Running">
+    <Id>1234</Id>
+    <Lap StartTime="1234">
+        <TotalTimeSeconds>30</TotalTimeSeconds>
+        <DistanceMeters>100</DistanceMeters>
+        <AverageHeartRateBpm>122</AverageHeartRateBpm>
+        <AverageSpeed>20</AverageSpeed>
+    </Lap>
+</Activity>

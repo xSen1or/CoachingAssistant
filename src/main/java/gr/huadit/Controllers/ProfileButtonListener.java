@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -14,6 +14,7 @@ import gr.huadit.DTO.CurrentUser;
 import gr.huadit.DTO.Profile;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.Client;
+import gr.huadit.GUI.Starting;
 import gr.huadit.Loggers.ConsoleLogger;
 
 public class ProfileButtonListener implements ActionListener {
@@ -29,7 +30,7 @@ public class ProfileButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton src = (JButton) e.getSource(); // button that has been pressed.
-        JFrame srcFrame = (JFrame) SwingUtilities.getWindowAncestor(src); // parent window.
+        JDialog srcFrame = (JDialog) SwingUtilities.getWindowAncestor(src); // parent window.
         String CMD = src.getActionCommand(); // get the buttons specific ID.
 
         if (CMD.equals("SAVE")) { // if the buttons id is "SAVE" do this.
@@ -56,6 +57,9 @@ public class ProfileButtonListener implements ActionListener {
 
                 JOptionPane.showMessageDialog(srcFrame, "Profile created:\n" + currentUser.toString(2)); // pop up message. 
                 CurrentUser.currentUser = currentUser; // update the holders value. 
+                srcFrame.dispose();
+                Starting newPage = new Starting();
+                newPage.displayPage();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(srcFrame, "Please enter valid numbers for age, weight, and height."); // pop up error message
                 logger.print("Number format error: " + ex.getMessage(), LoggerLevel.ERROR); // error logging 

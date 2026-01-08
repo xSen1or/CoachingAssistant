@@ -42,15 +42,14 @@ public class AddActivityListener implements ActionListener {
                 JOptionPane.showMessageDialog(srcFrame, "Please enter all fields"); // error pop up message.
                 return;
             }
-            srcFrame.dispose(); // dispose the window. 
+            srcFrame.dispose(); // dispose of the window.
         }
 
         try {
-            // Create a new XML File so it can be read using the already existed reader.
-            XMLCreator builder = new XMLCreator(); 
+            XMLCreator builder = new XMLCreator();
             builder.createXML(activityNameField.getText(), idField.getText(), totalDistanceField.getText(), averagePaceField.getText(), averageHeartRateField.getText(), durationField.getText(), srcFrame);
             JOptionPane.showMessageDialog(srcFrame, "Activity added to the Selected Files page!");
-            TotalFiles.results.add(activityNameField.getText() + ".tcx");
+            TotalFiles.results.add("activity_" + idField.getText() + ".tcx");
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(srcFrame, exc); // error pop up message
         }

@@ -1,6 +1,7 @@
 package gr.huadit.Helpers;
 
 import java.io.FileInputStream;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +52,16 @@ public class XMLSingleFileReader implements XMLReader {
                 TrackPointResults results = TrackPointResults.processTrackPoints(trackPoints, timings);
                 ListContent.add(results);
 
-                ActivityCard activityCard = new ActivityCard(sport, Id, results.totalDistance(), progressCalculator.calculatePace(results.dur().toSeconds(), results.totalDistance()), results.averageBPM(), results.dur());
-                activityCard.saveActivity();
+                Duration duration = results.dur();
+                assert duration != null : "Duration is null for activity " + Id;
+                ActivityCard activityCard = new ActivityCard(
+                        sport,
+                        Id,
+                        results.totalDistance(),
+                        progressCalculator.calculatePace(duration.toSeconds(), results.totalDistance()),
+                        results.averageBPM(),
+                        duration
+                );                activityCard.saveActivity();
                 activityCard.printAthleteCard();
             }
             

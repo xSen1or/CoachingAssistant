@@ -43,12 +43,12 @@ public class StartingPageListener implements ActionListener {
                 srcFrame.setSize(500, 400);
                 srcFrame.setLocationRelativeTo(null);
                 srcFrame.setVisible(true);
-                FileResults fileResultsGUI = new FileResults();
+                FileResults fileResultsGUI = new FileResults(srcFrame);
 
-                // selecting the files using java Build Id JFileChooser. https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html
+                // selecting the files using java Build id JFileChooser. https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html
                 JFileChooser chooser = new JFileChooser();
                 
-                // pass a filter to accept only .tcx files .
+                // pass a filter to accept only .tcx files.
                 FileNameExtensionFilter filter =new FileNameExtensionFilter("TCX Files", "tcx");
 
                 // enable multiselection. 
@@ -67,6 +67,7 @@ public class StartingPageListener implements ActionListener {
                     // loop through the selected files.
                     for (File file : selectedFiles) {
                         // add the filenames to the holder.
+                        if (TotalFiles.results.contains(file.getName())) return; 
                         TotalFiles.results.add(file.getName());
                         // logging.
                         log.print("You chose to open this file: " + file.getPath(), LoggerLevel.INFO);

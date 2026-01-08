@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
+    <Activity Sport="Running">
+        <Id>20123</Id>
+        <Lap StartTime="20123">
+            <TotalTimeSeconds>10</TotalTimeSeconds>
+            <DistanceMeters>100</DistanceMeters>
+            <AverageHeartRateBpm>10</AverageHeartRateBpm>
+            <AverageSpeed>120</AverageSpeed>
+        </Lap>
+    </Activity>
+</TrainingCenterDatabase>

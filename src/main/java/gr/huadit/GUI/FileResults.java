@@ -7,7 +7,12 @@ import gr.huadit.Loggers.ConsoleLogger;
 import javax.swing.*;
 import java.time.Duration;
 
-public class FileResults extends JFrame {
+public class FileResults extends JDialog {
+
+    public FileResults(JFrame parent) {
+        super(parent, "Activity Results", true);
+    }
+
     private final ConsoleLogger log = new ConsoleLogger();
 
     public void displayGUIWindow(ActivityCard card) {

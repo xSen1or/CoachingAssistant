@@ -15,20 +15,15 @@ import javax.swing.JPanel;
 
 import gr.huadit.Controllers.StartingPageListener;
 import gr.huadit.DTO.CurrentUser;
-
 // super class
 
 
 public class Starting extends JFrame {
-    public Starting() {
-        super("Starting");
-    }
-
     public void displayPage() {
         setTitle("Fitness Tracker - Home");
         setSize(500, 400);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Main panel
         JPanel panel = new JPanel();
