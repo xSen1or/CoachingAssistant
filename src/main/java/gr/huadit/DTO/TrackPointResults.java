@@ -13,49 +13,48 @@ import gr.huadit.Interfaces.Logger;
 import static gr.huadit.Interfaces.XMLReader.GARMIN_NS;
 import gr.huadit.Loggers.ConsoleLogger;
 
-/*
-    DTO Class
-    Runs a loop for each trackpoint.        
-    Calculates the: BPM, DURATION, DISTANCE
-    And returns it as an object.
- */
+public record TrackPointResults(
+        double totalDistance,
+        int countBPM,
+        double averageBPM,
+        Duration dur
+) {
 
-
-
-public record TrackPointResults(double totalDistance, int countBPM, double averageBPM, Duration dur) {
     public static TrackPointResults processTrackPoints(NodeList trackPoints, String[] timings) {
-        Logger log = new ConsoleLogger(); // logger
-        
-        // initialize variables 
+
+        Logger log = new ConsoleLogger();
+
         double totalDistance = 0.0;
         int countBPM = 0;
         double sumBPM = 0.0;
 
-
-        // loop for length of the trackpoints 
+        /* ---------------- Trackpoint loop ---------------- */
         for (int j = 0; j < trackPoints.getLength(); j++) {
-            Element tp = (Element) trackPoints.item(j); // get the item.
 
-            // get the specific node values 
-            String distanceStr = getNodeValue(tp.getElementsByTagNameNS(GARMIN_NS, "DistanceMeters"), null);
-            String timeStr = getNodeValue(tp.getElementsByTagNameNS(GARMIN_NS, "Time"), null);
-            Element hrElement = (Element) tp.getElementsByTagNameNS(GARMIN_NS, "HeartRateBpm").item(0);
-            String bpmStr = hrElement != null ? getNodeValue(hrElement.getElementsByTagName("Value"), null) : null;
+            Element tp = (Element) trackPoints.item(j);
 
-            // do some checks 
-            if (timeStr != null && !timeStr.isEmpty()) {
-                if (timings != null && timings.length > j) {
-                    timings[j] = timeStr;
-                }
+            String distanceStr = getNodeValue(
+                    tp.getElementsByTagNameNS(GARMIN_NS, "DistanceMeters"), null);
+
+            String timeStr = getNodeValue(
+                    tp.getElementsByTagNameNS(GARMIN_NS, "Time"), null);
+
+            Element hrElement = (Element)
+                    tp.getElementsByTagNameNS(GARMIN_NS, "HeartRateBpm").item(0);
+
+            String bpmStr = hrElement != null
+                    ? getNodeValue(hrElement.getElementsByTagName("Value"), null)
+                    : null;
+
+            if (timings != null && timeStr != null && j < timings.length) {
+                timings[j] = timeStr;
             }
 
             if (bpmStr != null && !bpmStr.isEmpty()) {
                 try {
-                    double bpm = Double.parseDouble(bpmStr);
+                    sumBPM += Double.parseDouble(bpmStr);
                     countBPM++;
-                    sumBPM += bpm;
-                } catch (NumberFormatException ignored) {
-                }
+                } catch (NumberFormatException ignored) {}
             }
 
             if (distanceStr != null && !distanceStr.isEmpty()) {
@@ -64,33 +63,53 @@ public record TrackPointResults(double totalDistance, int countBPM, double avera
                     if (distance > totalDistance) {
                         totalDistance = distance;
                     }
-                } catch (NumberFormatException ignored) {
-                    // Ignore invalid number silently
-                    log.print("Ignored Invalid Number", LoggerLevel.WARNING);
+                } catch (NumberFormatException e) {
+                    log.print("Ignored invalid distance value", LoggerLevel.WARNING);
                 }
             }
         }
 
-        // create a time formater.
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-        OffsetDateTime firstDT = null, lastDT = null;
-        try {
-            assert timings != null;
+        /* ---------------- Time calculation ---------------- */
+
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
+        OffsetDateTime firstDT = null;
+        OffsetDateTime lastDT  = null;
+
+        if (timings != null) {
             for (String t : timings) {
-                if (t != null) {
-                    if (firstDT == null) firstDT = OffsetDateTime.parse(t, inputFormatter);
-                    lastDT = OffsetDateTime.parse(t, inputFormatter);
+                if (t == null || t.isEmpty()) continue;
+
+                try {
+                    OffsetDateTime parsed = OffsetDateTime.parse(t, formatter);
+                    if (firstDT == null) {
+                        firstDT = parsed;
+                    }
+                    lastDT = parsed;
+                } catch (Exception e) {
+                    log.print("Invalid time format: " + t, LoggerLevel.WARNING);
                 }
             }
-        } catch (NullPointerException exc) {
-            log.print("Null pointer exception | " + exc.getMessage(), LoggerLevel.WARNING);
         }
+
+        Duration dur;
+
+        if (firstDT != null && lastDT != null) {
+            dur = Duration.between(firstDT, lastDT);
+        } else {
+            log.print("Duration could not be calculated (missing timestamps)",
+                    LoggerLevel.WARNING);
+            dur = Duration.ZERO;
+        }
+
         double averageBPM = countBPM > 0 ? sumBPM / countBPM : 0.0;
-        assert firstDT != null;
-        // return the data.
-        return new TrackPointResults(totalDistance, countBPM, averageBPM, Duration.between(firstDT, lastDT));
+
+        return new TrackPointResults(
+                totalDistance,
+                countBPM,
+                averageBPM,
+                dur
+        );
     }
-
 }
-
-
