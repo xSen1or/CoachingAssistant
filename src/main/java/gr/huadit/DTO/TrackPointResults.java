@@ -3,6 +3,8 @@ package gr.huadit.DTO;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -17,18 +19,19 @@ public record TrackPointResults(
         double totalDistance,
         int countBPM,
         double averageBPM,
-        Duration dur
+        Duration dur,
+        List<Integer> bpmValues
 ) {
 
     public static TrackPointResults processTrackPoints(NodeList trackPoints, String[] timings) {
 
         Logger log = new ConsoleLogger();
+        List<Integer> bpmValues = new ArrayList<>();
 
         double totalDistance = 0.0;
         int countBPM = 0;
         double sumBPM = 0.0;
 
-        /* ---------------- Trackpoint loop ---------------- */
         for (int j = 0; j < trackPoints.getLength(); j++) {
 
             Element tp = (Element) trackPoints.item(j);
@@ -52,11 +55,12 @@ public record TrackPointResults(
 
             if (bpmStr != null && !bpmStr.isEmpty()) {
                 try {
-                    sumBPM += Double.parseDouble(bpmStr);
+                    int bpm = Integer.parseInt(bpmStr);
+                    sumBPM += bpm;
                     countBPM++;
+                    bpmValues.add(bpm);
                 } catch (NumberFormatException ignored) {}
             }
-
             if (distanceStr != null && !distanceStr.isEmpty()) {
                 try {
                     double distance = Double.parseDouble(distanceStr);
@@ -69,7 +73,6 @@ public record TrackPointResults(
             }
         }
 
-        /* ---------------- Time calculation ---------------- */
 
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
@@ -95,7 +98,7 @@ public record TrackPointResults(
 
         Duration dur;
 
-        if (firstDT != null && lastDT != null) {
+        if (firstDT != null) {
             dur = Duration.between(firstDT, lastDT);
         } else {
             log.print("Duration could not be calculated (missing timestamps)",
@@ -109,7 +112,8 @@ public record TrackPointResults(
                 totalDistance,
                 countBPM,
                 averageBPM,
-                dur
+                dur,
+                bpmValues
         );
     }
 }
