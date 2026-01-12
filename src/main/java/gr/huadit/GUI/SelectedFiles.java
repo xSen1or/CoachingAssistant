@@ -1,10 +1,9 @@
 package gr.huadit.GUI;
 
 
-import gr.huadit.DTO.TotalFiles;
 import gr.huadit.Controllers.*;
-
-import java.util.List;
+import gr.huadit.Holders.TotalFiles;
+import gr.huadit.JSONHandler.JSONFileReader;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,6 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectedFiles extends JDialog { 
 
@@ -20,11 +21,12 @@ public class SelectedFiles extends JDialog {
     }
 
     public void displayGUIWindow() {
+        List<String> filenames = TotalFiles.results;
 
         setSize(300, 200);
         setLocationRelativeTo(getParent());
 
-        List<String> filenames = TotalFiles.results;
+        JSONFileReader reader = new JSONFileReader();
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

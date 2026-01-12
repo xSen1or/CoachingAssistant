@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gr.huadit.Classes.ActivityCard;
 import gr.huadit.DTO.Profile;
 import gr.huadit.Enums.LoggerLevel;
+import gr.huadit.Holders.TotalFiles;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Loggers.ConsoleLogger;
 
@@ -42,7 +43,6 @@ public class JSONFileWriter {
             // Check if the file exists and is not empty.
             if (outputFile.exists() && outputFile.length() > 0) {
                 JsonNode existing = objectMapper.readTree(outputFile);
-
                 if (existing.isArray()) {
                     arrayNode = (ArrayNode) existing;
                 } else {
@@ -61,9 +61,12 @@ public class JSONFileWriter {
             jsonNode.put("activity_total_distance", obj.getTotalDistance());
             jsonNode.put("activity_average_pace", obj.getAveragePace());
             jsonNode.put("activity_duration", obj.getDuration().toString());
+            jsonNode.put("activity_average_heart_rate", obj.getAverageHeartRate());
 
+            TotalFiles.results.add(obj.getActivityName());
             arrayNode.add(jsonNode);
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputFile, arrayNode);
+            logger.print("JSON OBject Created", LoggerLevel.INFO);
         } catch (Exception e) {
             logger.print("Couldn't parse data in storage", LoggerLevel.FATAL);
             logger.print(e.getMessage(), LoggerLevel.FATAL);

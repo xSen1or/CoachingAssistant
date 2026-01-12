@@ -1,4 +1,4 @@
-package gr.huadit.DTO;
+package gr.huadit.Holders;
 
 import org.json.JSONObject;
 

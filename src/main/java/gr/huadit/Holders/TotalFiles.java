@@ -1,4 +1,4 @@
-package gr.huadit.DTO;
+package gr.huadit.Holders;
 import java.util.ArrayList;
 import java.util.List;
 

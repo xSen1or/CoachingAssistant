@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gr.huadit.Controllers.StartingPageListener;
-import gr.huadit.DTO.CurrentUser;
+import gr.huadit.Holders.CurrentUser;
 // super class
 
 

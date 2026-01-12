@@ -11,8 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import gr.huadit.Classes.ActivityCard;
-import gr.huadit.DTO.TotalFiles;
-import gr.huadit.Helpers.XMLCreator;
+import gr.huadit.JSONHandler.JSONFileReader;
 import gr.huadit.JSONHandler.JSONFileWriter;
 
 public class AddActivityListener implements ActionListener {
@@ -48,10 +47,17 @@ public class AddActivityListener implements ActionListener {
             srcFrame.dispose(); // dispose of the window.
         }
 
+
         try {
             long minutes = Long.parseLong(durationField.getText().trim());
             ActivityCard card = new ActivityCard(activityNameField.getText(), idField.getText(), Double.parseDouble(totalDistanceField.getText()), Double.parseDouble(averagePaceField.getText()), Double.parseDouble(averageHeartRateField.getText()), Duration.ofMinutes(minutes));
             JSONFileWriter writer = new JSONFileWriter(card);
+            JSONFileReader reader = new JSONFileReader();
+            if (reader.contains(card.getActivityName())) {
+                JOptionPane.showMessageDialog(srcFrame, "Filename already exists");
+                return;
+            }
+            writer.writeProfileToFile();
             JOptionPane.showMessageDialog(srcFrame, "Activity added successfully!");
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(srcFrame, exc); // error pop up message

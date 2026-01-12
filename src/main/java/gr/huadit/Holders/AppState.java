@@ -1,4 +1,4 @@
-package gr.huadit.DTO;
+package gr.huadit.Holders;
 
 /*
     DTO Class for the calorie calculator

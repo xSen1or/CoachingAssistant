@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 
 import org.json.JSONObject;
 
-import gr.huadit.DTO.CurrentUser;
+import gr.huadit.Holders.CurrentUser;
 import gr.huadit.DTO.Profile;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.Client;

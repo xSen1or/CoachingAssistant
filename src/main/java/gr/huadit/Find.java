@@ -34,7 +34,6 @@ public class Find {
                 numMatches++;
                 foundPath = file.toAbsolutePath();
                 filenames.add(foundPath.toString());
-                System.out.println();
             }
         }
 
@@ -44,10 +43,10 @@ public class Find {
 
         // Prints the total number of
         // matches to standard out.
-        void done() {
-            System.out.println("Matched: "
-                    + numMatches);
-        }
+//        void done() {
+//            System.out.println("Matched: "
+//                    + numMatches);
+//        }
 
         // Invoke the pattern matching
         // method on each file.

@@ -80,7 +80,5 @@ public class AddActivity extends JDialog {
         panel.add(saveButton, gbc);
         add(panel);
         setVisible(true);
-
-
    }
 }

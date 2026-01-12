@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import gr.huadit.DTO.TotalFiles;
+import gr.huadit.Holders.TotalFiles;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.AddActivity;
 import gr.huadit.GUI.CalorieGoal;
@@ -67,7 +67,7 @@ public class StartingPageListener implements ActionListener {
                     // loop through the selected files.
                     for (File file : selectedFiles) {
                         // add the filenames to the holder.
-                        if (TotalFiles.results.contains(file.getName())) return; 
+                        if (TotalFiles.results.contains(file.getName())) return;
                         TotalFiles.results.add(file.getName());
                         // logging.
                         log.print("You chose to open this file: " + file.getPath(), LoggerLevel.INFO);
