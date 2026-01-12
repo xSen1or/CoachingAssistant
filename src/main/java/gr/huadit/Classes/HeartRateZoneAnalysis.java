@@ -14,7 +14,7 @@ public class HeartRateZoneAnalysis {
     private static final double[] zoneMax = {0.60, 0.70, 0.80, 0.90, 1.00};
 
     private static final double[] ceff = {0.07, 0.10, 0.13, 0.16, 0.20};
-
+    //
     public HeartRateZoneAnalysis(int age, double weight) {
         this.age = age;
         this.weight = weight;
