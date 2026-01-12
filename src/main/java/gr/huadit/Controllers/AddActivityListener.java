@@ -2,6 +2,7 @@ package gr.huadit.Controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Duration;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -9,8 +10,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import gr.huadit.Classes.ActivityCard;
 import gr.huadit.DTO.TotalFiles;
 import gr.huadit.Helpers.XMLCreator;
+import gr.huadit.JSONHandler.JSONFileWriter;
 
 public class AddActivityListener implements ActionListener {
     private final JTextField activityNameField;
@@ -46,10 +49,10 @@ public class AddActivityListener implements ActionListener {
         }
 
         try {
-            XMLCreator builder = new XMLCreator();
-            builder.createXML(activityNameField.getText(), idField.getText(), totalDistanceField.getText(), averagePaceField.getText(), averageHeartRateField.getText(), durationField.getText(), srcFrame);
-            JOptionPane.showMessageDialog(srcFrame, "Activity added to the Selected Files page!");
-            TotalFiles.results.add("activity_" + idField.getText() + ".tcx");
+            long minutes = Long.parseLong(durationField.getText().trim());
+            ActivityCard card = new ActivityCard(activityNameField.getText(), idField.getText(), Double.parseDouble(totalDistanceField.getText()), Double.parseDouble(averagePaceField.getText()), Double.parseDouble(averageHeartRateField.getText()), Duration.ofMinutes(minutes));
+            JSONFileWriter writer = new JSONFileWriter(card);
+            JOptionPane.showMessageDialog(srcFrame, "Activity added successfully!");
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(srcFrame, exc); // error pop up message
         }

@@ -72,7 +72,7 @@ public class StartingPageListener implements ActionListener {
                         // logging.
                         log.print("You chose to open this file: " + file.getPath(), LoggerLevel.INFO);
                         
-                        // read the files data.
+                        // read the files' data.
                         XMLSingleFileReader singleFileReader = new XMLSingleFileReader();
                         singleFileReader.read(file.getPath(), log);
                     }

@@ -17,16 +17,17 @@ public class JSONFileReader {
     }
 
     public Profile readJSON(String key) {
-        File outputFile = new File(STORAGE_DIRECTORY, "storage.json");
+
+        File outputFile = new File(STORAGE_DIRECTORY, "fileContainer.json");
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(outputFile);
-            String name = jsonNode.get("Name").asText();
-            int age = jsonNode.get("Age").asInt();
-            int weight = jsonNode.get("Weight").asInt();
-            int height = jsonNode.get("Height").asInt();
+            String name = jsonNode.get("type").asText();
+            String age = jsonNode.get("id").asText();
+            String weight = jsonNode.get("distance").asText();
+            String height = jsonNode.get("pace").asText();
             String gender = jsonNode.get("Gender").asText();
-            return new Profile(name, age, weight, height, gender);
+            return null;
         } catch (IOException e) {
             System.err.println("ERROR AT READING JSON FILE:");
         }
