@@ -69,13 +69,20 @@ public class ArgumentHandler {
     }
     
     // get the weight argument.
-    public void getWeight() {
+    public int getWeight() {
         index = 1;
         if (args.length > 2 && args[index].equals("-w")) {
             log.print("Weight Argument Found: " + args[index + 1], LoggerLevel.DEBUG);
             index = 3;
         }
+        return Integer.parseInt(args[index]);
     }
 
-
+    public int getAge() {
+        index = 1;
+        if (args.length > 2 && args[index].equals("-age")) {
+            log.print("Age Argument Found: " + args[index + 1], LoggerLevel.DEBUG);
+        }
+        return Integer.parseInt(args[index]);
+    }
 }

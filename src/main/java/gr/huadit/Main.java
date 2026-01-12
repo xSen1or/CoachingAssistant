@@ -15,6 +15,7 @@ import gr.huadit.Helpers.ArgumentHandler;
 
         if (args.length == 0) throw new IllegalArgumentException("No arguments provided");
         ArgumentHandler argumentHandler = new ArgumentHandler(args);
+        argumentHandler.debugIndexOfArguments();
         if (argumentHandler.isEmpty()) System.exit(1);
         argumentHandler.flag();
 
