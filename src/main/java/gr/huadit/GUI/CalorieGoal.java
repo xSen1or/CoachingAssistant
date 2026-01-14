@@ -35,10 +35,13 @@ public class CalorieGoal extends JDialog {
 
         JButton calculateButton = new JButton("Counter");
 
+        // Set the given value as the daily goal in the AppState Holder.
         calculateButton.addActionListener(e -> {
             AppState.dailyGoal = Integer.parseInt(goalField.getText());
 
+            // Calculate the remaining calories.
             int remaining = AppState.dailyGoal - AppState.todayConsumed;
+            // Update the values.
             consumedValue.setText(String.valueOf(AppState.todayConsumed));
             remainingValue.setText(String.valueOf(Math.max(0, remaining)));
 

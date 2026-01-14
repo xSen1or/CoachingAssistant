@@ -18,9 +18,6 @@ import static gr.huadit.Helpers.ArgumentHandler.flag;
     Usage: print activity information
 
  */
-
-
-
 public class ActivityCard {
     private final Logger log = new ConsoleLogger();
     private final String ActivityName;
@@ -41,11 +38,13 @@ public class ActivityCard {
         this.duration = duration;
     }
 
+    // Call this method to PRINT the .tcx file contents.
     public void printAthleteCard() {
         long minutes = (long) (this.AveragePace / 60);
         long seconds = (long) (this.AveragePace % 60);
         String formattedDuration = String.format("%02d:%02d:%02d", duration.toHours(), duration.toMinutes() % 60, duration.toSeconds() % 60);
 
+        // Print on the console.
         System.out.println(
                 "Activity: " + this.ActivityName + "\n" +
                         "ID: " + this.Id + "\n" +
@@ -57,12 +56,14 @@ public class ActivityCard {
 
         this.pace = minutes + ":" + seconds + "min/km";
 
-        if (flag == 0) { // if a flag is for gui -> run gui
+        // If the flag is Zero run the file results for GUI.
+        if (flag == 0) {
             FileResults fileResultsGUI = new FileResults(null);
             fileResultsGUI.displayGUIWindow(this);
         }
     }
 
+    // Kinda necessary
     public void saveActivity() {
         switch (this.ActivityName) {
             case "Running" -> {

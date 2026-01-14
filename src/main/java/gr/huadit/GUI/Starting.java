@@ -36,7 +36,6 @@ public class Starting extends JFrame {
         panel.add(helloLabel, BorderLayout.CENTER);
         add(panel, BorderLayout.NORTH);
 
-
         // Title label
         JLabel title = new JLabel("Fitness Tracker Home");
         title.setFont(new Font("Arial", Font.BOLD, 22));
