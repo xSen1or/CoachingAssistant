@@ -39,7 +39,7 @@ public class AddActivityListener implements ActionListener {
         JDialog srcFrame = (JDialog) SwingUtilities.getWindowAncestor(src); // source window.
 
         for (JTextField field : new JTextField[] { activityNameField, idField, totalDistanceField, averagePaceField,
-   averageHeartRateField, durationField }) { // loop through the fields and check if any of them are blank. Not checking this could result to a Fatal Error.
+   averageHeartRateField, durationField }) { // loop through the fields and check if any of them are blank. Not checking this could result in a Fatal Error.
             if (field.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(srcFrame, "Please enter all fields"); // error pop up message.
                 return;
