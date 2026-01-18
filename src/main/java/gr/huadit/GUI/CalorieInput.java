@@ -21,9 +21,13 @@ public class CalorieInput {
 
         JButton addButton = new JButton("Προσθήκη");
 
+        // Button Listener.
         addButton.addActionListener(e -> {
+            // Get the calories from the user.
             int calories = Integer.parseInt(caloriesField.getText());
+            // Add them to the todayConsumed calories on the holder.
             AppState.todayConsumed += calories;
+            // Wipe the text box.
             caloriesField.setText("");
         });
 

@@ -24,16 +24,17 @@ public record TrackPointResults(
 ) {
 
     public static TrackPointResults processTrackPoints(NodeList trackPoints, String[] timings) {
-
+        // Logger
         Logger log = new ConsoleLogger();
-        List<Integer> bpmValues = new ArrayList<>();
 
+        // Initialize variables and list
+        List<Integer> bpmValues = new ArrayList<>();
         double totalDistance = 0.0;
         int countBPM = 0;
         double sumBPM = 0.0;
 
+        // Loop through the trackpoints and calculate the needed information.
         for (int j = 0; j < trackPoints.getLength(); j++) {
-
             Element tp = (Element) trackPoints.item(j);
 
             String distanceStr = getNodeValue(
@@ -73,17 +74,17 @@ public record TrackPointResults(
             }
         }
 
+        // Formatter for the Duration
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 
-        DateTimeFormatter formatter =
-                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
+        // Offsets to calculate the Duration
         OffsetDateTime firstDT = null;
         OffsetDateTime lastDT  = null;
 
+        // Pass values to the Offsets
         if (timings != null) {
             for (String t : timings) {
                 if (t == null || t.isEmpty()) continue;
-
                 try {
                     OffsetDateTime parsed = OffsetDateTime.parse(t, formatter);
                     if (firstDT == null) {
@@ -96,18 +97,20 @@ public record TrackPointResults(
             }
         }
 
+        // Initialize the duration
         Duration dur;
 
+        // Try to calculate the total time between the two offsets or throw an error message and set the duration to ZERO.
         if (firstDT != null) {
             dur = Duration.between(firstDT, lastDT);
         } else {
-            log.print("Duration could not be calculated (missing timestamps)",
-                    LoggerLevel.WARNING);
+            log.print("Duration could not be calculated (missing timestamps)", LoggerLevel.ERROR);
             dur = Duration.ZERO;
         }
 
         double averageBPM = countBPM > 0 ? sumBPM / countBPM : 0.0;
 
+        // Return all the information using the current object.
         return new TrackPointResults(
                 totalDistance,
                 countBPM,

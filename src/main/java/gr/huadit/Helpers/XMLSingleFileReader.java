@@ -51,7 +51,7 @@ public class XMLSingleFileReader implements XMLReader {
 
                 String[] timings = new String[trackPoints.getLength()];
                 TrackPointResults results = TrackPointResults.processTrackPoints(trackPoints, timings);
-//                HeartRateZoneAnalysis HRZAlalysis = new HeartRateZoneAnalysis();
+//                HeartRateZoneAnalysis HRZAnalysis = new HeartRateZoneAnalysis();
 
                 ListContent.add(results);
 

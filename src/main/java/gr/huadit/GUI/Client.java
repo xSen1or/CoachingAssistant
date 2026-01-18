@@ -172,19 +172,6 @@ public class Client extends JDialog {
         label.setFont(font);
         return label;
     }
-
-    private static JTextField createStyledField(Font font) {
-        JTextField field = new JTextField();
-        field.setBackground(new Color(60, 63, 72));
-        field.setForeground(new Color(230, 230, 230));
-        field.setCaretColor(Color.WHITE);
-        field.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(90, 90, 90)),
-                BorderFactory.createEmptyBorder(5, 8, 5, 8))
-        );
-        field.setFont(font);
-        return field;
-    }
     public String getNameInput() { return nameField.getText(); }
     public String getAgeInput() { return ageField.getText(); }
     public String getGenderInput() { return genderField.getText(); }
