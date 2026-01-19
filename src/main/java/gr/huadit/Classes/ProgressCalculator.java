@@ -23,6 +23,9 @@ public class ProgressCalculator {
             return totalSeconds / distanceKm;
     }
 
+
+
+
     public double getCeff(double avgHr, double mhr) {
         double percentage = (avgHr / mhr);
         double ceff = 0.0;

@@ -1,7 +1,9 @@
 package gr.huadit.GUI;
 
 import gr.huadit.Classes.ActivityCard;
+import gr.huadit.Classes.HeartRateZoneAnalysis;
 import gr.huadit.Classes.ProgressCalculator;
+import gr.huadit.Classes.VO2Assessment;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Holders.CalculationType;
 import gr.huadit.Holders.CurrentUser;
@@ -14,6 +16,8 @@ public class FileResults extends JDialog {
 
     private final ConsoleLogger log = new ConsoleLogger();
     ProgressCalculator prgCal = new ProgressCalculator();
+    VO2Assessment vo2Assessment = new VO2Assessment();
+    HeartRateZoneAnalysis  heartRateZoneAnalysis = new HeartRateZoneAnalysis();
 
     public FileResults(JFrame parent) {
         super(parent, "Activity Results", true);
@@ -36,59 +40,12 @@ public class FileResults extends JDialog {
 
 
 
-    private double getZoneCalories(ActivityCard card) {
-        if (CurrentUser.currentUser == null || card == null || card.getDuration() == null) return 0.0;
-
-        int age = CurrentUser.currentUser.optInt("age", 25);
-        double weight = CurrentUser.currentUser.optDouble("weight", 0.0);
-        double mhr = 220.0 - age;
-        double avgHr = card.getAverageHeartRate();
-
-        if (mhr == 0) return 0.0;
-
-        double ceff = prgCal.getCeff(avgHr, mhr);
-
-        // Duration in minutes
-        double minutes = card.getDuration().toSeconds() / 60.0;
-
-        return minutes * ceff * weight;
-    }
-
-
-
-
-    private double[] getVO2Calculations(ActivityCard card) {
-        // Returns array: [0] -> VO2 Max Value, [1] -> Calories
-        if (CurrentUser.currentUser == null || card == null || card.getDuration() == null) return new double[]{0.0, 0.0};
-
-        int age = CurrentUser.currentUser.optInt("age", 25);
-        double weight = CurrentUser.currentUser.optDouble("weight", 0.0);
-        double rhr = CurrentUser.currentUser.optDouble("restingHeartRate", 70.0); // Default to 70 if missing
-
-        double mhr = 220.0 - age;
-
-        // 1. Calculate VO2 Max
-        double vo2Max = 15.3 * (mhr / rhr);
-
-        // 2. Calculate Calories
-        double minutes = card.getDuration().toSeconds() / 60.0;
-        double vo2Calories = (vo2Max * weight * minutes) / 200.0;
-
-        return new double[]{vo2Max, vo2Calories};
-    }
-
-    private String getVO2Assessment(double vo2) {
-        if (vo2 >= 50) return "Excellent";
-        if (vo2 >= 40) return "Good";
-        if (vo2 >= 30) return "Average";
-        return "Poor";
-    }
-
     // ==========================================
     // GUI DISPLAY
     // ==========================================
     public void displayGUIWindow(ActivityCard card) {
         SwingUtilities.invokeLater(() -> {
+            heartRateZoneAnalysis.setAge(CurrentUser.currentUser.optInt("age"));
             log.print("displayGUIWindow on FileResultsGUI triggered", LoggerLevel.INFO);
 
             if (card == null) return;
@@ -101,8 +58,8 @@ public class FileResults extends JDialog {
 
             // ---- RUN CALCULATIONS ----
             double bmrVal = getCalculation(); // Your original calculation
-            double zoneCalVal = getZoneCalories(card);
-            double[] vo2Results = getVO2Calculations(card);
+            double zoneCalVal = heartRateZoneAnalysis.getZoneCalories(card, prgCal);
+            double[] vo2Results = vo2Assessment.getVO2Calculations(card);
 
             // ---- LABELS ----
             JLabel nameLabel = new JLabel("Name:");
@@ -132,7 +89,8 @@ public class FileResults extends JDialog {
             JLabel zoneCalValue = new JLabel(String.format("%.1f kcal", zoneCalVal));
 
             // 3. VO2 CALORIES DISPLAY (+ Assessment)
-            String vo2Text = String.format("%.1f kcal (Rate: %s)", vo2Results[1], getVO2Assessment(vo2Results[0]));
+
+            String vo2Text = String.format("%.1f kcal (Rate: %s)", vo2Results[1], vo2Assessment.getVO2Assessment(vo2Results[0]));
             JLabel vo2CalValue = new JLabel(vo2Text);
 
 

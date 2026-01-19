@@ -4,10 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import gr.huadit.Holders.TotalFiles;
@@ -63,7 +60,14 @@ public class StartingPageListener implements ActionListener {
 
                 // if the option(s) is approved
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+
                     selectedFiles = chooser.getSelectedFiles();
+                    if (selectedFiles.length == 0) {
+                        JOptionPane.showMessageDialog(null, "No file selected.");
+                        return;
+                    }
+
                     // loop through the selected files.
                     for (File file : selectedFiles) {
                         // add the filenames to the holder.

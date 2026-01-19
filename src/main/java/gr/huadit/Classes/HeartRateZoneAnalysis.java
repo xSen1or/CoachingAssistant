@@ -1,14 +1,16 @@
 package gr.huadit.Classes;
 
+import gr.huadit.Holders.Constants;
+import gr.huadit.Holders.CurrentUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HeartRateZoneAnalysis {
 
     // Initialize attributes.
-    private final int age;
-    private final double weight;
-    private final List<Integer> bpmValues;
+    private int age;
+
 
     // BPM Zones
     private static final double[] zoneMin = {0.50, 0.60, 0.70, 0.80, 0.90};
@@ -17,20 +19,16 @@ public class HeartRateZoneAnalysis {
     private static final double[] ceff = {0.07, 0.10, 0.13, 0.16, 0.20};
 
     // Constructor
-    public HeartRateZoneAnalysis(int age, double weight) {
-        this.age = age;
-        this.weight = weight;
-        this.bpmValues = new ArrayList<>();
+    public HeartRateZoneAnalysis() {
     }
 
-    // adder
-    public void addBpmValue(int bpm) {
-        bpmValues.add(bpm);
+    public void setAge(int age) {
+        this.age = age;
     }
 
     // Get the MHR (obviously)
     public int calculateMHR() {
-        return 220 - age;
+        return Constants.MHR_CALCULATION_FACTOR - age;
     }
 
     public int getZone(int heartRate) {
@@ -45,30 +43,21 @@ public class HeartRateZoneAnalysis {
     }
 
 
-    public int[] calculateMinutesPerZone() {
-        int[] secondsPerZone = new int[5];
+    public double getZoneCalories(ActivityCard card, ProgressCalculator prgCal) {
+        if (CurrentUser.currentUser == null || card == null || card.getDuration() == null) return 0.0;
 
-        for (int bpm : bpmValues) {
-            int zone = getZone(bpm);
-            if (zone != -1) {
-                secondsPerZone[zone]++;
-            }
-        }
+        int age = CurrentUser.currentUser.optInt("age", 25);
+        double weight = CurrentUser.currentUser.optDouble("weight", 0.0);
+        double mhr = 220.0 - age;
+        double avgHr = card.getAverageHeartRate();
 
-        int[] minutesPerZone = new int[5];
-        for (int i = 0; i < 5; i++) {
-            minutesPerZone[i] = secondsPerZone[i] / 60;
-        }
+        if (mhr == 0) return 0.0;
 
-        return minutesPerZone;
-    }
+        double ceff = prgCal.getCeff(avgHr, mhr);
 
-    public double calculateCalories(int[] minutesPerZone) {
-        double calories = 0;
+        // Duration in minutes
+        double minutes = card.getDuration().toSeconds() / 60.0;
 
-        for (int i = 0; i < 5; i++) {
-            calories += minutesPerZone[i] * ceff[i] * weight;
-        }
-        return calories;
+        return minutes * ceff * weight;
     }
 }
