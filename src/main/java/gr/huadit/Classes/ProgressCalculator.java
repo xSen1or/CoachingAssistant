@@ -23,17 +23,42 @@ public class ProgressCalculator {
             return totalSeconds / distanceKm;
     }
 
+    public double getCeff(double avgHr, double mhr) {
+        double percentage = (avgHr / mhr);
+        double ceff = 0.0;
 
-    public double calculateCFunction(double[] m, double[] ceff, double w) {
-        if (m.length != ceff.length) {
-            throw new IllegalArgumentException("Arrays m and ceff must have the same length.");
-        }
-
-        double C = 0.0;
-
-        for (int i = 0; i < m.length; i++) {
-            C += m[i] * ceff[i] * w;
-        }
-        return C;
+        if (percentage >= 0.50 && percentage < 0.60) ceff = 0.07;      // Zone 1
+        else if (percentage >= 0.60 && percentage < 0.70) ceff = 0.10; // Zone 2
+        else if (percentage >= 0.70 && percentage < 0.80) ceff = 0.13; // Zone 3
+        else if (percentage >= 0.80 && percentage < 0.90) ceff = 0.16; // Zone 4
+        else if (percentage >= 0.90) ceff = 0.20;                      // Zone 5
+        else ceff = 0.05; // Low intensity fallback
+        return ceff;
     }
+
+    public double calculateBMR(String method, String gender, double weightKg, double heightCm, int ageYears) {
+        double bmr = 0.0;
+        boolean isMale = gender.equalsIgnoreCase("MALE");
+
+        if (method.equals("Mifflin-St Jeor")) {
+            double baseCalculation = (10 * weightKg) + (6.25 * heightCm) - (5 * ageYears);
+
+            if (isMale) {
+                bmr = baseCalculation + 5;
+            } else {
+                bmr = baseCalculation - 161;
+            }
+
+        } else if (method.equals("Harris-Benedict")) {
+            if (isMale) {
+                bmr = 66.4730 + (13.7516 * weightKg) + (5.0033 * heightCm) - (6.7550 * ageYears);
+            } else {
+                bmr = 655.0955 + (9.5634 * weightKg) + (1.8496 * heightCm) - (4.6756 * ageYears);
+            }
+        }
+
+        return bmr;
+    }
+
+
 }

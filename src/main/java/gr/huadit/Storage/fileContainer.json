@@ -47,4 +47,18 @@
   "activity_average_pace" : 19.0,
   "activity_duration" : "PT19M",
   "activity_average_heart_rate" : 19.0
+}, {
+  "activity_name" : "running_2",
+  "activity_id" : "19201-DDAS",
+  "activity_total_distance" : 102.0,
+  "activity_average_pace" : 10.0,
+  "activity_duration" : "PT20M",
+  "activity_average_heart_rate" : 10.0
+}, {
+  "activity_name" : "DIEEING",
+  "activity_id" : "103",
+  "activity_total_distance" : 101.0,
+  "activity_average_pace" : 101.0,
+  "activity_duration" : "PT10M",
+  "activity_average_heart_rate" : 102.0
 } ]

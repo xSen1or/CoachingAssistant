@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import gr.huadit.Holders.CalculationType;
 import org.json.JSONObject;
 
 import gr.huadit.Holders.CurrentUser;
@@ -43,7 +44,10 @@ public class ProfileButtonListener implements ActionListener {
                 int age = Integer.parseInt(client.getAgeInput()); 
                 double weight = Double.parseDouble(client.getWeightInput()); 
                 double height = Double.parseDouble(client.getHeightInput()); 
-                String gender = client.getGenderInput(); 
+                String gender = client.getGenderInput();
+                String calcType = client.getCalculationTypeInput();
+
+
 
                 Profile profile = new Profile(name, age, weight, height, gender); // pass the information to the DTO Class 
 
@@ -55,6 +59,9 @@ public class ProfileButtonListener implements ActionListener {
                 currentUser.put("height", profile.height());
                 currentUser.put("gender", profile.gender());
 
+                // Save Calculation type
+                CalculationType.calculationType = calcType;
+
                 JOptionPane.showMessageDialog(srcFrame, "Profile created:\n" + currentUser.toString(2)); // pop up message. 
                 CurrentUser.currentUser = currentUser; // update the holders value. 
                 srcFrame.dispose();
@@ -64,8 +71,6 @@ public class ProfileButtonListener implements ActionListener {
                 JOptionPane.showMessageDialog(srcFrame, "Please enter valid numbers for age, weight, and height."); // pop up error message
                 logger.print("Number format error: " + ex.getMessage(), LoggerLevel.ERROR); // error logging 
             }
-        } else if (CMD.equals("CANCEL")) { // if the button id is "CANCEL" 
-            logger.print("Cancel Button Pressed", LoggerLevel.INFO);
         }
     }
 

@@ -1,30 +1,22 @@
 package gr.huadit.GUI;
 
 import javax.swing.*;
-
+import gr.huadit.Controllers.CancelButtonListener;
 import gr.huadit.Controllers.ProfileButtonListener;
-
 import java.awt.*;
 
-/*
-
-    This class indicates the Edit User Info & Calorie Method
-
- */
-
-
-
 public class Client extends JDialog {
-    // Text fields stored as INSTANCE VARIABLES
     private JTextField nameField;
     private JTextField ageField;
-    private JTextField genderField;
+    private JComboBox<String> genderComboBox;
+    private JComboBox<String> calculationTypeComboBox;
     private JTextField heightField;
     private JTextField weightField;
 
     public Client(JFrame parent) {
-        super(parent, "Client", true); //modal = true
+        super(parent, "Client", true); // modal = true
     }
+
     public void displayGUIWindow() {
 
         JPanel mainPanel = new JPanel();
@@ -40,7 +32,8 @@ public class Client extends JDialog {
         ageField = new JTextField();
 
         JLabel genderLabel = new JLabel("Gender:");
-        genderField = new JTextField();
+        String[] genderOptions = {"MALE", "FEMALE"};
+        genderComboBox = new JComboBox<>(genderOptions);
 
         JLabel heightLabel = new JLabel("Height: (cm)");
         heightField = new JTextField();
@@ -48,133 +41,109 @@ public class Client extends JDialog {
         JLabel weightLabel = new JLabel("Weight: (kg)");
         weightField = new JTextField();
 
+        JLabel calculationLabel = new JLabel("Calculation Type:");
+        String[] methodOptions = {"Mifflin-St Jeor", "Harris-Benedict"};
+        calculationTypeComboBox = new JComboBox<>(methodOptions);
+
         // ---- Buttons ----
         JButton saveButton = new JButton("Save");
         saveButton.setActionCommand("SAVE");
+        // Ensure this listener exists in your project, or comment it out to test the GUI
         saveButton.addActionListener(new ProfileButtonListener(this));
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setActionCommand("CANCEL");
-        cancelButton.addActionListener(new ProfileButtonListener(this));
+        // Ensure this listener exists in your project, or comment it out to test the GUI
+        cancelButton.addActionListener(new CancelButtonListener());
 
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
-        // ---- Vertical Layout ----
+        // ---- Vertical Layout (Rows) ----
+        // This determines which components appear on the same Y-axis (Row)
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
-
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(nameLabel)
                                 .addComponent(nameField))
-
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(ageLabel)
                                 .addComponent(ageField))
-
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(genderLabel)
-                                .addComponent(genderField))
-
+                                .addComponent(genderComboBox))
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(heightLabel)
                                 .addComponent(heightField))
-
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(weightLabel)
                                 .addComponent(weightField))
-
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(calculationLabel)       // Added Label here
+                                .addComponent(calculationTypeComboBox)) // Added Combo here
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(saveButton)
                                 .addComponent(cancelButton))
         );
 
-        // ---- Horizontal Layout ----
+        // ---- Horizontal Layout (Columns) ----
+        // This determines which components are in the Left column vs Right column
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
+                        // Column 1 (Labels + Save Button)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(nameLabel)
                                 .addComponent(ageLabel)
                                 .addComponent(genderLabel)
                                 .addComponent(heightLabel)
                                 .addComponent(weightLabel)
+                                .addComponent(calculationLabel) // Correct: Label
                                 .addComponent(saveButton))
+                        // Column 2 (Fields + Cancel Button)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(nameField)
                                 .addComponent(ageField)
-                                .addComponent(genderField)
+                                .addComponent(genderComboBox)
                                 .addComponent(heightField)
                                 .addComponent(weightField)
+                                .addComponent(calculationTypeComboBox) // Correct: Combo Box
                                 .addComponent(cancelButton))
         );
 
         add(mainPanel);
 
-        setSize(500, 450);
+        // Resize the window slightly to accommodate the new row
+        setSize(500, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
-    public void displayProfile(String name, int age, String gender, double height, double weight) {
-        JFrame frame = new JFrame("User Profile Display");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(450, 350);
-        frame.setLocationRelativeTo(null);
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(40, 44, 52));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setLayout(new GridLayout(5, 2, 10, 15));
+    // --- Getters ---
 
-        Font labelFont = new Font("SansSerif", Font.BOLD, 16);
-        Font fieldFont = new Font("SansSerif", Font.PLAIN, 15);
-
-// Labels
-        JLabel nameLabel = createStyledLabel("Name:", labelFont);
-        JLabel ageLabel = createStyledLabel("Age:", labelFont);
-        JLabel genderLabel = createStyledLabel("Gender:", labelFont);
-        JLabel heightLabel = createStyledLabel("Height:", labelFont);
-        JLabel weightLabel = createStyledLabel("Weight:", labelFont);
-
-// Fields
-        JLabel nameField = createStyledLabel(name, fieldFont);
-        JLabel ageField = createStyledLabel(Integer.toString(age), fieldFont);
-        JLabel genderField = createStyledLabel(gender, fieldFont);
-        JLabel heightField = createStyledLabel(Integer.toString((int) height), fieldFont);
-        JLabel weightField = createStyledLabel(Integer.toString((int) weight), fieldFont);
-
-
-        nameField.setText(name);
-        ageField.setText(Integer.toString(age));
-        genderField.setText(gender);
-        heightField.setText(Integer.toString((int) height));
-        weightField.setText(Integer.toString((int) weight));
-
-// Add Components
-        panel.add(nameLabel);
-        panel.add(nameField);
-        panel.add(ageLabel);
-        panel.add(ageField);
-        panel.add(genderLabel);
-        panel.add(genderField);
-        panel.add(heightLabel);
-        panel.add(heightField);
-        panel.add(weightLabel);
-        panel.add(weightField);
-
-        frame.add(panel);
-        frame.setVisible(true);
+    public String getNameInput() {
+        return nameField.getText();
     }
 
-    private static JLabel createStyledLabel(String text, Font font) {
-        JLabel label = new JLabel(text);
-        label.setForeground(new Color(198, 198, 198));
-        label.setFont(font);
-        return label;
+    public String getAgeInput() {
+        return ageField.getText();
     }
-    public String getNameInput() { return nameField.getText(); }
-    public String getAgeInput() { return ageField.getText(); }
-    public String getGenderInput() { return genderField.getText(); }
-    public String getHeightInput() { return heightField.getText(); }
-    public String getWeightInput() { return weightField.getText(); }
+
+    public String getGenderInput() {
+        Object selected = genderComboBox.getSelectedItem();
+        return (selected != null) ? selected.toString() : "MALE";
+    }
+
+    public String getCalculationTypeInput() {
+        Object selected = calculationTypeComboBox.getSelectedItem();
+        return (selected != null) ? selected.toString() : "Mifflin-St Jeor";
+    }
+
+    public String getHeightInput() {
+        return heightField.getText();
+    }
+
+    public String getWeightInput() {
+        return weightField.getText();
+    }
 }

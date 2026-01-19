@@ -22,11 +22,14 @@ public class ArgumentHandler {
         }
     }
 
-
     /*
     if flag = 0 -> terminal mode
     if flag = 1 -> gui mode
      */
+
+    public void usage() {
+        log.print("Usage:  java -jar CoachingAssistant-1.0-SNAPSHOT.jar -<run-type> [-w weight] <filename> ", LoggerLevel.INFO);
+    }
 
     public void flag() {
         if (args[0].equals("-term")) {
@@ -51,8 +54,8 @@ public class ArgumentHandler {
     public boolean isEmpty() {
         if (args.length == 1 && args[0].equals("-term") || args.length < 4  && args[0].equals("-term") && args[1].equals("-w" )){
             log.print("No arguments (or not enough) provided for Terminal Mode.", LoggerLevel.FATAL);
-            log.print("Usage:  java -jar target/CoachingAssistant-1.0-SNAPSHOT.jar <run-type> [-w weight] <filename> ", LoggerLevel.INFO);
-            return true;
+usage();
+return true;
         }
         return false;
     }

@@ -12,10 +12,14 @@ import gr.huadit.Helpers.ArgumentHandler;
         // long start = System.nanoTime();
         // String os = System.getProperty("os.name");
         // log.print("Running on " +  os, LoggerLevel.INFO);
-
-        if (args.length == 0) throw new IllegalArgumentException("No arguments provided");
         ArgumentHandler argumentHandler = new ArgumentHandler(args);
-        argumentHandler.debugIndexOfArguments();
+
+        if (args.length == 0) {
+            argumentHandler.usage();
+            throw new IllegalArgumentException("No arguments provided");
+        }
+
+//        argumentHandler.debugIndexOfArguments();
         if (argumentHandler.isEmpty()) System.exit(1);
         argumentHandler.flag();
 
