@@ -38,7 +38,7 @@ public class ArgumentHandler implements ArgumentParser {
             log.print("DISCLAIMER: Take notice that the applications response time depends on the storage of the current device.!", LoggerLevel.INFO);
             // passes the correct flag value 
             flag = 1;
-            // calls the two functions that retrieve the neccessery data.
+            // calls the two functions that retrieve the necessary data.
             this.getWeight(); //gets the weight argument
             this.getFiles(); //gets the files
         } else if (args[0].equals("-gui")) {

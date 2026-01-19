@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gr.huadit.Classes.ActivityCard;
-import gr.huadit.DTO.Profile;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Loggers.ConsoleLogger;
 

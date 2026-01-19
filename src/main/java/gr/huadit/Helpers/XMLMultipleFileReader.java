@@ -3,10 +3,10 @@ package gr.huadit.Helpers;
 import gr.huadit.Interfaces.Logger;
 import gr.huadit.Interfaces.XMLReader;
 import gr.huadit.Enums.LoggerLevel;
-import org.w3c.dom.NodeList;
+
 
 public class XMLMultipleFileReader implements XMLReader {
-    private XMLSingleFileReader reader = new XMLSingleFileReader();
+    private final XMLSingleFileReader reader = new XMLSingleFileReader();
 
     @Override
     public void read(String file, Logger log) {
@@ -19,9 +19,5 @@ public class XMLMultipleFileReader implements XMLReader {
         for (String file : fileName) {
             read(file, logger); // gets the read above cause of the parameters
         }
-    }
-
-    public static String getNodeValue(NodeList n, Logger logger) {
-        return "";
     }
 }

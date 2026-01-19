@@ -7,7 +7,6 @@ import gr.huadit.Classes.VO2Assessment;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Holders.CalculationType;
 import gr.huadit.Holders.CurrentUser;
-import gr.huadit.Interfaces.GraphicUserInterface;
 import gr.huadit.Loggers.ConsoleLogger;
 
 import javax.swing.*;

@@ -92,9 +92,7 @@ public class StartingPageListener implements ActionListener {
                 new CalorieInput().show(cgoal.getParent());
             }
             // you guessed it, open the selected files Window.
-            case "DISPLAY_SELECTED_FILES" -> {
-                sFiles.displayGUIWindow();
-            }
+            case "DISPLAY_SELECTED_FILES" -> sFiles.displayGUIWindow();
         }
     }
 }

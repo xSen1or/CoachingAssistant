@@ -9,10 +9,9 @@ import gr.huadit.Find;
 import gr.huadit.Interfaces.Logger;
 
 public class PathParser {
-    private  Find.Finder finder;
-    private String[] args;
-    private int index;
-    private Logger log;
+    private final String[] args;
+    private final int index;
+    private final Logger log;
 
     public PathParser(
         String[] args, int index, Logger log) {

@@ -22,7 +22,6 @@ public class ProfileButtonListener implements ActionListener {
 
     private final ConsoleLogger logger = new ConsoleLogger();
     private final Client client; // Interface to get GUI inputs
-    private JSONObject currentUser;
 
     public ProfileButtonListener(Client client) {
         this.client = client;
@@ -51,8 +50,9 @@ public class ProfileButtonListener implements ActionListener {
 
                 Profile profile = new Profile(name, age, weight, height, gender); // pass the information to the DTO Class 
 
-                // create a new JSBON Object and give it to the holder. 
-                currentUser = new JSONObject();
+                // create a new JSON Object and give it to the holder.
+                JSONObject currentUser = new JSONObject();
+
                 currentUser.put("name", profile.name());
                 currentUser.put("age", profile.age());
                 currentUser.put("weight", profile.weight());
@@ -74,7 +74,5 @@ public class ProfileButtonListener implements ActionListener {
         }
     }
 
-    public JSONObject getCurrentUser() {
-        return currentUser;
-    }
+
 }

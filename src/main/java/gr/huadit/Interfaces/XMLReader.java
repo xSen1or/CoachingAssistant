@@ -1,6 +1,5 @@
 package gr.huadit.Interfaces;
 
-import org.w3c.dom.NodeList;
 
 public interface XMLReader {
     String GARMIN_NS = "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2";
@@ -12,9 +11,4 @@ public interface XMLReader {
             read(file, logger);
         }
     }
-
-    static String getNodeValue(NodeList n, Logger logger) {
-        return "";
-    }
-
 }

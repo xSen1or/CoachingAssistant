@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gr.huadit.Classes.ActivityCard;
-import gr.huadit.DTO.Profile;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Holders.TotalFiles;
 import gr.huadit.Interfaces.Logger;
@@ -66,7 +65,7 @@ public class JSONFileWriter {
             TotalFiles.results.add(obj.getActivityName());
             arrayNode.add(jsonNode);
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputFile, arrayNode);
-            logger.print("JSON OBject Created", LoggerLevel.INFO);
+            logger.print("JSON Object Created", LoggerLevel.INFO);
         } catch (Exception e) {
             logger.print("Couldn't parse data in storage", LoggerLevel.FATAL);
             logger.print(e.getMessage(), LoggerLevel.FATAL);

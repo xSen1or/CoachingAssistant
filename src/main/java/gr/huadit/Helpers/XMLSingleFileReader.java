@@ -2,13 +2,10 @@ package gr.huadit.Helpers;
 
 import java.io.FileInputStream;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import gr.huadit.Classes.HeartRateZoneAnalysis;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,7 +27,6 @@ import gr.huadit.Interfaces.XMLReader;
 public class XMLSingleFileReader implements XMLReader {
     private static final String GARMIN_NS =  "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2";
     ProgressCalculator progressCalculator = new ProgressCalculator();
-    private final List<TrackPointResults> ListContent = new ArrayList<>();
 
 
     public void read(String fileName, Logger logger) {
@@ -51,9 +47,7 @@ public class XMLSingleFileReader implements XMLReader {
 
                 String[] timings = new String[trackPoints.getLength()];
                 TrackPointResults results = TrackPointResults.processTrackPoints(trackPoints, timings);
-//                HeartRateZoneAnalysis HRZAnalysis = new HeartRateZoneAnalysis();
 
-                ListContent.add(results);
 
                 Duration duration = results.dur();
                 assert duration != null : "Duration is null for activity " + Id;

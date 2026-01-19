@@ -1,8 +1,11 @@
 package gr.huadit.Classes;
 
 
+import gr.huadit.DTO.Activity;
+import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.FileResults;
-import gr.huadit.Holders.Constants;
+import gr.huadit.Interfaces.Logger;
+import gr.huadit.Loggers.ConsoleLogger;
 
 import java.time.Duration;
 
@@ -12,9 +15,10 @@ import static gr.huadit.Helpers.ArgumentHandler.flag;
     Usage: print activity information
     Could convert it to record, but we lose the private attributes
  */
-public class ActivityCard implements gr.huadit.Interfaces.ActivityCard {
+public class  ActivityCard implements gr.huadit.Interfaces.ActivityCard {
     private final String ActivityName;
     private final String  Id;
+    private final Logger logger = new ConsoleLogger();
 
     private final double TotalDistance;
     private final double AveragePace;
@@ -34,20 +38,10 @@ public class ActivityCard implements gr.huadit.Interfaces.ActivityCard {
 
     // Call this method to PRINT the .tcx file contents.
     public void printAthleteCard() {
-        long minutes = (long) (this.AveragePace / Constants.CONVERT_TO_MINUTES_NUMBER);
-        long seconds = (long) (this.AveragePace % Constants.CONVERT_TO_MINUTES_NUMBER);
-        String formattedDuration = String.format("%02d:%02d:%02d", duration.toHours(), duration.toMinutes() % 60, duration.toSeconds() % 60);
 
-        // Print on the console.
-        System.out.println(
-                "Activity: " + this.ActivityName + "\n" +
-                        "ID: " + this.Id + "\n" +
-                        "Total Distance: " + this.TotalDistance + "\n" +
-                        "Pace: " + minutes + ":" + seconds + "min/km" + "\n" +
-                        "Average BPM: " + this.AverageHeartRate + "\n" +
-                        "Duration: " + formattedDuration
-        );
+        Activity activity = new Activity(this.getActivityName(), this.getId(), this.getTotalDistance(), this.getAverageHeartRate(), this.getDuration());
 
+        logger.print(activity.toString(), LoggerLevel.INFO);
 
         // If the flag is Zero run the file results for GUI.
         if (flag == 0) {
