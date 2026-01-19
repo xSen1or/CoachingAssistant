@@ -11,14 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import gr.huadit.Controllers.AddActivityListener;
+import gr.huadit.Interfaces.GraphicUserInterface;
 
-public class AddActivity extends JDialog {
+public class AddActivity extends JDialog implements GraphicUserInterface {
 
    public AddActivity(JFrame parent) {
         super(parent, "Add Activity", true);
     }
 
-    public void displayWindowGUI() {
+    public void displayGUIWindow() {
         setTitle("Activity Details");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

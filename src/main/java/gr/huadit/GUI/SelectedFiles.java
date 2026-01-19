@@ -3,6 +3,7 @@ package gr.huadit.GUI;
 
 import gr.huadit.Controllers.*;
 import gr.huadit.Holders.TotalFiles;
+import gr.huadit.Interfaces.GraphicUserInterface;
 import gr.huadit.JSONHandler.JSONFileReader;
 
 import javax.swing.BoxLayout;
@@ -14,7 +15,7 @@ import javax.swing.JScrollPane;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectedFiles extends JDialog { 
+public class SelectedFiles extends JDialog implements GraphicUserInterface {
 
     public SelectedFiles(JFrame parentFrame) {
         super(parentFrame, "Select File", true);

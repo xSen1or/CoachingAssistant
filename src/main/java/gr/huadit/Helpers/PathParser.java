@@ -35,28 +35,36 @@ public class PathParser {
                 String[] filePaths =  new String[args.length]; // creating this inside the if statement because it is useless if there is just one file
 
                 for (int i = index; i < args.length; i++) { // we start the loop from i = 1 because the first
+
                     finder = new Find.Finder(args[i]);
+
                     Files.walkFileTree(startingDir, finder);
                     filePaths[i] = finder.getPath();  // copy the filenames from the arguments to the files[] array.
+
                     log.print("File Name:: " + args[i], LoggerLevel.DEBUG);
                     System.out.println(filePaths[i]);
+
                     multiReader.read(filePaths[i], log); // call the method of the XMLMultipleFileReader
                 }
             } else { // we just have one
+
                 // Pattern is the key file. Key file is the file we are looking for in the directory.
                 log.print("Single File", LoggerLevel.DEBUG);
+
                 Find.Finder finder = new Find.Finder(pattern);
                 Files.walkFileTree(startingDir, finder);
+
                 reader.read(finder.getPath(), log);
+
             }
         } catch (Exception e) {
+
             log.print( "File Not Found!\n" + e.getMessage(), LoggerLevel.ERROR);
+
             System.exit(1);
         }
         log.print("DISCLAIMER: Calorie Calculation is not available in terminal mode cause of missing arguments. Please use the GUI panel to calculate it.", LoggerLevel.INFO);
 
     }
-
-
 
 }

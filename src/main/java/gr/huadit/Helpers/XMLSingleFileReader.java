@@ -64,7 +64,7 @@ public class XMLSingleFileReader implements XMLReader {
                         progressCalculator.calculatePace(duration.toSeconds(), results.totalDistance()),
                         results.averageBPM(),
                         duration
-                );                activityCard.saveActivity();
+                );
                 activityCard.printAthleteCard();
             }
             

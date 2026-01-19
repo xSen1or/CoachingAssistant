@@ -3,9 +3,11 @@ package gr.huadit.GUI;
 import javax.swing.*;
 import gr.huadit.Controllers.CancelButtonListener;
 import gr.huadit.Controllers.ProfileButtonListener;
+import gr.huadit.Interfaces.GraphicUserInterface;
+
 import java.awt.*;
 
-public class Client extends JDialog {
+public class Client extends JDialog implements GraphicUserInterface {
     private JTextField nameField;
     private JTextField ageField;
     private JComboBox<String> genderComboBox;

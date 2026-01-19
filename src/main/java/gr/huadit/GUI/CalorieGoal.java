@@ -1,19 +1,20 @@
 package gr.huadit.GUI;
 
 import gr.huadit.Holders.AppState;
+import gr.huadit.Interfaces.GraphicUserInterface;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CalorieGoal extends JDialog {
+public class CalorieGoal extends JDialog implements GraphicUserInterface {
     JFrame parent;
 
     public CalorieGoal(JFrame parent) {
         super(parent, "CalorieGoal", true);
-        displayWindowGUI();
+        displayGUIWindow();
     }
 
-    public void displayWindowGUI() {
+    public void displayGUIWindow() {
         parent = new JFrame("Στόχος Θερμίδων");
         parent.setSize(350, 250);
         parent.setLocationRelativeTo(null);

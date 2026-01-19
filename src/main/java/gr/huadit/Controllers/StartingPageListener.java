@@ -83,7 +83,7 @@ public class StartingPageListener implements ActionListener {
                 }
             }
             // opens the AddActivity Window.
-            case "ADD_ACTIVITY" -> new AddActivity(srcFrame).displayWindowGUI();
+            case "ADD_ACTIVITY" -> new AddActivity(srcFrame).displayGUIWindow();
             // opens the profile Window. 
             case "USER_INFO" -> new Client(srcFrame).displayGUIWindow();
             // opens the calorie goal Window.

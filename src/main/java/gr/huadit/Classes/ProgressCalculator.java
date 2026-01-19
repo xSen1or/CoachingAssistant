@@ -1,23 +1,8 @@
 package gr.huadit.Classes;
 
-public class ProgressCalculator {
+public class ProgressCalculator implements gr.huadit.Interfaces.ProgressCalculator {
 
-    public double caloriesMen(double h, double w, double a, double t) {
-        return -55.0969
-                + (0.6309 * h)
-                + (0.1966 * w)
-                + (0.2017 * a)
-                * (t / 4.184);
-    }
-
-    public double caloriesWomen(double h, double w, double a, double t) {
-        return -20.4022
-                + (0.4472 * h)
-                + (0.1263 * w)
-                + (0.074 * a)
-                * (t / 4.184);
-    }
-
+    // Constructor
     public double calculatePace(long totalSeconds, double distanceMeters) {
             double distanceKm = distanceMeters / 1000.0;
             return totalSeconds / distanceKm;
@@ -25,10 +10,10 @@ public class ProgressCalculator {
 
 
 
-
+    // Getting ceff and calculating zones.
     public double getCeff(double avgHr, double mhr) {
         double percentage = (avgHr / mhr);
-        double ceff = 0.0;
+        double ceff;
 
         if (percentage >= 0.50 && percentage < 0.60) ceff = 0.07;      // Zone 1
         else if (percentage >= 0.60 && percentage < 0.70) ceff = 0.10; // Zone 2
@@ -39,10 +24,15 @@ public class ProgressCalculator {
         return ceff;
     }
 
+    // Calculating the BMR.
     public double calculateBMR(String method, String gender, double weightKg, double heightCm, int ageYears) {
+
+        // Initialize
         double bmr = 0.0;
+        // Male or Female?
         boolean isMale = gender.equalsIgnoreCase("MALE");
 
+        // Choosing calculation method
         if (method.equals("Mifflin-St Jeor")) {
             double baseCalculation = (10 * weightKg) + (6.25 * heightCm) - (5 * ageYears);
 
@@ -52,6 +42,7 @@ public class ProgressCalculator {
                 bmr = baseCalculation - 161;
             }
 
+            // Magic Numbers are not a problem here.
         } else if (method.equals("Harris-Benedict")) {
             if (isMale) {
                 bmr = 66.4730 + (13.7516 * weightKg) + (5.0033 * heightCm) - (6.7550 * ageYears);
@@ -59,9 +50,7 @@ public class ProgressCalculator {
                 bmr = 655.0955 + (9.5634 * weightKg) + (1.8496 * heightCm) - (4.6756 * ageYears);
             }
         }
-
+        // Returning the value.
         return bmr;
     }
-
-
 }

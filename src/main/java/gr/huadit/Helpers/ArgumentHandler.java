@@ -1,10 +1,11 @@
 package gr.huadit.Helpers;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.GUI.Starting;
+import gr.huadit.Interfaces.ArgumentParser;
 import gr.huadit.Loggers.ConsoleLogger;
 
 
-public class ArgumentHandler {
+public class ArgumentHandler implements ArgumentParser {
     private final ConsoleLogger log = new ConsoleLogger();
     private final String[] args;
     private int index = 0;
@@ -43,7 +44,7 @@ public class ArgumentHandler {
         } else if (args[0].equals("-gui")) {
             flag = 0; // flag = 0 indicates that we are in GUI mode
             Starting homePage = new Starting(); // open the starting page
-            homePage.displayPage();
+            homePage.displayGUIWindow();
         } else {
             log.print("Usage:  java -jar CoachingAssistant-1.0-SNAPSHOT.jar -<run-type> [-w weight] <filename> ", LoggerLevel.INFO);
             System.exit(1); // in case of missing arguments, throw a help message and terminate the program
@@ -52,12 +53,17 @@ public class ArgumentHandler {
 
     // a function that returns a message in case the user gave invalid or empty info 
     public boolean isEmpty() {
+
         if (args.length == 1 && args[0].equals("-term") || args.length < 4  && args[0].equals("-term") && args[1].equals("-w" )){
             log.print("No arguments (or not enough) provided for Terminal Mode.", LoggerLevel.FATAL);
-usage();
-return true;
+            usage();
+
+            return true;
+
         }
+
         return false;
+
     }
 
     public void getFiles() {
@@ -72,21 +78,11 @@ return true;
     }
     
     // get the weight argument.
-    public String getWeight() {
+    public void getWeight() {
         index = 1;
         if (args.length > 2 && args[index].equals("-w")) {
             log.print("Weight Argument Found: " + args[index + 1], LoggerLevel.DEBUG);
             index = 3;
         }
-        return  args[2];
     }
-
-    public int getAge() {
-        index = 1;
-        if (args.length > 2 && args[index].equals("-a")) {
-            log.print("Age Argument Found: " + args[index + 1], LoggerLevel.DEBUG);
-        }
-        return Integer.parseInt(args[index]);
-    }
-
 }

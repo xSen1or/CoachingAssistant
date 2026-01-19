@@ -15,11 +15,12 @@ import javax.swing.JPanel;
 
 import gr.huadit.Controllers.StartingPageListener;
 import gr.huadit.Holders.CurrentUser;
+import gr.huadit.Interfaces.GraphicUserInterface;
 // super class
 
 
-public class Starting extends JFrame {
-    public void displayPage() {
+public class Starting extends JFrame implements GraphicUserInterface {
+    public void displayGUIWindow() {
         setTitle("Fitness Tracker - Home");
         setSize(500, 400);
         setLocationRelativeTo(null);

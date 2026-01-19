@@ -1,14 +1,8 @@
 package gr.huadit.Classes;
 
-import gr.huadit.Activities.Cycling;
-import gr.huadit.Activities.Running;
-import gr.huadit.Activities.Swimming;
-import gr.huadit.Activities.Walking;
-import gr.huadit.Enums.LoggerLevel;
+
 import gr.huadit.GUI.FileResults;
-import gr.huadit.Interfaces.Activity;
-import gr.huadit.Interfaces.Logger;
-import gr.huadit.Loggers.ConsoleLogger;
+import gr.huadit.Holders.Constants;
 
 import java.time.Duration;
 
@@ -16,10 +10,9 @@ import static gr.huadit.Helpers.ArgumentHandler.flag;
 
 /*
     Usage: print activity information
-
+    Could convert it to record, but we lose the private attributes
  */
-public class ActivityCard {
-    private final Logger log = new ConsoleLogger();
+public class ActivityCard implements gr.huadit.Interfaces.ActivityCard {
     private final String ActivityName;
     private final String  Id;
 
@@ -27,8 +20,9 @@ public class ActivityCard {
     private final double AveragePace;
     private final double AverageHeartRate;
     private final Duration duration;
-    private String pace;
 
+
+    // Constructor
     public ActivityCard (String activityName, String id, double totalDistance, double averagePace, double averageHeartRate, Duration duration) {
         ActivityName = activityName;
         Id = id;
@@ -40,8 +34,8 @@ public class ActivityCard {
 
     // Call this method to PRINT the .tcx file contents.
     public void printAthleteCard() {
-        long minutes = (long) (this.AveragePace / 60);
-        long seconds = (long) (this.AveragePace % 60);
+        long minutes = (long) (this.AveragePace / Constants.CONVERT_TO_MINUTES_NUMBER);
+        long seconds = (long) (this.AveragePace % Constants.CONVERT_TO_MINUTES_NUMBER);
         String formattedDuration = String.format("%02d:%02d:%02d", duration.toHours(), duration.toMinutes() % 60, duration.toSeconds() % 60);
 
         // Print on the console.
@@ -54,7 +48,6 @@ public class ActivityCard {
                         "Duration: " + formattedDuration
         );
 
-        this.pace = minutes + ":" + seconds + "min/km";
 
         // If the flag is Zero run the file results for GUI.
         if (flag == 0) {
@@ -62,30 +55,6 @@ public class ActivityCard {
             fileResultsGUI.displayGUIWindow(this);
         }
     }
-
-    // Kinda necessary
-    public void saveActivity() {
-        switch (this.ActivityName) {
-            case "Running" -> {
-                Activity running = new Running(this.Id, this.duration, this.pace, new ProgressCalculator().caloriesMen(1, 1, 1, 1), this.TotalDistance);
-                log.print("OBJECT CREATED: " + running, LoggerLevel.DEBUG);
-            }
-            case "Swimming" -> {
-                Activity swimming = new Swimming(this.Id, this.duration, this.pace, new ProgressCalculator().caloriesMen(1, 1, 1, 1), this.TotalDistance);
-                log.print("OBJECT CREATED: " + swimming, LoggerLevel.DEBUG);
-            }
-            case "Walking" -> {
-                Activity walking = new Walking(this.Id, this.duration, this.pace, new ProgressCalculator().caloriesMen(1, 1, 1, 1), this.TotalDistance);
-                log.print("OBJECT CREATED: " + walking, LoggerLevel.DEBUG);
-            }
-            case "Cycling" -> {
-                Activity cycling = new Cycling(this.Id, this.duration, this.pace, new ProgressCalculator().caloriesMen(1, 1, 1, 1), this.TotalDistance);
-                log.print("OBJECT CREATED: " + cycling, LoggerLevel.DEBUG);
-            }
-        }
-    }
-
-
 
 
     public String getActivityName() {

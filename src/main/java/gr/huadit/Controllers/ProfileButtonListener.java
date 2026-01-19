@@ -66,7 +66,7 @@ public class ProfileButtonListener implements ActionListener {
                 CurrentUser.currentUser = currentUser; // update the holders value. 
                 srcFrame.dispose();
                 Starting newPage = new Starting();
-                newPage.displayPage();
+                newPage.displayGUIWindow();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(srcFrame, "Please enter valid numbers for age, weight, and height."); // pop up error message
                 logger.print("Number format error: " + ex.getMessage(), LoggerLevel.ERROR); // error logging 

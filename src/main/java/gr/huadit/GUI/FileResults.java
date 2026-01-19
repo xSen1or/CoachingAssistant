@@ -7,6 +7,7 @@ import gr.huadit.Classes.VO2Assessment;
 import gr.huadit.Enums.LoggerLevel;
 import gr.huadit.Holders.CalculationType;
 import gr.huadit.Holders.CurrentUser;
+import gr.huadit.Interfaces.GraphicUserInterface;
 import gr.huadit.Loggers.ConsoleLogger;
 
 import javax.swing.*;
@@ -39,13 +40,8 @@ public class FileResults extends JDialog {
     }
 
 
-
-    // ==========================================
-    // GUI DISPLAY
-    // ==========================================
     public void displayGUIWindow(ActivityCard card) {
         SwingUtilities.invokeLater(() -> {
-            heartRateZoneAnalysis.setAge(CurrentUser.currentUser.optInt("age"));
             log.print("displayGUIWindow on FileResultsGUI triggered", LoggerLevel.INFO);
 
             if (card == null) return;

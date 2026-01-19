@@ -1,3 +1,4 @@
+
 [ {
   "activity_name" : "Flying",
   "activity_id" : "10",
@@ -5,60 +6,4 @@
   "activity_average_pace" : 10.0,
   "activity_duration" : "PT10M",
   "activity_average_heart_rate" : 10.0
-}, {
-  "activity_name" : "diving",
-  "activity_id" : "10",
-  "activity_total_distance" : 10.0,
-  "activity_average_pace" : 10.0,
-  "activity_duration" : "PT10M",
-  "activity_average_heart_rate" : 10.0
-}, {
-  "activity_name" : "cleaning",
-  "activity_id" : "10",
-  "activity_total_distance" : 10.0,
-  "activity_average_pace" : 10.0,
-  "activity_duration" : "PT10M",
-  "activity_average_heart_rate" : 10.0
-}, {
-  "activity_name" : "killing",
-  "activity_id" : "10",
-  "activity_total_distance" : 10.0,
-  "activity_average_pace" : 10.0,
-  "activity_duration" : "PT0S",
-  "activity_average_heart_rate" : 1.0
-}, {
-  "activity_name" : "asd",
-  "activity_id" : "1",
-  "activity_total_distance" : 1.0,
-  "activity_average_pace" : 1.0,
-  "activity_duration" : "PT1M",
-  "activity_average_heart_rate" : 1.0
-}, {
-  "activity_name" : "10",
-  "activity_id" : "10",
-  "activity_total_distance" : 10.0,
-  "activity_average_pace" : 0.0,
-  "activity_duration" : "PT10M",
-  "activity_average_heart_rate" : 0.0
-}, {
-  "activity_name" : "eating",
-  "activity_id" : "10",
-  "activity_total_distance" : 19.0,
-  "activity_average_pace" : 19.0,
-  "activity_duration" : "PT19M",
-  "activity_average_heart_rate" : 19.0
-}, {
-  "activity_name" : "running_2",
-  "activity_id" : "19201-DDAS",
-  "activity_total_distance" : 102.0,
-  "activity_average_pace" : 10.0,
-  "activity_duration" : "PT20M",
-  "activity_average_heart_rate" : 10.0
-}, {
-  "activity_name" : "DIEEING",
-  "activity_id" : "103",
-  "activity_total_distance" : 101.0,
-  "activity_average_pace" : 101.0,
-  "activity_duration" : "PT10M",
-  "activity_average_heart_rate" : 102.0
 } ]

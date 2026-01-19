@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import gr.huadit.Interfaces.DTO;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -15,15 +16,9 @@ import gr.huadit.Interfaces.Logger;
 import static gr.huadit.Interfaces.XMLReader.GARMIN_NS;
 import gr.huadit.Loggers.ConsoleLogger;
 
-public record TrackPointResults(
-        double totalDistance,
-        int countBPM,
-        double averageBPM,
-        Duration dur,
-        List<Integer> bpmValues
-) {
+public record TrackPointResults (double totalDistance, int countBPM, double averageBPM, Duration dur, List<Integer> bpmValues) implements DTO {
 
-    public static TrackPointResults processTrackPoints(NodeList trackPoints, String[] timings) {
+    public static TrackPointResults processTrackPoints(NodeList trackPoints, String[] timings)  {
         // Logger
         Logger log = new ConsoleLogger();
 
